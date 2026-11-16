@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kramaveekshan – mobile v3</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700;800;900&amp;family=Fraunces:wght@100..900&amp;family=Inter:wght@100..900&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;family=DM+Sans:wght@300;400;500;600;700&amp;family=Tiro+Devanagari+Hindi&amp;family=Noto+Sans+Devanagari:wght@100..900&amp;family=Mukta:wght@200;300;400;500;600;700;800&amp;family=Hind:wght@300;400;500;600;700&amp;display=swap">
+<style>
+/* Brand fonts (supplied files). Change which font each role uses in Tweaks › Typography */
+@font-face{font-family:"Satisfy SK";src:url(./assets/376effb2a590333810f2f8c1972439b1.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/ea089e1c6e3a20d23475401a10f735db.woff2) format("woff2");font-weight:100;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/d24b593920fd7ce3a13d5a0a1437712a.woff2) format("woff2");font-weight:200;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/8f786d3ee09cace41dd65233cc24f21c.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/d751ccd464c45367e67f1d6dd6c7311e.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/36cdfe09b7630dfdaaed4a46f941e3e5.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/aaa9e6fd7fcf92c201b6fc43964531e4.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/24cfdd1511e821bfad870b517f6b3130.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/18cdded5ca2129bb18d55786ce52a3d8.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/cea9e378769c7a1c12192b18fdb66382.woff2) format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/de6e6c0da268376d2a91071ccc3a3b59.woff2) format("woff2");font-weight:200;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/1463243fdaa9f96607a7b9690f2bb02c.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/2c8ec2af96f8931b9bd75832f8055a28.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/82ba8036270d14720eaff142f69d38b3.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/17dbf43765765322b04e8aaa8af8911e.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/683c6c2ca577cf1f4c8a4e40772f4e1a.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/f0caec91323b0b71d94546783b9ccde5.woff2) format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/b35cc28c04524c57a84601443c238cab.woff2) format("woff2");font-weight:100;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/f35a10fc24036c0125ae7dc6b50ccf35.woff2) format("woff2");font-weight:200;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/fcb04fe9c143aaa5cc756d0eee879bec.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/ef99c79f35a74d7251f517ec0b943baa.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/e74e87ed4e934d1a0b95b9228358e522.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/61763ce2dc02fa2f9056ab6307cf24b1.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/c98f21713d9e205c1263cbf9401b930b.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/26b96487c832ccc957557d3309f1f1ac.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/b589dccfd81fe88cfb2dea4c542eb024.woff2) format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"Arya";src:url(./assets/0e58cdc74af2d9d96716057cd4890221.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Arya";src:url(./assets/736b4b64ff8750809829dd92626631bc.woff2) format("woff2");font-weight:700;font-display:swap}
+body{margin:0;background:#0A0A0A}
+a{color:var(--sk-primary)}a:hover{color:var(--sk-glow)}
+@keyframes skBreathe{0%,100%{transform:scale(.95);opacity:.82}50%{transform:scale(1.04);opacity:1}}
+@keyframes skRipple{0%{transform:translate(-50%,-50%) scale(.2);opacity:0}15%{opacity:.55}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
+@keyframes skDrift{0%,100%{transform:scaleX(1.12) translateX(2.5%)}50%{transform:scaleX(1.12) translateX(-2.5%)}}
+.sk-breathe{animation:skBreathe 8s cubic-bezier(.45,0,.25,1) infinite}
+.sk-ripple{animation:skRipple 12s cubic-bezier(.25,0,.35,1) infinite}
+.sk-drift{transform-box:fill-box;transform-origin:center;transform:scaleX(1.12);animation:skDrift 16s cubic-bezier(.45,0,.25,1) infinite}
+input,select{font:inherit}
+.sk-scroll{scrollbar-width:none;-webkit-overflow-scrolling:touch}.sk-scroll::-webkit-scrollbar{display:none}
+input:focus,select:focus{outline:2px solid var(--sk-primary);outline-offset:1px}
+@keyframes skJit{0%,100%{transform:translate(0,0) rotate(0)}25%{transform:translate(2px,-3px) rotate(6deg)}50%{transform:translate(-3px,1px) rotate(-5deg)}75%{transform:translate(1px,3px) rotate(3deg)}}
+@keyframes skCalm{0%{transform:scale(.7);opacity:.75}100%{transform:scale(2);opacity:0}}
+.sk-jit{animation:skJit 1.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.sk-calm{animation:skCalm 4s cubic-bezier(.45,0,.25,1) infinite;transform-box:fill-box;transform-origin:center}
+@media (prefers-reduced-motion:reduce){.sk-breathe,.sk-ripple,.sk-drift,.sk-jit,.sk-calm{animation:none}}
+@keyframes skAtma{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:1;transform:scale(1.3)}}
+@keyframes skAtmaDot{0%,100%{opacity:.7}50%{opacity:1}}
+.sk-atma{transform-box:fill-box;transform-origin:center;animation:skAtma 4s ease-in-out infinite}
+.sk-atma-dot{animation:skAtmaDot 4s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.sk-atma,.sk-atma-dot{animation:none}}
+@keyframes skTopOut{0%{transform:translateY(0);visibility:visible}99.9%{visibility:visible}100%{transform:translateY(-100%);visibility:hidden}}
+@keyframes skBotIn{0%{transform:translateY(100%);visibility:hidden}0.1%{visibility:visible}100%{transform:translateY(0);visibility:visible}}
+@supports (animation-timeline: scroll()){.sk-top{animation:skTopOut linear both;animation-timeline:scroll(root);animation-range:40px 140px}.sk-bottom{animation:skBotIn linear both;animation-timeline:scroll(root);animation-range:60px 180px}}
+.sk-contact>summary{list-style:none}.sk-contact>summary::-webkit-details-marker{display:none}.sk-contact[open]>summary{opacity:.9}
+</style>
+</helmet>
+<div style="{{rootStyle}}">
+
+<!-- TOP BAR -->
+<header class="sk-top" style="position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--sk-ink) 92%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid color-mix(in srgb, var(--sk-lilac) 14%, transparent)">
+<div style="padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<img src="./assets/5c06d09ab6c67ec4e84529befe0bd77e.png" alt="Shadanga Kriya" style="height: 38px; width: 178px; display: block">
+<a href="#book" style="display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; background: var(--sk-primary); color: #FFFFFF; text-decoration: none; font-weight: var(--sk-w-ui); font-size: 13px; letter-spacing: 0.08em">Book seat</a>
+</div>
+</header>
+
+<!-- HERO -->
+<section style="position: relative; overflow: hidden; background: var(--sk-ink); color: rgba(255,255,255,0.88); padding: 36px 20px 0">
+<div class="sk-ripples" aria-hidden="true" style="position: absolute; left: 50%; top: 380px; width: 0; height: 0; pointer-events: none">
+<div class="sk-ripple" style="position: absolute; width: 760px; height: 760px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--sk-lilac) 35%, transparent); animation-delay: 0s"></div>
+<div class="sk-ripple" style="position: absolute; width: 760px; height: 760px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--sk-lilac) 35%, transparent); animation-delay: 4s"></div>
+<div class="sk-ripple" style="position: absolute; width: 760px; height: 760px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--sk-lilac) 35%, transparent); animation-delay: 8s"></div>
+<div style="position: absolute; left: -300px; top: -300px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--sk-glow) 32%, transparent) 0%, transparent 65%)"></div>
+</div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; line-height: 1.6; text-transform: uppercase; color: var(--sk-lilac)">Shadanga Kriya<br>{{programName}}</p>
+<h1 style="margin: 0; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 42px; line-height: 1.04; color: #FFFFFF; text-transform: var(--sk-display-case)">Your mind isn't weak,<br><span style="color: var(--sk-lilac)">just never trained.</span></h1>
+<p lang="hi" style="margin: 0; font-family: var(--sk-font-dv-text); font-weight: var(--sk-w-dv-text); font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.72)">आपका मन कमज़ोर नहीं है। उसे कभी train ही नहीं किया गया।</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.65">Guided meditation that trains concentration, awareness, calmness, confidence, emotional regulation and decisiveness, building the clarity to decide your way of life. Experience it in person, every morning, in Nagpur.</p>
+</div>
+
+<!-- video -->
+<div style="position: relative; margin-top: 28px; aspect-ratio: 1080 / 1400; border-radius: 24px; overflow: hidden; background: var(--sk-ink); border: 1px solid color-mix(in srgb, var(--sk-lilac) 25%, transparent); box-shadow: 0 24px 60px color-mix(in srgb, var(--sk-glow) 28%, transparent)">
+<video ref="{{refFounderVideo}}" playsinline="" preload="metadata" poster="./assets/76d29d71f70fd29c069dde3e75b701cd.jpg" onPlay="{{onVideoPlay}}" onPause="{{onVideoPause}}" onEnded="{{onVideoPause}}" aria-label="What is Shadanga Kriya, in the founder's own words" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background: var(--sk-ink)"><source src="./assets/0026fe702ebfd251005ae6b55408de44.mp4" type="video/mp4"></video>
+<sc-if value="{{videoNotStarted}}" hint-placeholder-val="{{true}}"><img src="./assets/76d29d71f70fd29c069dde3e75b701cd.jpg" alt="" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none"></sc-if>
+<button type="button" onClick="{{playFounderVideo}}" aria-label="{{videoBtnLabel}}" style="position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; margin: 0; border: 0; background: transparent; cursor: pointer; color: inherit; font: inherit; text-align: left">
+<sc-if value="{{videoIdle}}" hint-placeholder-val="{{true}}"><span aria-hidden="true" style="position: absolute; left: 50%; top: 44%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.6); background: rgba(10,10,10,0.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center"><svg width="21" height="21" viewBox="0 0 24 24" aria-hidden="true" style="margin-left: 3px; fill: #FFFFFF"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"></path></svg></span></sc-if>
+<span style="position: absolute; left: 0; right: 0; bottom: 0; padding: 48px 20px 20px; display: flex; flex-direction: column; gap: 6px; background: linear-gradient(0deg, color-mix(in srgb, var(--sk-ink) 92%, transparent) 0%, color-mix(in srgb, var(--sk-ink) 60%, transparent) 55%, transparent 100%)">
+<span style="font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sk-lilac)">Watch · 2:51</span>
+<span style="font-size: 15px; line-height: 1.4; color: #FFFFFF">What is Shadanga Kriya, in the founder's own words</span>
+</span>
+</button>
+</div>
+
+<!-- plan switch -->
+<div style="position: relative; margin-top: 28px; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sk-lilac)">Choose your plan</p>
+<div role="tablist" aria-label="Choose a plan" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 6px; border-radius: 20px; background: color-mix(in srgb, var(--sk-lilac) 8%, transparent); border: 1px solid color-mix(in srgb, var(--sk-lilac) 22%, transparent)">
+<button type="button" role="tab" aria-selected="{{coreSel}}" onClick="{{pickCore}}" style="{{tabCoreStyle}}"><span style="display: block; font-weight: var(--sk-w-ui); font-size: 15px">Core</span><span style="display: block; font-size: 12px; opacity: 0.85">4 days · <span style="font-family: var(--sk-font-dv-text)">₹{{corePrice}}<span style="margin-left: 4px; font-family: var(--sk-font-text); font-weight: var(--sk-w-body); font-size: max(11px, 0.55em); opacity: 0.75; white-space: nowrap">+ GST</span></span></span></button>
+<button type="button" role="tab" aria-selected="{{fullSel}}" onClick="{{pickFull}}" style="{{tabFullStyle}}"><span style="display: block; font-weight: var(--sk-w-ui); font-size: 15px">Comprehensive</span><span style="display: block; font-size: 12px; opacity: 0.85">120 days · <span style="font-family: var(--sk-font-dv-text)">₹{{fullPrice}}<span style="margin-left: 4px; font-family: var(--sk-font-text); font-weight: var(--sk-w-body); font-size: max(11px, 0.55em); opacity: 0.75; white-space: nowrap">+ GST</span></span></span></button>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #FFFFFF">{{planLine}}</p>
+
+<!-- event ticket -->
+<div style="border-radius: 22px; background: color-mix(in srgb, var(--sk-night) 85%, transparent); border: 1px solid color-mix(in srgb, var(--sk-lilac) 18%, transparent); overflow: hidden">
+<div style="display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-bottom: 1px solid color-mix(in srgb, var(--sk-lilac) 12%, transparent)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><rect x="3.5" y="5" width="17" height="15" rx="3"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg><span style="flex: 1; font-size: 13px; color: var(--sk-lilac)">Dates</span><span style="font-size: 15px; color: #FFFFFF; text-align: right">{{dates}}</span></div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-bottom: 1px solid color-mix(in srgb, var(--sk-lilac) 12%, transparent)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><path d="M3 17h18M6 17a6 6 0 0 1 12 0M12 5v2M5.6 8.6l1.4 1.4M18.4 8.6L17 10M8 21h8"></path></svg><span style="flex: 1; font-size: 13px; color: var(--sk-lilac)">Every morning</span><span style="font-size: 15px; color: #FFFFFF; text-align: right">7:00 – 9:00 AM</span></div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-bottom: 1px solid color-mix(in srgb, var(--sk-lilac) 12%, transparent)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg><span style="flex: 1; font-size: 13px; color: var(--sk-lilac)">Duration</span><span style="font-size: 15px; color: #FFFFFF; text-align: right">{{durationLabel}}</span></div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-bottom: 1px solid color-mix(in srgb, var(--sk-lilac) 12%, transparent)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"></path><circle cx="12" cy="10" r="2.3"></circle></svg><span style="flex: 1; font-size: 13px; color: var(--sk-lilac)">Venue</span><span style="font-size: 15px; color: #FFFFFF; text-align: right">Chandan Nagar,<br><span style="font-size: 13px; color: rgba(255,255,255,0.6)">near Krida Sq.</span></span></div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-bottom: 1px solid color-mix(in srgb, var(--sk-lilac) 12%, transparent)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><path d="M4 5h10M4 9h7M9 5c0 6-2.5 10-5 12M6.5 11c1.5 2 3.5 3.5 6 4.5M13 21l3.5-9 3.5 9M14.2 18h4.6"></path></svg><span style="flex: 1; font-size: 13px; color: var(--sk-lilac)">Language</span><span style="font-size: 15px; color: #FFFFFF; text-align: right">{{language}}</span></div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 16px 18px; background: color-mix(in srgb, var(--sk-primary) 18%, transparent)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><path d="M7 5h10M7 9h10M7 5c4 0 6 1.5 6 4s-2 4-6 4l7 6"></path></svg><span style="flex: 1; font-size: 13px; color: var(--sk-lilac)">Fee</span><span style="font-family: var(--sk-font-dv-text); font-weight: var(--sk-w-dv-text); font-size: 22px; color: #FFFFFF">₹{{price}}<span style="margin-left: 4px; font-family: var(--sk-font-text); font-weight: var(--sk-w-body); font-size: max(11px, 0.55em); opacity: 0.75; white-space: nowrap">+ GST</span></span></div>
+</div>
+
+<a href="#book" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; border-radius: 999px; background: var(--sk-primary); color: #FFFFFF; text-decoration: none; font-weight: var(--sk-w-ui); font-size: 16px; box-shadow: 0 0 32px color-mix(in srgb, var(--sk-wordmark) 50%, transparent)">{{ctaLabel}}</a>
+<p style="margin: 0; text-align: center; font-size: 13px; line-height: 1.6; color: var(--sk-lilac)">{{ctaNote}}</p>
+</div>
+<svg aria-hidden="true" viewBox="0 0 390 70" preserveAspectRatio="none" style="display: block; width: calc(100% + 40px); height: 56px; margin: 48px -20px 0; margin-bottom: -2px; position: relative; z-index: 1"><path class="sk-drift" d="M0 40 C 70 14, 140 64, 200 38 S 330 14, 390 38 L 390 70 L 0 70 Z" style="fill: var(--sk-night)"></path></svg>
+</section>
+
+<!-- DOES THIS SOUND FAMILIAR -->
+<section style="background: var(--sk-night); color: rgba(255,255,255,0.88); padding: 40px 20px 72px">
+<p style="margin: 0 0 10px; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sk-lilac)">Be honest with yourself</p>
+<h2 style="margin: 0 0 8px; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 34px; line-height: 1.1; color: #FFFFFF">Does any of this sound familiar?</h2>
+<p style="margin: 0 0 18px; font-size: 14px; line-height: 1.6; color: var(--sk-lilac)">Pick the stage of life you're in.</p>
+<div class="sk-scroll" role="tablist" aria-label="Stage of life" style="margin: 0 -20px; padding: 0 20px 4px; display: flex; gap: 8px; overflow-x: auto">
+<sc-for list="{{lifeChips}}" as="lc" hint-placeholder-count="5">
+<button type="button" role="tab" aria-selected="{{lc.sel}}" onClick="{{lc.pick}}" style="{{lc.style}}">{{lc.label}}</button>
+</sc-for>
+</div>
+<div style="margin-top: 16px; border-radius: 22px; background: color-mix(in srgb, var(--sk-ink) 45%, transparent); border: 1px solid color-mix(in srgb, var(--sk-lilac) 16%, transparent); padding: 16px">
+<div style="display: flex; align-items: center; gap: 14px; padding-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--sk-lilac) 12%, transparent)">
+<span aria-hidden="true" style="flex: none; width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: linear-gradient(150deg, color-mix(in srgb, var(--sk-primary) 38%, transparent), color-mix(in srgb, var(--sk-primary) 10%, transparent)); border: 1px solid color-mix(in srgb, var(--sk-lilac) 30%, transparent); box-shadow: 0 0 20px color-mix(in srgb, var(--sk-wordmark) 25%, transparent)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: #FFFFFF"><path d="{{lifeNow.icon}}"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: var(--sk-w-ui); font-size: 18px; color: #FFFFFF">{{lifeNow.label}}</span><span style="font-size: 12px; color: var(--sk-lilac)">{{lifeNow.count}}</span></div>
+</div>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<sc-for list="{{lifeNow.items}}" as="li" hint-placeholder-count="4">
+<li style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0"><span aria-hidden="true" style="flex: none; width: 8px; height: 8px; margin-top: 8px; border-radius: 50%; background: var(--sk-lilac); box-shadow: 0 0 8px var(--sk-wordmark)"></span><span style="font-size: 15px; line-height: 1.55; color: #FFFFFF">{{li.t}}</span></li>
+</sc-for>
+</ul>
+</div>
+<div style="margin-top: 24px; padding: 24px; border-radius: 22px; background: linear-gradient(160deg, color-mix(in srgb, var(--sk-primary) 30%, transparent), color-mix(in srgb, var(--sk-primary) 6%, transparent)); border: 1px solid color-mix(in srgb, var(--sk-lilac) 28%, transparent)">
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #FFFFFF">At every stage of life we call it a memory problem, a stress problem or a relationship problem. Often it's <span style="color: var(--sk-lilac); font-weight: var(--sk-w-emph)">attention and awareness</span>. What never got your full attention can't be seen clearly, or changed.</p>
+<p style="margin: 16px 0 0; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 28px; line-height: 1.15; color: #FFFFFF">Attention isn't a talent. It's a capacity, and it can be trained.</p>
+</div>
+</section>
+
+<!-- WITHOUT / WITH -->
+
+
+<!-- WHAT SK IS -->
+<section style="position: relative; overflow: hidden; background: var(--sk-ink); color: rgba(255,255,255,0.88); padding: 72px 20px">
+<div style="position: relative">
+<p style="margin: 0 0 10px; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sk-lilac)">Heavy to light</p>
+<h2 style="margin: 0 0 12px; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 34px; line-height: 1.1; color: #FFFFFF">What changes when you train the mind</h2>
+<p style="margin: 0 0 24px; font-size: 16px; line-height: 1.65">Same you. Same busy day. Training turns the noise into a steady flow.</p>
+<div style="position: relative; border-radius: 24px; overflow: hidden; background: linear-gradient(90deg, var(--sk-night) 0%, var(--sk-ink) 45%, color-mix(in srgb, var(--sk-primary) 32%, var(--sk-ink)) 100%); border: 1px solid color-mix(in srgb, var(--sk-lilac) 16%, transparent); padding: 18px 0 12px">
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 0 16px">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: var(--sk-w-ui); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.55)">Without training</span><span style="font-size: 12px; color: rgba(255,255,255,0.45)">Scattered · reactive</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px; text-align: right"><span style="font-weight: var(--sk-w-ui); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sk-lilac)">With practice</span><span style="font-size: 12px; color: rgba(255,255,255,0.85)">Steady · clear</span></div>
+</div>
+<div style="position: relative; margin-top: 8px"><svg viewBox="0 0 390 150" preserveAspectRatio="none" role="img" aria-label="A disturbed, jagged frequency wave on the left that flows into a smooth, steady wave on the right" style="display: block; width: 100%; height: 150px; overflow: visible"><defs><linearGradient id="skwm" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color: var(--sk-lilac); stop-opacity: 0.45"></stop><stop offset="0.45" style="stop-color: var(--sk-wordmark); stop-opacity: 0.85"></stop><stop offset="1" stop-color="#FFFFFF"></stop></linearGradient></defs><path ref="{{refWaveFaint}}" fill="none" stroke="url(#skwm)" stroke-width="1.2" stroke-opacity="0.45" stroke-linejoin="round" d="M0.0 105.0L4.0 69.2L8.0 71.3L12.1 75.3L16.1 67.9L20.1 61.7L24.1 66.0L28.1 51.9L32.2 63.1L36.2 98.7L40.2 100.1L44.2 94.1L48.2 85.8L52.3 69.9L56.3 51.6L60.3 76.7L64.3 66.5L68.4 60.2L72.4 59.3L76.4 77.9L80.4 72.9L84.4 109.9L88.5 101.6L92.5 82.9L96.5 59.3L100.5 69.7L104.5 49.2L108.6 72.0L112.6 72.1L116.6 66.8L120.6 61.5L124.6 95.5L128.7 91.7L132.7 99.4L136.7 92.0L140.7 68.3L144.7 46.9L148.8 64.8L152.8 67.4L156.8 66.8L160.8 76.9L164.8 72.8L168.9 70.6L172.9 85.8L176.9 92.8L180.9 71.5L184.9 67.3L189.0 54.8L193.0 52.0L197.0 59.9L201.0 78.3L205.1 69.5L209.1 77.5L213.1 79.7L217.1 84.9L221.1 85.1L225.2 93.8L229.2 81.7L233.2 80.6L237.2 82.0L241.2 87.3L245.3 88.0L249.3 94.1L253.3 89.7L257.3 86.8L261.3 85.1L265.4 82.9L269.4 77.3L273.4 73.6L277.4 68.7L281.4 64.5L285.5 62.0L289.5 59.7L293.5 57.4L297.5 55.9L301.5 55.2L305.6 55.5L309.6 56.6L313.6 58.5L317.6 61.2L321.6 64.4L325.7 68.0L329.7 72.0L333.7 76.1L337.7 80.1L341.8 84.0L345.8 87.4L349.8 90.3L353.8 92.6L357.8 94.1L361.9 94.8L365.9 94.6L369.9 93.6L373.9 91.8L377.9 89.3L382.0 86.2L386.0 82.6L390.0 78.6"></path><path ref="{{refWaveMain}}" fill="none" stroke="url(#skwm)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(143,91,255,0.6))" d="M0.0 111.1L4.0 87.5L8.0 98.1L12.1 94.6L16.1 80.4L20.1 83.5L24.1 98.1L28.1 52.6L32.2 24.1L36.2 45.7L40.2 52.1L44.2 85.6L48.2 119.4L52.3 111.5L56.3 68.8L60.3 93.9L64.3 76.2L68.4 73.0L72.4 62.0L76.4 57.4L80.4 10.7L84.4 66.5L88.5 90.3L92.5 113.3L96.5 104.9L100.5 113.6L104.5 51.7L108.6 73.0L112.6 74.7L116.6 65.9L120.6 36.3L124.6 60.6L128.7 41.7L132.7 82.1L136.7 122.3L140.7 121.6L144.7 85.4L148.8 85.8L152.8 63.1L156.8 56.4L160.8 79.5L164.8 70.3L168.9 51.2L172.9 65.7L176.9 90.5L180.9 89.1L184.9 111.6L189.0 92.5L193.0 62.9L197.0 45.5L201.0 59.8L205.1 43.3L209.1 56.3L213.1 52.3L217.1 51.0L221.1 50.9L225.2 77.0L229.2 70.7L233.2 73.1L237.2 67.8L241.2 66.2L245.3 64.6L249.3 82.0L253.3 86.2L257.3 91.9L261.3 97.4L265.4 102.9L269.4 104.7L273.4 109.1L277.4 108.0L281.4 104.3L285.5 101.1L289.5 97.4L293.5 92.5L297.5 86.8L301.5 80.3L305.6 73.5L309.6 66.8L313.6 60.4L317.6 54.6L321.6 49.7L325.7 45.9L329.7 43.3L333.7 42.1L337.7 42.3L341.8 43.9L345.8 46.8L349.8 51.0L353.8 56.1L357.8 62.1L361.9 68.6L365.9 75.4L369.9 82.2L373.9 88.7L377.9 94.6L382.0 99.6L386.0 103.6L390.0 106.4"></path></svg>
+<div aria-hidden="true" class="sk-breathe" style="position: absolute; right: -584px; top: -301px; width: 782px; height: 782px; margin-top: -36px; border-radius: 50%; background: radial-gradient(circle, #FFFFFF 0 8%, var(--sk-rim) 14%, color-mix(in srgb, var(--sk-wordmark) 45%, transparent) 40%, transparent 70%)"></div>
+</div>
+<div style="display: flex; justify-content: space-between; padding: 0 16px; font-size: 11px; color: rgba(255,255,255,0.45)"><span>noise</span><span style="color: var(--sk-lilac)">breath by breath</span><span style="color: #FFFFFF">flow</span></div>
+</div>
+<div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px">
+<div style="border-radius: 20px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--sk-lilac) 16%, transparent); box-shadow: 0 20px 60px color-mix(in srgb, var(--sk-glow) 18%, transparent)">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr))">
+<div style="padding: 12px 14px; background: var(--sk-night); font-weight: var(--sk-w-ui); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.5)">Without training</div>
+<div style="padding: 12px 14px; background: color-mix(in srgb, var(--sk-primary) 26%, var(--sk-ink)); box-shadow: inset 1px 0 0 color-mix(in srgb, var(--sk-lilac) 35%, transparent); text-align: right; font-weight: var(--sk-w-ui); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sk-lilac)">With practice</div>
+</div>
+<sc-for list="{{pairs}}" as="pr" hint-placeholder-count="6">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid color-mix(in srgb, var(--sk-lilac) 10%, transparent)">
+<div style="display: flex; align-items: center; gap: 10px; padding: 14px 14px; background: var(--sk-night); font-size: 13px; line-height: 1.4; color: rgba(255,255,255,0.5)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: rgba(255,255,255,0.35)"><path d="M2 12l3-5 3 9 3-8 3 7 3-6 3 5 2-2"></path></svg><span>{{pr.before}}</span></div>
+<div style="display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 14px 14px; background: color-mix(in srgb, var(--sk-primary) 26%, var(--sk-ink)); box-shadow: inset 1px 0 0 color-mix(in srgb, var(--sk-lilac) 35%, transparent); text-align: right; font-size: 14px; line-height: 1.4; color: #FFFFFF; font-weight: var(--sk-w-emph)"><span>{{pr.after}}</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><path d="M2 12c2.5-4 5-4 7.5 0s5 4 7.5 0 3.5-3 5-2"></path></svg></div>
+</div>
+</sc-for>
+</div>
+</div>
+<p style="margin: 18px 0 0; font-size: 13px; line-height: 1.6; color: var(--sk-lilac)">This is practice. Experience at your own pace.</p>
+</div>
+</section>
+
+<!-- REAL PRACTITIONERS · IN THEIR OWN WORDS -->
+<section style="background: var(--sk-night); color: rgba(255,255,255,0.88); padding: 64px 20px 72px">
+<p style="margin: 0 0 10px; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sk-lilac)">Real practitioners</p>
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px">
+<h3 style="margin: 0; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 28px; line-height: 1.1; color: #FFFFFF">In their own words</h3>
+<span style="flex: none; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--sk-lilac)">Swipe<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="stroke: var(--sk-lilac)"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
+</div>
+<div class="sk-scroll" style="margin: 18px -20px 0; padding: 0 20px 4px; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 20px">
+<figure style="margin: 0; flex: 0 0 70%; scroll-snap-align: start; position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 3 / 4; cursor: pointer"><img src="./assets/07d537c30ca362244793e0c1f05d9da1.jpg" alt="Placeholder: video testimony poster frame" style="width: 100%; height: 100%; object-fit: cover"><span aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 52%; background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--sk-ink) 55%, transparent) 45%, color-mix(in srgb, var(--sk-ink) 92%, transparent) 100%)"></span><span aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px)"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="margin-left: 3px; fill: #FFFFFF"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"></path></svg></span><figcaption style="position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; line-height: 1.3; font-weight: var(--sk-w-ui); color: #FFFFFF">[Name]</span><span style="font-size: 13px; line-height: 1.4; color: rgba(255,255,255,0.8)">Age [00]</span></figcaption></figure>
+<figure style="margin: 0; flex: 0 0 70%; scroll-snap-align: start; position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 3 / 4; cursor: pointer"><img src="./assets/ab1ae3707a58013520e0e1e1cc3219b9.jpg" alt="Placeholder: video testimony poster frame" style="width: 100%; height: 100%; object-fit: cover"><span aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 52%; background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--sk-ink) 55%, transparent) 45%, color-mix(in srgb, var(--sk-ink) 92%, transparent) 100%)"></span><span aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px)"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="margin-left: 3px; fill: #FFFFFF"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"></path></svg></span><figcaption style="position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; line-height: 1.3; font-weight: var(--sk-w-ui); color: #FFFFFF">[Name]</span><span style="font-size: 13px; line-height: 1.4; color: rgba(255,255,255,0.8)">Age [00]</span></figcaption></figure>
+<figure style="margin: 0; flex: 0 0 70%; scroll-snap-align: start; position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 3 / 4; cursor: pointer"><img src="./assets/c7153d640bfe892842a6c727af66eb86.jpg" alt="Placeholder: video testimony poster frame" style="width: 100%; height: 100%; object-fit: cover"><span aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 52%; background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--sk-ink) 55%, transparent) 45%, color-mix(in srgb, var(--sk-ink) 92%, transparent) 100%)"></span><span aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px)"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="margin-left: 3px; fill: #FFFFFF"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"></path></svg></span><figcaption style="position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; line-height: 1.3; font-weight: var(--sk-w-ui); color: #FFFFFF">[Name]</span><span style="font-size: 13px; line-height: 1.4; color: rgba(255,255,255,0.8)">Age [00]</span></figcaption></figure>
+<figure style="margin: 0; flex: 0 0 70%; scroll-snap-align: start; position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 3 / 4; cursor: pointer"><img src="./assets/6e9b64c643f8948df1e24778d1891c8d.jpg" alt="Placeholder: video testimony poster frame" style="width: 100%; height: 100%; object-fit: cover"><span aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 52%; background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--sk-ink) 55%, transparent) 45%, color-mix(in srgb, var(--sk-ink) 92%, transparent) 100%)"></span><span aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px)"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="margin-left: 3px; fill: #FFFFFF"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"></path></svg></span><figcaption style="position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; line-height: 1.3; font-weight: var(--sk-w-ui); color: #FFFFFF">[Name]</span><span style="font-size: 13px; line-height: 1.4; color: rgba(255,255,255,0.8)">Age [00]</span></figcaption></figure>
+</div>
+<p style="margin: 10px 0 0; font-size: 12px; color: var(--sk-lilac)">Real practitioners, in their own words, shared with consent. Replace with session videos.</p>
+</section>
+
+<!-- WHAT SK IS -->
+<section style="background: var(--sk-ink); color: rgba(255,255,255,0.88); padding: 72px 20px 0">
+<p style="margin: 0 0 10px; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sk-lilac)">What is Shadanga Kriya?</p>
+<h2 style="margin: 0 0 18px; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 34px; line-height: 1.1; color: #FFFFFF">Not just any other meditation, a structured training for your mind.</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.7">A guidance to connect you with your inner self, while your brain acquires clarity with every breath. It's inspired by Shadanga Yoga from the ancient scriptures of yogic India, which counts <span style="color: var(--sk-lilac); font-weight: var(--sk-w-emph)">tarka, Logic</span> as a core. Further empowered with modern science.</p>
+
+<!-- six dimensions: tap a layer to go inward -->
+<div style="margin-top: 56px">
+<p style="margin: 0 0 10px; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sk-lilac)">Six dimensions · outer to inner</p>
+<h3 style="margin: 0; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 32px; line-height: 1.08; color: #FFFFFF">Tap a layer to go inward</h3>
+<p style="margin: 10px 0 0; font-size: 14px; line-height: 1.6; color: var(--sk-lilac)">Each layer lighter than the last, like the lotus.</p>
+<div style="margin: 28px 0 24px; display: flex; justify-content: center">
+<svg viewBox="0 0 240 240" role="img" aria-label="Six layers of yourself, from the body on the outside to consciousness at the centre" style="width: 248px; height: 248px; overflow: visible">
+<circle cx="120" cy="120" r="118" style="fill: color-mix(in srgb, var(--sk-glow) 10%, transparent)"></circle>
+<circle cx="120" cy="120" r="112" fill="none" style="{{ring0}}"></circle>
+<circle cx="120" cy="120" r="92" fill="none" style="{{ring1}}"></circle>
+<circle cx="120" cy="120" r="72" fill="none" style="{{ring2}}"></circle>
+<circle cx="120" cy="120" r="52" fill="none" style="{{ring3}}"></circle>
+<circle cx="120" cy="120" r="32" fill="none" style="{{ring4}}"></circle>
+<defs><radialGradient id="skAtmaM"><stop offset="0" style="stop-color: #FFFFFF; stop-opacity: 0.95"></stop><stop offset="0.35" style="stop-color: var(--sk-lilac); stop-opacity: 0.7"></stop><stop offset="0.7" style="stop-color: var(--sk-wordmark); stop-opacity: 0.25"></stop><stop offset="1" style="stop-color: var(--sk-wordmark); stop-opacity: 0"></stop></radialGradient></defs>
+<circle cx="120" cy="120" r="16" style="{{coreHalo}}"></circle>
+<circle class="sk-atma" cx="120" cy="120" r="30" fill="url(#skAtmaM)" style="pointer-events: none"></circle>
+<circle class="sk-atma-dot" cx="120" cy="120" r="{{coreR}}" fill="#FFFFFF" style="{{coreDot}}"></circle>
+<circle cx="120" cy="120" r="112" fill="none" stroke="transparent" stroke-width="18" style="pointer-events: stroke; cursor: pointer" onClick="{{pick0}}"></circle>
+<circle cx="120" cy="120" r="92" fill="none" stroke="transparent" stroke-width="18" style="pointer-events: stroke; cursor: pointer" onClick="{{pick1}}"></circle>
+<circle cx="120" cy="120" r="72" fill="none" stroke="transparent" stroke-width="18" style="pointer-events: stroke; cursor: pointer" onClick="{{pick2}}"></circle>
+<circle cx="120" cy="120" r="52" fill="none" stroke="transparent" stroke-width="18" style="pointer-events: stroke; cursor: pointer" onClick="{{pick3}}"></circle>
+<circle cx="120" cy="120" r="32" fill="none" stroke="transparent" stroke-width="18" style="pointer-events: stroke; cursor: pointer" onClick="{{pick4}}"></circle>
+<circle cx="120" cy="120" r="18" fill="transparent" style="cursor: pointer" onClick="{{pick5}}"></circle>
+</svg>
+</div>
+<div role="tablist" aria-label="Six dimensions" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{dimTabs}}" as="t" hint-placeholder-count="6">
+<button type="button" role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}" style="{{t.style}}"><span style="display: block; font-size: 10px; letter-spacing: 0.08em; opacity: 0.7">{{t.n}}</span><span style="display: block; font-weight: var(--sk-w-ui); font-size: 13px; line-height: 1.3">{{t.en}}</span></button>
+</sc-for>
+</div>
+<div role="tabpanel" style="margin-top: 14px; padding: 22px; border-radius: 22px; background: var(--sk-fresh); color: var(--sk-ink); box-shadow: 0 0 40px color-mix(in srgb, var(--sk-wordmark) 22%, transparent)">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<span style="font-weight: var(--sk-w-ui); font-size: 20px">{{dimEn}}</span>
+<span lang="hi" style="font-family: var(--sk-font-dv-display); font-weight: var(--sk-w-dv-display); font-size: 20px; line-height: 1.4; color: var(--sk-primary)">{{dimHi}}</span>
+</div>
+<p style="margin: 10px 0 0; font-size: 15px; line-height: 1.7">{{dimDesc}}</p>
+<p style="margin: 12px 0 0; font-size: 12px; line-height: 1.6; color: color-mix(in srgb, var(--sk-ink) 60%, transparent)">{{dimN}} of 06 · each layer lighter than the last, like the lotus</p>
+<div style="margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<button type="button" onClick="{{dimPrev}}" style="min-height: 44px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--sk-primary) 30%, transparent); background: #FFFFFF; color: var(--sk-ink); cursor: pointer; font-family: inherit; font-weight: var(--sk-w-ui); font-size: 14px">← Outer</button>
+<button type="button" onClick="{{dimNext}}" style="min-height: 44px; border-radius: 999px; border: 0; background: var(--sk-primary); color: #FFFFFF; cursor: pointer; font-family: inherit; font-weight: var(--sk-w-ui); font-size: 14px">Go inward →</button>
+</div>
+</div>
+</div>
+
+<!-- the one shift: vertical stepper -->
+<div style="margin-top: 56px; padding: 24px 20px; border-radius: 24px; border: 1px solid color-mix(in srgb, var(--sk-lilac) 16%, transparent)">
+<h3 style="margin: 0 0 6px; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 30px; line-height: 1.1; color: #FFFFFF">The one shift it trains</h3>
+<p style="margin: 0 0 20px; font-size: 13px; color: rgba(255,255,255,0.5)">Untrained: something happens → you react at once.</p>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<li style="display: flex; gap: 14px; align-items: stretch"><span style="display: flex; flex-direction: column; align-items: center"><span style="width: 14px; height: 14px; border-radius: 50%; background: var(--sk-step2); border: 2px solid var(--sk-lilac)"></span><span style="flex: 1; width: 2px; background: color-mix(in srgb, var(--sk-lilac) 40%, transparent)"></span></span><span style="padding-bottom: 20px; font-size: 16px; color: #FFFFFF; line-height: 1">Something happens</span></li>
+<li style="display: flex; gap: 14px; align-items: stretch"><span style="display: flex; flex-direction: column; align-items: center"><span style="width: 14px; height: 14px; border-radius: 50%; background: var(--sk-step3); border: 2px solid var(--sk-lilac)"></span><span style="flex: 1; width: 2px; background: color-mix(in srgb, var(--sk-lilac) 40%, transparent)"></span></span><span style="padding-bottom: 20px; font-size: 16px; color: #FFFFFF; line-height: 1">You notice</span></li>
+<li style="display: flex; gap: 14px; align-items: stretch"><span style="display: flex; flex-direction: column; align-items: center"><span style="width: 14px; height: 14px; border-radius: 50%; background: var(--sk-primary); box-shadow: 0 0 14px var(--sk-wordmark)"></span><span style="flex: 1; width: 2px; background: color-mix(in srgb, var(--sk-lilac) 40%, transparent)"></span></span><span style="padding-bottom: 20px; font-size: 16px; color: #FFFFFF; line-height: 1"><strong style="font-weight: var(--sk-w-ui)">A small pause</strong> · you choose</span></li>
+<li style="display: flex; gap: 14px; align-items: stretch"><span style="display: flex; flex-direction: column; align-items: center"><span style="width: 14px; height: 14px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 0 14px var(--sk-wordmark)"></span></span><span style="font-size: 16px; color: #FFFFFF; line-height: 1">You respond</span></li>
+</ol>
+<p style="margin: 22px 0 0; font-size: 14px; color: var(--sk-lilac)">No beliefs, rituals or prior experience needed.</p>
+</div>
+<svg aria-hidden="true" viewBox="0 0 390 70" preserveAspectRatio="none" style="display: block; width: calc(100% + 40px); height: 56px; margin: 56px -20px 0; margin-bottom: -2px; position: relative; z-index: 1"><path d="M0 44 C 80 10, 150 64, 210 34 S 330 8, 390 34 L 390 70 L 0 70 Z" style="fill: var(--sk-fresh)"></path></svg>
+</section>
+
+<!-- WHAT YOU'LL EXPERIENCE -->
+<section style="background: var(--sk-fresh); padding: 32px 20px 72px">
+<p style="margin: 0 0 10px; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sk-primary)">What you'll experience</p>
+<h2 style="margin: 0 0 20px; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 34px; line-height: 1.1; color: var(--sk-ink)">{{expTitle}}</h2>
+<div role="tablist" aria-label="Choose a plan" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 999px; background: #FFFFFF; border: 1px solid color-mix(in srgb, var(--sk-primary) 20%, transparent); margin-bottom: 20px">
+<button type="button" role="tab" aria-selected="{{coreSel}}" onClick="{{pickCore}}" style="{{pillCoreStyle}}">Core · 4 days</button>
+<button type="button" role="tab" aria-selected="{{fullSel}}" onClick="{{pickFull}}" style="{{pillFullStyle}}">Comprehensive · 120 days</button>
+</div>
+<p style="margin: 0 0 20px; font-size: 16px; line-height: 1.65; color: color-mix(in srgb, var(--sk-ink) 80%, transparent)">{{expIntro}}</p>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{outcomes}}" as="o" hint-placeholder-count="5">
+<div style="{{o.card}}">
+<span style="{{o.badge}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="{{o.iconStyle}}"><path d="{{o.icon}}"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-weight: var(--sk-w-ui); font-size: 18px; line-height: 1.3">{{o.title}}</h3><p style="margin: 0; font-size: 15px; line-height: 1.7; opacity: 0.82">{{o.text}}</p></div>
+</div>
+</sc-for>
+</div>
+<p style="margin: 18px 0 0; font-size: 13px; line-height: 1.6; color: color-mix(in srgb, var(--sk-ink) 65%, transparent)">{{expNote}}</p>
+</section>
+
+<!-- A MORNING -->
+<section style="background: var(--sk-fresh); padding: 0 20px 72px">
+<div style="border-radius: 26px; overflow: hidden; background: var(--sk-ink); color: rgba(255,255,255,0.88)">
+<div style="position: relative; aspect-ratio: 4 / 3"><img src="./assets/823802408b96bd9ab480753c531fa598.webp" alt="Participants seated in the Shadanga Kriya hall, eyes closed, in soft violet light" style="width: 100%; height: 100%; object-fit: cover; display: block"><div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 20px; background: linear-gradient(0deg, var(--sk-ink), transparent)"><p style="margin: 0 0 6px; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sk-rim)">7:00 – 9:00 AM</p><h2 style="margin: 0; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 32px; line-height: 1.1; color: #FFFFFF">What a morning looks like</h2></div></div>
+<ol style="margin: 0; padding: 12px 20px 8px; list-style: none; display: flex; flex-direction: column">
+<li style="display: flex; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid color-mix(in srgb, var(--sk-lilac) 14%, transparent)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><path d="M3 17h18M6 17a6 6 0 0 1 12 0M12 5v2M5.6 8.6l1.4 1.4M18.4 8.6L17 10"></path></svg><span style="font-size: 15px; line-height: 1.5"><strong style="font-weight: var(--sk-w-ui); color: rgb(255, 255, 255)">Arrive and settle</strong><br>6:30 – 7:00, register and leave the rush at the door; we begin at 7:00 sharp</span></li>
+<li style="display: flex; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid color-mix(in srgb, var(--sk-lilac) 14%, transparent)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20M9 8h7M9 11.5h5"></path></svg><span style="font-size: 15px; line-height: 1.5"><strong style="font-weight: var(--sk-w-ui); color: #FFFFFF">Understand</strong><br>the scientific and spiritual reasoning behind the mind, the brain and their link with the body</span></li>
+<li style="display: flex; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid color-mix(in srgb, var(--sk-lilac) 14%, transparent)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><path d="M12 11a1 1 0 1 0 0 2a1 1 0 1 0 0-2M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18"></path></svg><span style="font-size: 15px; line-height: 1.5"><strong style="font-weight: var(--sk-w-ui); color: #FFFFFF">Practise</strong><br>the same morning, live it through Shadanga Kriya: core meditative practice with sound frequencies</span></li>
+<li style="display: flex; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid color-mix(in srgb, var(--sk-lilac) 14%, transparent)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><path d="M12 3c3 3.5 3 8.5 0 12-3-3.5-3-8.5 0-12zM4 13c3.5 0 6.5 2 8 6-4 0-7-2-8-6zM20 13c-3.5 0-6.5 2-8 6 4 0 7-2 8-6z"></path></svg><span style="font-size: 15px; line-height: 1.5"><strong style="font-weight: var(--sk-w-ui); color: #FFFFFF">Settle into clarity</strong><br>come back slowly, with clarity and a realisation about your own life</span></li>
+<li style="display: flex; gap: 14px; align-items: center; padding: 14px 0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg><span style="font-size: 15px; line-height: 1.5"><strong style="font-weight: var(--sk-w-ui); color: #FFFFFF">Integrate</strong><br>carry the patterns and learning into your own day, in time for school or work</span></li>
+</ol>
+</div>
+</section>
+
+<!-- AFTER THE PROGRAM -->
+<section style="background: var(--sk-relax); padding: 72px 20px">
+<p style="margin: 0 0 10px; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sk-primary)">After the program</p>
+<sc-if value="{{isCore}}" hint-placeholder-val="{{true}}">
+<div>
+<h2 style="margin: 0 0 16px; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 34px; line-height: 1.1; color: var(--sk-ink)">After Day 4, you decide.</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.7">No pressure, and no follow-up calls you didn't ask for. If you want to continue, move to the Comprehensive program <span style="color: var(--sk-primary)">and your ₹{{corePrice}} comes off the ₹{{fullPrice}} fee</span>. If not, you keep the breathing and relaxation routine you learned, and you can keep practising on your own.</p>
+</div>
+</sc-if>
+<sc-if value="{{isFull}}" hint-placeholder-val="{{false}}">
+<div>
+<h2 style="margin: 0 0 20px; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 34px; line-height: 1.1; color: var(--sk-ink)">30 days build the practice. 90 days make it yours.</h2>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 16px; line-height: 1.55">
+<li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px; stroke: var(--sk-primary)"><path d="M3 18v-6a9 9 0 0 1 18 0v6M3 18a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2zM21 18a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2z"></path></svg><span>30 guided mornings at the centre, then 90 days of guided self-practice with the Shadanga Kriya app</span></li>
+<li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px; stroke: var(--sk-primary)"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1 1 21 12z"></path></svg><span>Weekend sessions at the centre for doubt-clearing and community gathering</span></li>
+<li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px; stroke: var(--sk-primary)"><circle cx="9" cy="8" r="3"></circle><circle cx="17" cy="9" r="2.5"></circle><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.2c2.9.1 6 1.6 6 5.8"></path></svg><span>A weekly progress check by the team</span></li>
+</ul>
+<p style="margin: 18px 0 0; font-size: 14px; line-height: 1.7; color: color-mix(in srgb, var(--sk-ink) 70%, transparent)"><strong style="font-weight: var(--sk-w-ui); color: var(--sk-ink)">Why 120 days:</strong> a new habit takes about 66 days on average to feel automatic (Lally et al., 2009), so 30 days alone isn't enough.</p>
+</div>
+</sc-if>
+<div style="margin-top: 32px; display: flex; gap: 20px; align-items: center; padding: 20px; border-radius: 22px; background: #FFFFFF">
+<svg viewBox="0 0 320 320" role="img" aria-label="120 days: 3-day core, 30 guided mornings, then 90 days of practice" style="flex: none; width: 128px; height: 128px">
+<circle cx="160" cy="160" r="130" fill="none" stroke-width="30" style="stroke: var(--sk-lilac)"></circle>
+<circle cx="160" cy="160" r="130" fill="none" stroke-width="30" stroke-dasharray="204.2 816.8" transform="rotate(-90 160 160)" style="stroke: var(--sk-primary)"></circle>
+<circle cx="160" cy="160" r="130" fill="none" stroke-width="30" stroke-dasharray="27.2 816.8" transform="rotate(-90 160 160)" style="stroke: var(--sk-night)"></circle>
+<text x="160" y="172" text-anchor="middle" font-size="64" style="font-family: var(--sk-font-display); font-weight: var(--sk-w-display); fill: var(--sk-ink)">120</text>
+</svg>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; line-height: 1.4">
+<li style="display: flex; gap: 8px; align-items: center"><span style="width: 10px; height: 10px; border-radius: 3px; background: var(--sk-night)"></span>4 days · Core</li>
+<li style="display: flex; gap: 8px; align-items: center"><span style="width: 10px; height: 10px; border-radius: 3px; background: var(--sk-primary)"></span>30 guided mornings</li>
+<li style="display: flex; gap: 8px; align-items: center"><span style="width: 10px; height: 10px; border-radius: 3px; background: var(--sk-lilac)"></span>90 days of practice</li>
+</ul>
+</div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section style="background: var(--sk-relax); padding: 0 20px 72px">
+<div style="padding: 20px; border-radius: 20px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent)">
+<p style="margin: 0 0 14px; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: color-mix(in srgb, var(--sk-ink) 65%, transparent)">It's not for you if you</p>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.5; color: color-mix(in srgb, var(--sk-ink) 82%, transparent)">
+<li style="display: flex; gap: 10px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: color-mix(in srgb, var(--sk-ink) 50%, transparent)"><path d="M7 7l10 10M17 7L7 17"></path></svg><span>Want a guru or a set of beliefs to follow</span></li>
+<li style="display: flex; gap: 10px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: color-mix(in srgb, var(--sk-ink) 50%, transparent)"><path d="M7 7l10 10M17 7L7 17"></path></svg><span>Expect instant results without daily practice</span></li>
+<li style="display: flex; gap: 10px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: color-mix(in srgb, var(--sk-ink) 50%, transparent)"><path d="M7 7l10 10M17 7L7 17"></path></svg><span>Want it to replace medical or psychological treatment. It supports care; it never replaces it.</span></li>
+<li style="display: flex; gap: 10px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: color-mix(in srgb, var(--sk-ink) 50%, transparent)"><path d="M7 7l10 10M17 7L7 17"></path></svg><span>Are below Class 8 (a children's format is being developed)</span></li>
+</ul>
+</div>
+</section>
+
+<!-- GUIDE, NOT GURU + GALLERY -->
+<section style="background: var(--sk-ink); color: rgba(255,255,255,0.88); padding: 72px 20px">
+<div style="position: relative; width: 78%; margin: 0 auto 28px; aspect-ratio: 4 / 5; border-radius: 160px 160px 24px 24px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--sk-lilac) 30%, transparent)"><img src="./assets/d05058c507a4c09ebe4829aa234fcf9f.webp" alt="Yogee, founder of Shadanga Kriya, seated and smiling" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 44%"></div>
+<p style="margin: 0 0 10px; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sk-lilac)">Your guide, not your guru</p>
+<h2 style="margin: 0 0 18px; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 34px; line-height: 1.1; color: #FFFFFF">It began with one word: "Why?"</h2>
+<p style="margin: 0 0 14px; font-size: 16px; line-height: 1.7">Yogee grew up in a traditional Vedic family and wouldn't follow any practice he couldn't understand. That question took him into the Vedas, the Upanishads and Patanjali, then into neuroscience, then across India to learn from yogis and scientists.</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.7">After 20 years of practice he built Shadanga Kriya, so that no one has to depend on anyone to find their way, <span style="color: var(--sk-lilac)">including him</span>.</p>
+</section>
+
+<!-- BOOK -->
+<section id="book" style="position: relative; background: var(--sk-fresh); padding: 72px 20px; overflow: hidden">
+<img src="./assets/07d537c30ca362244793e0c1f05d9da1.jpg" alt="" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.9">
+<div style="position: relative">
+<p style="margin: 0 0 10px; text-align: center; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sk-primary)">{{programName}}</p>
+<h2 style="margin: 0 0 12px; text-align: center; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 36px; line-height: 1.08; color: var(--sk-ink)">Your clearer mornings start here</h2>
+<p style="margin: 0 0 24px; text-align: center; font-size: 15px; line-height: 1.65; color: color-mix(in srgb, var(--sk-ink) 75%, transparent)">Begin with four mornings for ₹{{corePrice}}. If it speaks to you, continue into the Comprehensive program. That’s how most people start, and how we’d like it.</p>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<button type="button" onClick="{{pickCore}}" aria-pressed="{{coreSel}}" style="{{cardCoreStyle}}">
+<span style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><span style="padding: 4px 10px; border-radius: 999px; background: var(--sk-fresh); color: var(--sk-primary); font-weight: var(--sk-w-ui); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase">Recommended first step</span><span style="{{radioCore}}"></span></span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px"><span style="font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 32px; line-height: 1.05; color: var(--sk-ink)">Core</span><span style="font-family: var(--sk-font-dv-text); font-weight: var(--sk-w-dv-text); font-size: 28px; line-height: 1.1; color: var(--sk-ink)">₹{{corePrice}}<span style="margin-left: 4px; font-family: var(--sk-font-text); font-weight: var(--sk-w-body); font-size: max(11px, 0.55em); opacity: 0.75; white-space: nowrap">+ GST</span></span></span>
+<span style="font-size: 14px; color: color-mix(in srgb, var(--sk-ink) 70%, transparent)">{{coreDates}} · 4 mornings · 7:00–9:00 AM</span>
+<sc-if value="{{showCoreSeats}}" hint-placeholder-val="{{true}}"><span style="display: inline-flex; align-items: center; gap: 8px; font-weight: var(--sk-w-ui); font-size: 13px; color: var(--sk-primary)"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--sk-primary); flex: none"></span>{{coreSeatsText}}</span></sc-if>
+<span style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.5; color: color-mix(in srgb, var(--sk-ink) 82%, transparent); text-align: left">
+<span style="display: flex; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: var(--sk-primary)"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Breath and sound to settle toward the alpha state</span>
+<span style="display: flex; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: var(--sk-primary)"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Steadier focus; thoughts and emotions seen clearly and balanced</span>
+<span style="display: flex; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: var(--sk-primary)"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>On Day 4, you choose whether to continue</span>
+</span>
+</button>
+<button type="button" onClick="{{pickFull}}" aria-pressed="{{fullSel}}" style="{{cardFullStyle}}">
+<span style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><span style="padding: 4px 10px; border-radius: 999px; background: var(--sk-night); color: var(--sk-rim); font-weight: var(--sk-w-ui); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase">The complete training</span><span style="{{radioFull}}"></span></span>
+<span style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px"><span style="font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 32px; line-height: 1.05; color: var(--sk-ink)">Comprehensive</span><span style="font-family: var(--sk-font-dv-text); font-weight: var(--sk-w-dv-text); font-size: 28px; line-height: 1.1; color: var(--sk-ink)">₹{{fullPrice}}<span style="margin-left: 4px; font-family: var(--sk-font-text); font-weight: var(--sk-w-body); font-size: max(11px, 0.55em); opacity: 0.75; white-space: nowrap">+ GST</span></span></span>
+<span style="font-size: 14px; color: color-mix(in srgb, var(--sk-ink) 70%, transparent)">{{fullDates}} · 30 mornings + 90 days practice</span>
+<sc-if value="{{showFullSeats}}" hint-placeholder-val="{{true}}"><span style="display: inline-flex; align-items: center; gap: 8px; font-weight: var(--sk-w-ui); font-size: 13px; color: var(--sk-primary)"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: var(--sk-primary); flex: none"></span>{{fullSeatsText}}</span></sc-if>
+<span style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.5; color: color-mix(in srgb, var(--sk-ink) 82%, transparent); text-align: left">
+<span style="display: flex; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: var(--sk-primary)"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Going deeper, from alpha toward theta, across all six dimensions</span>
+<span style="display: flex; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: var(--sk-primary)"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Steady focus and attention, sharper senses, and easier recall of what you study and learn</span>
+<span style="display: flex; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: var(--sk-primary)"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Break old patterns, build emotional independence and your personal blueprint</span>
+<span style="display: flex; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: var(--sk-primary)"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>30 mornings at the centre, then 90 days of guided self-practice with the Shadanga Kriya app</span>
+<span style="display: flex; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: var(--sk-primary)"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Weekend sessions for doubt-clearing and community</span>
+<span style="display: flex; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px; stroke: var(--sk-primary)"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Weekly progress check by the team</span>
+</span>
+</button>
+</div>
+
+<form onSubmit="{{noSubmit}}" style="margin-top: 20px; background: #FFFFFF; border-radius: 24px; padding: 22px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 20px 50px color-mix(in srgb, var(--sk-primary) 18%, transparent); border: 1px solid color-mix(in srgb, var(--sk-primary) 15%, transparent)">
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12px; color: color-mix(in srgb, var(--sk-ink) 60%, transparent)">Step 1 of 2 · about a minute</span><h3 style="margin: 0; font-weight: var(--sk-w-ui); font-size: 19px">Book: {{planName}} <span style="font-family: var(--sk-font-dv-text); font-weight: var(--sk-w-dv-text); color: var(--sk-primary)">· ₹{{price}} + GST per person</span></h3></div>
+<span style="align-self: flex-start; padding: 6px 12px; border-radius: 999px; background: var(--sk-fresh); color: var(--sk-primary); font-weight: var(--sk-w-ui); font-size: 12px">{{bookingFor}}</span>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 4px"><span style="font-weight: var(--sk-w-ui); font-size: 15px">Person 1 · You</span></div>
+<div style="display: grid; grid-template-columns: 1fr; gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">Full name<input type="text" name="name" autocomplete="name" placeholder="Your name" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">WhatsApp number<input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="+91" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">Email <span style="font-weight: var(--sk-w-body); color: color-mix(in srgb, var(--sk-ink) 55%, transparent)">(for your receipt and updates)</span><input type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">City / location<input type="text" name="city" autocomplete="address-level2" placeholder="e.g. Nagpur" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">Area / locality<input type="text" name="area" autocomplete="address-level3" placeholder="e.g. Manish Nagar" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">I am a<select name="role" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"><option value="Student">Student</option><option value="Working adult">Working adult</option><option value="Parent">Parent</option><option value="Homemaker">Homemaker</option><option value="Senior citizen (60+)">Senior citizen (60+)</option><option value="Other">Other</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">Age<input type="number" name="age" inputmode="numeric" min="12" max="110" placeholder="e.g. 16" value="{{regAge}}" onChange="{{onRegAge}}" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+</div>
+<sc-if value="{{showGuardian}}" hint-placeholder-val="{{false}}">
+<div style="padding: 16px; border-radius: 16px; background: color-mix(in srgb, var(--sk-primary) 6%, transparent); border: 1px solid color-mix(in srgb, var(--sk-primary) 22%, transparent); display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; gap: 10px; align-items: flex-start"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-primary)"><path d="M12 3l7.5 3v5.5c0 4.5-3.2 8.2-7.5 9.5-4.3-1.3-7.5-5-7.5-9.5V6z"></path><path d="M9 12l2 2 4-4"></path></svg><div style="display: flex; flex-direction: column; gap: 4px"><span style="font-weight: var(--sk-w-ui); font-size: 15px">You're under 18: add a parent or guardian</span><span style="font-size: 13px; line-height: 1.55; color: color-mix(in srgb, var(--sk-ink) 70%, transparent)">Is your parent joining too? Add them below with "Add more people" and you can skip this.</span></div></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">Parent / guardian name<input type="text" name="guardianName" placeholder="Full name" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">Their phone number<input type="tel" name="guardianPhone" inputmode="tel" placeholder="+91" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+</div>
+<label style="display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5"><input type="checkbox" name="guardianConsent" style="width: 22px; height: 22px; margin: 0; accent-color: var(--sk-primary); flex: none">My parent or guardian agrees to my joining.</label>
+</div>
+</sc-if>
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 10px"><legend style="padding: 0; margin-bottom: 10px; font-weight: var(--sk-w-ui); font-size: 13px">What are you looking for? <span style="font-weight: var(--sk-w-body); color: color-mix(in srgb, var(--sk-ink) 60%, transparent)">(choose any)</span></legend><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px"><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor" value="Concentration" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Concentration</label><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor" value="Awareness" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Awareness</label><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor" value="Calmness" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Calmness</label><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor" value="Confidence" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Confidence</label><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor" value="Emotional regulation" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Emotional regulation</label><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor" value="Decisiveness" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Decisiveness</label><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor" value="Clarity about my way of life" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Clarity about my way of life</label></div></fieldset>
+<label style="display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; color: color-mix(in srgb, var(--sk-ink) 82%, transparent)"><input type="checkbox" name="health" checked="{{healthOn}}" onChange="{{toggleHealth}}" style="width: 22px; height: 22px; margin: 0; accent-color: var(--sk-primary); flex: none">I have a health condition to tell the team about.</label>
+<sc-if value="{{healthOn}}" hint-placeholder-val="{{false}}">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">What health condition do you have? <span style="font-weight: var(--sk-w-body); color: color-mix(in srgb, var(--sk-ink) 55%, transparent)">(private, only for the team)</span><textarea name="healthCondition" rows="3" placeholder="e.g. asthma, high blood pressure, back pain, anxiety, pregnancy" style="padding: 12px 14px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font: inherit; font-size: 15px; font-weight: var(--sk-w-body); resize: vertical; background: #FFFFFF"></textarea></label>
+</sc-if>
+<sc-for list="{{people}}" as="pp" hint-placeholder-count="0">
+<div style="padding: 16px; border-radius: 18px; background: var(--sk-fresh); border: 1px solid color-mix(in srgb, var(--sk-primary) 16%, transparent); display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px"><span style="font-weight: var(--sk-w-ui); font-size: 15px">Person {{pp.n}}</span><button type="button" onClick="{{pp.remove}}" aria-label="Remove person {{pp.n}}" style="display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--sk-ink) 16%, transparent); background: #FFFFFF; color: color-mix(in srgb, var(--sk-ink) 70%, transparent); font-family: inherit; font-size: 13px; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"></path></svg>Remove</button></div>
+<div style="display: grid; grid-template-columns: 1fr; gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">Full name<input type="text" value="{{pp.name}}" onChange="{{pp.onName}}" placeholder="Their name" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">Relation to Person 1<select value="{{pp.rel}}" onChange="{{pp.onRel}}" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"><option value="">Choose</option><option>Spouse / partner</option><option>Child</option><option>Parent</option><option>Guardian</option><option>Sibling</option><option>Grandparent</option><option>Grandchild</option><option>Relative</option><option>Friend</option><option>Other</option></select></label>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">They are a<select value="{{pp.role}}" onChange="{{pp.onRole}}" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"><option value="Student">Student</option><option value="Working adult">Working adult</option><option value="Parent">Parent</option><option value="Homemaker">Homemaker</option><option value="Senior citizen (60+)">Senior citizen (60+)</option><option value="Other">Other</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">Age<input type="number" inputmode="numeric" min="12" max="110" value="{{pp.age}}" onChange="{{pp.onAge}}" placeholder="Age" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+</div>
+<div style="display: grid; grid-template-columns: 1fr; gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">WhatsApp number<input type="tel" inputmode="tel" value="{{pp.phone}}" onChange="{{pp.onPhone}}" placeholder="+91" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">Email <span style="font-weight: var(--sk-w-body); color: color-mix(in srgb, var(--sk-ink) 55%, transparent)">(for their invitation and updates)</span><input type="email" inputmode="email" value="{{pp.email}}" onChange="{{pp.onEmail}}" placeholder="name@example.com" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">City / location<input type="text" autocomplete="address-level2" value="{{pp.city}}" onChange="{{pp.onCity}}" placeholder="e.g. Nagpur" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">Area / locality<input type="text" autocomplete="address-level3" value="{{pp.area}}" onChange="{{pp.onArea}}" placeholder="e.g. Manish Nagar" style="min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font-size: 16px; font-weight: var(--sk-w-body); background: #FFFFFF; width: 100%; box-sizing: border-box"></label>
+</div>
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 10px"><legend style="padding: 0; margin-bottom: 10px; font-weight: var(--sk-w-ui); font-size: 13px">What are they looking for? <span style="font-weight: var(--sk-w-body); color: color-mix(in srgb, var(--sk-ink) 55%, transparent)">(choose any)</span></legend><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px"><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); background: #FFFFFF; font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor_p{{pp.n}}" value="Concentration" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Concentration</label><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); background: #FFFFFF; font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor_p{{pp.n}}" value="Awareness" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Awareness</label><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); background: #FFFFFF; font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor_p{{pp.n}}" value="Calmness" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Calmness</label><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); background: #FFFFFF; font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor_p{{pp.n}}" value="Confidence" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Confidence</label><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); background: #FFFFFF; font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor_p{{pp.n}}" value="Emotional regulation" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Emotional regulation</label><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); background: #FFFFFF; font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor_p{{pp.n}}" value="Decisiveness" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Decisiveness</label><label style="display: flex; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 14%, transparent); background: #FFFFFF; font-weight: var(--sk-w-body); font-size: 14px; line-height: 1.3; cursor: pointer"><input type="checkbox" name="lookingFor_p{{pp.n}}" value="Clarity about my way of life" style="width: 20px; height: 20px; margin: 0; accent-color: var(--sk-primary); flex: none">Clarity about my way of life</label></div></fieldset>
+<label style="display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; color: color-mix(in srgb, var(--sk-ink) 82%, transparent)"><input type="checkbox" checked="{{pp.healthOn}}" onChange="{{pp.toggleHealth}}" style="width: 22px; height: 22px; margin: 0; accent-color: var(--sk-primary); flex: none">They have a health condition to tell the team about.</label>
+<sc-if value="{{pp.healthOn}}" hint-placeholder-val="{{false}}">
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: var(--sk-w-ui); font-size: 13px">What health condition do they have? <span style="font-weight: var(--sk-w-body); color: color-mix(in srgb, var(--sk-ink) 55%, transparent)">(private, only for the team)</span><textarea rows="3" value="{{pp.healthText}}" onChange="{{pp.onHealthText}}" placeholder="e.g. asthma, high blood pressure, back pain, anxiety, pregnancy" style="padding: 12px 14px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--sk-ink) 20%, transparent); font: inherit; font-size: 15px; font-weight: var(--sk-w-body); resize: vertical; background: #FFFFFF"></textarea></label>
+</sc-if>
+</div>
+</sc-for>
+<button type="button" onClick="{{addPerson}}" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; border-radius: 16px; border: 1.5px dashed color-mix(in srgb, var(--sk-primary) 55%, transparent); background: color-mix(in srgb, var(--sk-primary) 5%, transparent); color: var(--sk-primary); font-family: inherit; font-weight: var(--sk-w-ui); font-size: 15px; cursor: pointer"><span style="width: 28px; height: 28px; border-radius: 50%; background: var(--sk-primary); display: inline-flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span>Add more people</button>
+<p style="margin: -4px 0 0; font-size: 13px; line-height: 1.55; color: color-mix(in srgb, var(--sk-ink) 62%, transparent)">Coming as a family? Add each person here. Everyone sits in the same batch, and each person gets their own invitation. The fee is per person.</p>
+
+<div role="group" aria-label="Agreements" style="display: flex; flex-direction: column; gap: 12px; padding: 16px 18px; border-radius: 16px; border: 1px solid color-mix(in srgb, var(--sk-ink) 12%, transparent)">
+<span style="font-size: 12px; line-height: 1.5; color: color-mix(in srgb, var(--sk-ink) 60%, transparent)">Once for this booking, on behalf of everyone listed above</span>
+<label style="display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; color: color-mix(in srgb, var(--sk-ink) 82%, transparent)"><input type="checkbox" name="agreeTerms" required="" checked="{{agreeTerms}}" onChange="{{toggleTerms}}" style="width: 22px; height: 22px; margin: 0; accent-color: var(--sk-primary); flex: none"><span>I agree to the <a href="[TERMS]" target="_blank" rel="noopener" style="color: var(--sk-primary)">Terms &amp; Conditions</a>.</span></label>
+<label style="display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; color: color-mix(in srgb, var(--sk-ink) 82%, transparent)"><input type="checkbox" name="agreeConsent" required="" checked="{{agreeConsent}}" onChange="{{toggleConsent}}" style="width: 22px; height: 22px; margin: 0; accent-color: var(--sk-primary); flex: none"><span>I have read and agree to the <a href="[CONSENT]" target="_blank" rel="noopener" style="color: var(--sk-primary)">Consent Form</a>.</span></label>
+</div>
+
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; border-radius: 16px; background: color-mix(in srgb, var(--sk-primary) 7%, transparent)"><span style="font-size: 14px; line-height: 1.4">{{totalLabel}}</span><span style="font-family: var(--sk-font-dv-text); font-weight: var(--sk-w-dv-text); font-size: 22px; color: var(--sk-ink)">₹{{totalFmt}}<span style="margin-left: 4px; font-family: var(--sk-font-text); font-weight: var(--sk-w-body); font-size: max(11px, 0.55em); opacity: 0.75; white-space: nowrap">+ GST</span></span></div>
+<a href="{{payHref}}" aria-disabled="{{payDisabled}}" style="{{payStyle}}">Continue to payment · <span style="font-family: var(--sk-font-dv-text)">₹{{totalFmt}}<span style="margin-left: 4px; font-family: var(--sk-font-text); font-weight: var(--sk-w-body); font-size: max(11px, 0.55em); opacity: 0.75; white-space: nowrap">+ GST</span></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<sc-if value="{{payBlocked}}" hint-placeholder-val="{{false}}"><p style="margin: -6px 0 0; text-align: center; font-size: 12px; color: var(--sk-primary)">Tick both boxes above to continue.</p></sc-if>
+<span style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: color-mix(in srgb, var(--sk-ink) 60%, transparent)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>UPI, cards, netbanking · Confirmation on WhatsApp</span>
+<sc-if value="{{isFull}}" hint-placeholder-val="{{false}}"><p style="margin: 0; text-align: center; font-size: 12px; color: var(--sk-primary)">Already did Core? Use the personal upgrade link we send you on WhatsApp after Day 3, so your ₹{{corePrice}} comes off.</p></sc-if>
+</form>
+</div>
+</section>
+
+<!-- FAQ -->
+<section style="background: #FFFFFF; padding: 72px 20px">
+<h2 style="margin: 0 0 20px; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 34px; line-height: 1.1; color: var(--sk-ink)">Questions, answered</h2>
+<div style="display: flex; flex-direction: column; border-top: 1px solid color-mix(in srgb, var(--sk-ink) 12%, transparent)">
+<sc-for list="{{faqs}}" as="f" hint-placeholder-count="11">
+<div style="border-bottom: 1px solid color-mix(in srgb, var(--sk-ink) 12%, transparent)">
+<button type="button" onClick="{{f.toggle}}" aria-expanded="{{f.expanded}}" style="width: 100%; min-height: 60px; padding: 14px 0; background: none; border: 0; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 14px; text-align: left; font-family: var(--sk-font-text); font-weight: var(--sk-w-ui); font-size: 16px; line-height: 1.4; color: var(--sk-ink)"><span>{{f.q}}</span><span style="flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--sk-fresh); color: var(--sk-primary); display: inline-flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1">{{f.sign}}</span></button>
+<sc-if value="{{f.open}}" hint-placeholder-val="{{false}}"><p style="margin: 0 0 18px; padding-right: 8px; font-size: 15px; line-height: 1.7; color: color-mix(in srgb, var(--sk-ink) 75%, transparent)">{{f.a}}</p></sc-if>
+</div>
+</sc-for>
+</div>
+<div style="margin-top: 28px; border-radius: 24px; padding: 22px; background: var(--sk-ink); color: rgba(255,255,255,0.88); display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 28px; line-height: 1.1; color: #FFFFFF">Still have a question?</h3>
+<p style="margin: 0; font-size: 14px; line-height: 1.6">Talk to a real person from the team. We reply the same day.</p>
+<details class="sk-contact" style="width: 100%"><summary style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; border-radius: 999px; background: #FFFFFF; color: var(--sk-ink); text-decoration: none; font-weight: var(--sk-w-ui); font-size: 15px; cursor: pointer; list-style: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-primary)"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>Call or WhatsApp us</summary><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 10px"><a href="{{callUrl}}" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--sk-lilac) 45%, transparent); color: #FFFFFF; text-decoration: none; font-weight: var(--sk-w-ui); font-size: 14px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: currentColor"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>Call</a><a href="{{whatsappUrl}}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--sk-lilac) 45%, transparent); color: #FFFFFF; text-decoration: none; font-weight: var(--sk-w-ui); font-size: 14px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: currentColor"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1 1 21 12zM9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-1.8-.9-.8.8c-1-.4-2-1.4-2.4-2.4l.8-.8-.9-1.8z"></path></svg>WhatsApp</a></div><p style="margin: 8px 0 0; text-align: center; font-size: 12px; color: rgba(255,255,255,0.6)">+91 89563 91919 · choose call or WhatsApp message</p></details>
+<a href="{{mapUrl}}" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--sk-lilac) 40%, transparent); color: #FFFFFF; text-decoration: none; font-weight: var(--sk-w-ui); font-size: 15px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="stroke: var(--sk-lilac)"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"></path><circle cx="12" cy="10" r="2.3"></circle></svg>Open venue in Maps</a>
+<p style="margin: 0; font-size: 12px; line-height: 1.7; color: var(--sk-lilac)">Nagpur City Multistate Credit Co-operative Society Ltd., Head Office, Main Rd, Chandan Nagar, Nagpur 440024 · Landmark: Krida Square</p>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: var(--sk-ink); color: rgba(255,255,255,0.7); padding: 40px 20px 120px; border-top: 1px solid color-mix(in srgb, var(--sk-lilac) 12%, transparent)">
+<img src="./assets/5c06d09ab6c67ec4e84529befe0bd77e.png" alt="Shadanga Kriya" style="height: 26px; width: auto; display: block">
+<div style="margin-top: 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; font-size: 14px">
+<a href="https://www.instagram.com/shadangakriya" target="_blank" rel="noopener" style="color: var(--sk-lilac)">Instagram</a>
+<a href="{{callUrl}}" style="color: var(--sk-lilac)">Call us</a>
+<a href="{{whatsappUrl}}" target="_blank" rel="noopener" style="color: var(--sk-lilac)">WhatsApp</a>
+<a href="mailto:hello@shadangakriya.com" target="_blank" rel="noopener" style="color: var(--sk-lilac)">Email</a>
+<a href="{{iosUrl}}" target="_blank" rel="noopener" style="color: var(--sk-lilac)">App Store</a>
+<a href="{{androidUrl}}" target="_blank" rel="noopener" style="color: var(--sk-lilac)">Google Play</a>
+<a href="[PRIVACY]" style="color: var(--sk-lilac)">Privacy</a>
+<a href="[TERMS]" style="color: var(--sk-lilac)">Terms &amp; refunds</a>
+<a href="[CONSENT]" style="color: var(--sk-lilac)">Consent form</a>
+</div>
+<p style="margin: 24px 0 0; font-size: 12px; line-height: 1.7">Shadanga Kriya · PL Six Tele Pi Pvt. Ltd. · Nagpur City Multistate Credit Co-operative Society Ltd., Head Office, Main Rd, Chandan Nagar, Nagpur 440024 (near Krida Square)</p>
+<p style="margin: 14px 0 0; font-size: 12px; line-height: 1.7">Shadanga Kriya is training for attention and awareness, not medical or psychological treatment. Results vary. If you're going through a hard time or having thoughts of harming yourself, please talk to a mental health professional, or call Tele-MANAS on 14416 (free, 24×7, India).</p>
+</footer>
+
+<!-- STICKY BOTTOM BAR -->
+<div class="sk-bottom" style="position: sticky; bottom: 0; z-index: 20; background: color-mix(in srgb, var(--sk-ink) 94%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid color-mix(in srgb, var(--sk-lilac) 20%, transparent)">
+<div style="padding: 10px 16px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-size: 14px; color: #FFFFFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{planShort}} · <span style="font-family: var(--sk-font-dv-text); font-weight: var(--sk-w-dv-text)">₹{{price}}<span style="margin-left: 4px; font-family: var(--sk-font-text); font-weight: var(--sk-w-body); font-size: max(11px, 0.55em); opacity: 0.75; white-space: nowrap">+ GST</span></span></span>
+<span style="font-size: 12px; color: var(--sk-lilac); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{dates}} · 7:00–9:00 AM</span>
+</div>
+<a href="#book" style="flex: none; display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 999px; background: var(--sk-primary); color: #FFFFFF; text-decoration: none; font-weight: var(--sk-w-ui); font-size: 15px">Book seat</a>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"programName": {"editor": "text", "default": "Neuro Mastery Program", "section": "Program"}, "coreDates": {"editor": "text", "default": "20 – 23 Nov", "section": "Program"}, "fullDates": {"editor": "text", "default": "20 Nov – 19 Dec", "section": "Program"}, "language": {"editor": "text", "default": "Hindi and English", "section": "Program"}, "defaultPlan": {"editor": "enum", "options": ["core", "full"], "default": "core", "section": "Program"}, "corePrice": {"editor": "text", "default": "499", "section": "Fees"}, "fullPrice": {"editor": "text", "default": "12,499", "section": "Fees"}, "fontPrimary": {"editor": "enum", "options": ["Satisfy SK (brand)", "Blauer Nue", "Objective", "Poppins", "Cormorant Garamond", "Playfair Display", "Fraunces", "Custom"], "default": "Satisfy SK (brand)", "section": "Typography · Primary (English display)"}, "fontPrimaryCustom": {"editor": "text", "default": "", "section": "Typography · Primary (English display)"}, "weightPrimary": {"editor": "enum", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"], "default": "400", "section": "Typography · Primary (English display)"}, "caseHero": {"editor": "enum", "options": ["uppercase", "none"], "default": "uppercase", "section": "Typography · Primary (English display)"}, "fontSecondary": {"editor": "enum", "options": ["Blauer Nue (brand)", "Objective", "Poppins", "Inter", "Manrope", "DM Sans", "Custom"], "default": "Objective", "section": "Typography · Secondary (English text &amp; UI)"}, "fontSecondaryCustom": {"editor": "text", "default": "", "section": "Typography · Secondary (English text &amp; UI)"}, "weightBody": {"editor": "enum", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"], "default": "300", "section": "Typography · Secondary (English text &amp; UI)"}, "weightEmphasis": {"editor": "enum", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"], "default": "400", "section": "Typography · Secondary (English text &amp; UI)"}, "weightUI": {"editor": "enum", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"], "default": "500", "section": "Typography · Secondary (English text &amp; UI)"}, "fontDvDisplay": {"editor": "enum", "options": ["Arya (brand)", "Poppins", "Tiro Devanagari Hindi", "Noto Sans Devanagari", "Custom"], "default": "Arya (brand)", "section": "Typography · Devanagari display"}, "fontDvDisplayCustom": {"editor": "text", "default": "", "section": "Typography · Devanagari display"}, "weightDvDisplay": {"editor": "enum", "options": ["400", "700"], "default": "700", "section": "Typography · Devanagari display"}, "fontDvText": {"editor": "enum", "options": ["Poppins (brand)", "Noto Sans Devanagari", "Mukta", "Hind", "Custom"], "default": "Custom", "section": "Typography · Devanagari text, prices ₹"}, "fontDvTextCustom": {"editor": "text", "default": "", "section": "Typography · Devanagari text, prices ₹"}, "weightDvText": {"editor": "enum", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"], "default": "400", "section": "Typography · Devanagari text, prices ₹"}, "colorPrimary": {"editor": "color", "default": "#7B3FF6", "section": "Colours"}, "colorWordmark": {"editor": "color", "default": "#8F5BFF", "section": "Colours"}, "colorLilac": {"editor": "color", "default": "#C7A7FF", "section": "Colours"}, "colorFresh": {"editor": "color", "default": "#F6F1FF", "section": "Colours"}, "colorRelax": {"editor": "color", "default": "#F8F1E7", "section": "Colours"}, "colorInk": {"editor": "color", "default": "#0A0A0A", "section": "Colours"}, "colorNight": {"editor": "color", "default": "#140A2E", "section": "Colours"}, "colorGlow": {"editor": "color", "default": "#6808FF", "section": "Colours"}, "colorRim": {"editor": "color", "default": "#E9DDFF", "section": "Colours"}, "corePayUrl": {"editor": "text", "default": "https://rzp.io/l/core-payment-link", "section": "Links"}, "fullPayUrl": {"editor": "text", "default": "https://rzp.io/l/full-payment-link", "section": "Links"}, "iosUrl": {"editor": "text", "default": "https://apps.apple.com/us/app/shadanga-kriya/id6759166813", "section": "Links"}, "whatsappUrl": {"editor": "text", "default": "https://wa.me/918956391919", "section": "Links"}, "mapUrl": {"editor": "text", "default": "https://www.google.com/maps/search/?api=1&query=21.130297,79.102997", "section": "Links"}, "seatsLeft": {"editor": "int", "min": 0, "max": 150, "default": 22, "section": "Seats (one shared count for the batch)"}, "$preview": {"width": 390, "height": 15000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { plan: null, open: 0, who: 'student', dim: 0, mind: 'before', health: false, agreeTerms: false, agreeConsent: false, life: 0, people: [], nextKey: 1, regAge: '' };
+  }
+  componentDidMount() {
+    const W = 390, H = 150, N = 97, DUR = 7000;
+    const ss = (a, b, x) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+    const wave = (t, amp, ph) => {
+      let d = '';
+      for (let i = 0; i <= N; i++) {
+        const u = i / N, x = u * W, s = ss(0.16, 0.52, u), P2 = 2 * Math.PI;
+        const chaos = 0.55 * Math.sin(P2 * (9 * u - 2 * t) + ph) + 0.35 * Math.sin(P2 * (17 * u - 3 * t) + 1.3 + ph) + 0.25 * Math.sin(P2 * (31 * u - 5 * t) + 2.1) + 0.18 * Math.sin(P2 * (47 * u - 7 * t) + 0.7);
+        const calm = Math.sin(P2 * (3.2 * u - t) + ph);
+        const y = H / 2 + amp * ((1 - s) * chaos * H * 0.36 + s * calm * H * 0.22);
+        d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
+      }
+      return d;
+    };
+    const t0 = (typeof performance !== 'undefined' ? performance.now() : Date.now());
+    const tick = (now) => {
+      const t = (((now || Date.now()) - t0) % DUR) / DUR;
+      if (this._waveMain) this._waveMain.setAttribute('d', wave(t, 1, 0));
+      if (this._waveFaint) this._waveFaint.setAttribute('d', wave(t, 0.6, 1.7));
+      this._waveRaf = requestAnimationFrame(tick);
+    };
+    if (typeof requestAnimationFrame === 'function') this._waveRaf = requestAnimationFrame(tick);
+  }
+  componentWillUnmount() {
+    if (this._waveRaf && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(this._waveRaf);
+  }
+  renderVals() {
+    const p = this.props;
+    const plan = this.state.plan || p.defaultPlan || 'core';
+    const isCore = plan === 'core';
+    const corePrice = p.corePrice ?? '499';
+    const fullPrice = p.fullPrice ?? '12,499';
+    const set = (v) => () => this.setState({ plan: v });
+    const who = this.state.who || 'student';
+    const setWho = (v) => () => this.setState({ who: v });
+
+    // ---- Theme: one value per role, used everywhere on the page ----
+    const stack = (choice, custom, map, fallback) => {
+      if (choice === 'Custom' && custom && custom.trim()) return '"' + custom.trim() + '", ' + fallback;
+      return map[choice] || map[Object.keys(map)[0]];
+    };
+    const fontDisplay = stack(p.fontPrimary ?? 'Satisfy SK (brand)', p.fontPrimaryCustom, {
+      'Satisfy SK (brand)': '"Satisfy SK", serif', 'Blauer Nue': '"Blauer Nue", sans-serif', 'Objective': '"Objective", sans-serif',
+      'Poppins': '"Poppins", sans-serif', 'Cormorant Garamond': '"Cormorant Garamond", serif', 'Playfair Display': '"Playfair Display", serif',
+      'Fraunces': '"Fraunces", serif' }, 'serif');
+    const fontText = stack(p.fontSecondary ?? 'Objective', p.fontSecondaryCustom, {
+      'Blauer Nue (brand)': '"Blauer Nue", "Poppins", sans-serif', 'Objective': '"Objective", "Poppins", sans-serif', 'Poppins': '"Poppins", sans-serif',
+      'Inter': '"Inter", "Poppins", sans-serif', 'Manrope': '"Manrope", "Poppins", sans-serif', 'DM Sans': '"DM Sans", "Poppins", sans-serif' }, '"Poppins", sans-serif');
+    const fontDvDisplay = stack(p.fontDvDisplay ?? 'Arya (brand)', p.fontDvDisplayCustom, {
+      'Arya (brand)': '"Arya", "Poppins", sans-serif', 'Poppins': '"Poppins", sans-serif', 'Tiro Devanagari Hindi': '"Tiro Devanagari Hindi", serif',
+      'Noto Sans Devanagari': '"Noto Sans Devanagari", sans-serif' }, '"Poppins", sans-serif');
+    const fontDvText = stack(p.fontDvText ?? 'Poppins (brand)', p.fontDvTextCustom, {
+      'Poppins (brand)': '"Poppins", sans-serif', 'Noto Sans Devanagari': '"Noto Sans Devanagari", "Poppins", sans-serif',
+      'Mukta': '"Mukta", "Poppins", sans-serif', 'Hind': '"Hind", "Poppins", sans-serif' }, '"Poppins", sans-serif');
+    const theme = {
+      '--sk-primary': p.colorPrimary ?? '#7B3FF6', '--sk-wordmark': p.colorWordmark ?? '#8F5BFF', '--sk-lilac': p.colorLilac ?? '#C7A7FF',
+      '--sk-fresh': p.colorFresh ?? '#F6F1FF', '--sk-relax': p.colorRelax ?? '#F8F1E7', '--sk-ink': p.colorInk ?? '#0A0A0A',
+      '--sk-night': p.colorNight ?? '#140A2E', '--sk-glow': p.colorGlow ?? '#6808FF', '--sk-rim': p.colorRim ?? '#E9DDFF',
+      '--sk-step2': 'color-mix(in srgb, var(--sk-primary) 22%, var(--sk-night))',
+      '--sk-step3': 'color-mix(in srgb, var(--sk-primary) 50%, var(--sk-night))',
+      '--sk-font-display': fontDisplay, '--sk-font-text': fontText, '--sk-font-dv-display': fontDvDisplay, '--sk-font-dv-text': fontDvText,
+      '--sk-w-display': p.weightPrimary ?? '400', '--sk-w-body': p.weightBody ?? '300', '--sk-w-emph': p.weightEmphasis ?? '400',
+      '--sk-w-ui': p.weightUI ?? '500', '--sk-w-dv-display': p.weightDvDisplay ?? '700', '--sk-w-dv-text': p.weightDvText ?? '400',
+      '--sk-display-case': p.caseHero ?? 'uppercase'
+    };
+    const rootStyle = Object.assign({}, theme, {
+      fontFamily: 'var(--sk-font-text)', fontWeight: 'var(--sk-w-body)', color: 'var(--sk-ink)', background: 'var(--sk-ink)',
+      WebkitFontSmoothing: 'antialiased', overflowX: 'clip' });
+    const css = (str) => { const o = {}; str.split(';').forEach((d) => { const i = d.indexOf(':'); if (i < 0) return; const k = d.slice(0, i).trim().replace(/-([a-z])/g, (m, c) => c.toUpperCase()); o[k] = d.slice(i + 1).trim(); }); return o; };
+
+    const tabOn = 'min-width: 0; min-height: 60px; padding: 8px 12px; border-radius: 15px; border: 0; cursor: pointer; text-align: left; font-family: inherit; background: var(--sk-primary); color: #FFFFFF; box-shadow: 0 0 24px color-mix(in srgb, var(--sk-wordmark) 45%, transparent)';
+    const tabOff = 'min-width: 0; min-height: 60px; padding: 8px 12px; border-radius: 15px; border: 0; cursor: pointer; text-align: left; font-family: inherit; background: transparent; color: rgba(255,255,255,0.8)';
+    const pillOn = 'min-height: 44px; padding: 0 10px; border-radius: 999px; border: 0; cursor: pointer; font-family: inherit; font-weight: var(--sk-w-ui); font-size: 14px; background: var(--sk-primary); color: #FFFFFF';
+    const pillOff = 'min-height: 44px; padding: 0 10px; border-radius: 999px; border: 0; cursor: pointer; font-family: inherit; font-weight: var(--sk-w-ui); font-size: 14px; background: transparent; color: var(--sk-ink)';
+    const pillWhoOn = 'min-height: 44px; padding: 0 10px; border-radius: 999px; border: 0; cursor: pointer; font-family: inherit; font-weight: var(--sk-w-ui); font-size: 14px; background: var(--sk-fresh); color: var(--sk-ink)';
+    const pillWhoOff = 'min-height: 44px; padding: 0 10px; border-radius: 999px; border: 0; cursor: pointer; font-family: inherit; font-weight: var(--sk-w-ui); font-size: 14px; background: transparent; color: rgba(255,255,255,0.8)';
+    const cardBase = 'display: flex; flex-direction: column; gap: 14px; padding: 22px; border-radius: 24px; cursor: pointer; width: 100%; text-align: left; font-family: inherit; font-weight: var(--sk-w-body); background: #FFFFFF; ';
+    const cardOn = cardBase + 'border: 2px solid var(--sk-primary); box-shadow: 0 0 0 6px color-mix(in srgb, var(--sk-primary) 12%, transparent), 0 24px 60px color-mix(in srgb, var(--sk-primary) 22%, transparent)';
+    const cardOff = cardBase + 'border: 2px solid color-mix(in srgb, var(--sk-ink) 8%, transparent); box-shadow: none; opacity: 0.88';
+    const radioOn = 'width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--sk-primary); box-shadow: inset 0 0 0 5px #FFFFFF; background: var(--sk-primary); flex: none';
+    const radioOff = 'width: 22px; height: 22px; border-radius: 50%; border: 2px solid color-mix(in srgb, var(--sk-ink) 30%, transparent); background: #FFFFFF; flex: none';
+
+    const dims = [
+      ['01', 'Body', 'शरीर', 'Notice sensations, tension and relaxation.', 'var(--sk-night)', 'rgba(255,255,255,0.9)', 'var(--sk-wordmark)', 5],
+      ['02', 'Breath', 'श्वास', 'Feel the breath before you control it.', 'var(--sk-step2)', 'rgba(255,255,255,0.9)', 'color-mix(in srgb, var(--sk-wordmark) 70%, var(--sk-lilac))', 4],
+      ['03', 'Senses', 'इंद्रियाँ', 'Seeing is not just seeing; hearing is not just hearing.', 'var(--sk-step3)', '#FFFFFF', 'var(--sk-lilac)', 3],
+      ['04', 'Mind & attention', 'मन', 'Not stopping thoughts, but noticing yourself between them.', 'var(--sk-primary)', '#FFFFFF', 'var(--sk-rim)', 2],
+      ['05', 'Emotion', 'भाव', 'Recognise a trigger before it runs you.', 'var(--sk-lilac)', 'var(--sk-ink)', 'var(--sk-primary)', 1],
+      ['06', 'Consciousness', 'चेतना', 'Who is watching all this?', 'var(--sk-fresh)', 'var(--sk-ink)', 'var(--sk-lilac)', 0]
+    ].map(([n, en, hi, line, bg, fg, ring, heavy], i) => {
+      const w = (k) => (k <= heavy ? String(1 + (heavy - k + 1) * 0.6) : '0.6');
+      return {
+        n, en, hi, line, ring,
+        card: css('flex: 0 0 74%; scroll-snap-align: start; box-sizing: border-box; display: flex; flex-direction: column; gap: 6px; padding: 24px; border-radius: 22px; min-height: 270px; background: ' + bg + '; color: ' + fg + (i === 5 ? '; box-shadow: 0 0 40px color-mix(in srgb, var(--sk-wordmark) 45%, transparent)' : '')),
+        w6: w(1), w5: w(2), w4: w(3), w3: w(4), w2: w(5),
+        dot: i === 5 ? '5' : '2.5',
+        svgStyle: { display: 'block', color: ring },
+        dotStyle: { fill: i >= 4 ? '#FFFFFF' : ring },
+      };
+    });
+
+
+    // ---- KMN2: what changes (toggle) ----
+    const mindAfter = this.state.mind === 'after';
+    const showBefore = () => this.setState({ mind: 'before' });
+    const showAfter = () => this.setState({ mind: 'after' });
+    const MINDICON = ['M12 11v2M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18', 'M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6L4.2 4.2M19.8 19.8l-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8', 'M9 6v12M15 6v12', 'M2 12c2.5-4 5-4 7.5 0s5 4 7.5 0 3.5-3 5-2', 'M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12zM12 9.5a2.5 2.5 0 1 0 0 5a2.5 2.5 0 1 0 0-5', 'M12 3c3 3.5 3 8.5 0 12-3-3.5-3-8.5 0-12zM4 13c3.5 0 6.5 2 8 6-4 0-7-2-8-6zM20 13c-3.5 0-6.5 2-8 6 4 0 7-2 8-6z'];
+    const MINDROWS = [
+      ['Attention that wanders', 'Attention you can direct and hold'],
+      ['Confusion', 'Clarity'],
+      ['Reacting at once', 'A small pause, then a choice'],
+      ['Emotions that sweep you away', 'Noticing an emotion as it rises'],
+      ['Self-doubt', 'Self-observation'],
+      ['Living on autopilot', 'Living with awareness']
+    ];
+    const mbOn = 'min-height: 44px; padding: 0 10px; border-radius: 999px; border: 0; cursor: pointer; font-family: inherit; font-weight: var(--sk-w-ui); font-size: 14px; transition: background 240ms; ';
+    const mindRows = MINDROWS.map(([a, b], i) => ({
+      text: mindAfter ? b : a, icon: MINDICON[i],
+      row: css('display: flex; align-items: center; gap: 14px; padding: 14px 0; transition: color 480ms; ' + (i < 5 ? 'border-bottom: 1px solid ' + (mindAfter ? 'color-mix(in srgb, var(--sk-primary) 12%, transparent)' : 'color-mix(in srgb, var(--sk-lilac) 10%, transparent)') : '')),
+      badge: css('flex: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 480ms; ' + (mindAfter ? 'background: #FFFFFF; box-shadow: 0 0 0 1px var(--sk-lilac), 0 0 14px color-mix(in srgb, var(--sk-wordmark) 35%, transparent)' : 'background: rgba(255,255,255,0.06)')),
+      iconStyle: css(mindAfter ? 'stroke: var(--sk-primary)' : 'stroke: rgba(255,255,255,0.45)'),
+      textStyle: css(mindAfter ? 'font-size: 17px; line-height: 1.4; color: var(--sk-ink); font-weight: var(--sk-w-emph)' : 'font-size: 16px; line-height: 1.4; color: rgba(255,255,255,0.6)')
+    }));
+    const mindPanel = css('padding: 18px 20px 6px; border-radius: 24px; transition: background 480ms, box-shadow 480ms; ' + (mindAfter ? 'background: var(--sk-fresh); box-shadow: 0 0 60px color-mix(in srgb, var(--sk-wordmark) 35%, transparent); border: 1px solid var(--sk-lilac)' : 'background: var(--sk-night); border: 1px solid color-mix(in srgb, var(--sk-lilac) 16%, transparent)'));
+    const mindLabel = css('margin: 0 0 4px; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; ' + (mindAfter ? 'color: var(--sk-primary)' : 'color: rgba(255,255,255,0.5)'));
+    // ---- KMN2: outcomes ----
+    const OUT_CORE = [
+      ['Settle into the alpha state', 'Guided breath and sound frequencies help your brain move toward alpha, the calm-but-alert state linked with deep focus and rest. Many people feel the shift in the first mornings; results vary.', 'M2 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0'],
+      ['Steady attention and focus', 'Train your mind to hold on one point, and to come back each time it drifts. A skill you carry straight into study, work and conversations.', 'M12 11a1 1 0 1 0 0 2a1 1 0 1 0 0-2M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18'],
+      ['See your thoughts and emotions clearly', 'Watch thoughts and feelings as they rise, without getting pulled along by them. Seeing them clearly is where real change begins.', 'M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6a3 3 0 1 0 0-6'],
+      ['Bring your emotions into balance', 'Find the small pause between what happens and how you react, so anger, worry and restlessness have less grip on your day.', 'M12 4v16M7 20h10M4 8h16M6.5 8L4 14h5zM17.5 8L15 14h5z'],
+      ['Your own answer', 'By Day 4 you\u2019ll know from your own experience, not from anyone\u2019s promise, whether to go further.', 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18M15.5 8.5l-2 5-5 2 2-5z']
+    ];
+    const OUT_FULL = [
+      ['Know who you are, and what state you\u2019re in', 'Learn to recognise your own state from moment to moment: tired, anxious, scattered or clear. Knowing where you are is the first step to changing it.', 'M12 4a4 4 0 1 0 0 8a4 4 0 1 0 0-8M4 21c1-4 4-6 8-6s7 2 8 6'],
+      ['Go deeper: alpha and theta', '30 guided mornings of breath and sound train your brain to settle toward alpha, and in deeper practice toward theta, the states linked with calm focus and deep rest. Results vary.', 'M2 12c1.5-5 3-5 4.5 0s3 5 4.5 0 3-5 4.5 0 3 5 4.5 0 1.5-3 2-3'],
+      ['Balance in all six dimensions of you', 'Body, breath, senses, mind, emotion and consciousness, trained one layer at a time, so every part of your life gets steadier, not just one.', 'M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20M12 6a6 6 0 1 0 0 12a6 6 0 1 0 0-12M12 10a2 2 0 1 0 0 4a2 2 0 1 0 0-4'],
+      ['Awareness, focus and attention that hold', 'Stay with a chapter, a task or a conversation for longer, and take things in fully, which makes them easier to recall in class, at work or in an exam.', 'M12 11v2M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18'],
+      ['Train the automatic mind', 'Daily repetition works on the part of you that runs below conscious thought, so calm and clarity begin to show up on their own, not only when you try.', 'M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4'],
+      ['Break old habit patterns', 'Catch the loops that keep repeating, the same anger, worry or procrastination, and choose a different response, again and again, until it becomes yours.', 'M4 12h6M14 12h6M10 8l4 8M7 5l-3 7 3 7M17 5l3 7-3 7'],
+      ['Emotional independence', 'Feel steady from the inside, without needing anyone else\u2019s approval, opinion or answers to know you\u2019re okay.', 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z'],
+      ['Your personal blueprint for life', 'Bring it all together into your own way of life: what you value, how you want to live, and a daily practice for the 90 days after, and beyond. Yours, not borrowed.', 'M4 4h16v16H4zM4 9h16M9 9v11M12 13h5M12 16h3']
+    ];
+    const outList = isCore ? OUT_CORE : OUT_FULL;
+    const outcomes = outList.map(([title, text, icon], i) => {
+      const last = i === outList.length - 1;
+      return {
+        title, text, icon,
+        card: css('display: flex; gap: 16px; align-items: flex-start; padding: 20px; border-radius: 22px; ' + (last ? 'background: var(--sk-ink); color: #FFFFFF; box-shadow: 0 20px 50px color-mix(in srgb, var(--sk-primary) 25%, transparent)' : 'background: #FFFFFF; color: var(--sk-ink); border: 1px solid color-mix(in srgb, var(--sk-primary) 12%, transparent)')),
+        badge: css('flex: none; width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; ' + (last ? 'background: color-mix(in srgb, var(--sk-lilac) 16%, transparent)' : 'background: var(--sk-fresh)')),
+        iconStyle: css(last ? 'stroke: var(--sk-lilac)' : 'stroke: var(--sk-primary)')
+      };
+    });
+    // ---- KMN2: health questions ----
+    const healthOn = !!this.state.health;
+    const toggleHealth = () => this.setState({ health: !this.state.health });
+    const agreeTerms = !!this.state.agreeTerms, agreeConsent = !!this.state.agreeConsent;
+    const toggleTerms = () => this.setState({ agreeTerms: !this.state.agreeTerms });
+    const toggleConsent = () => this.setState({ agreeConsent: !this.state.agreeConsent });
+    const payBlocked = !(agreeTerms && agreeConsent);
+    const payStyle = css('display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; border-radius: 999px; background: var(--sk-primary); color: #FFFFFF; text-decoration: none; font-weight: var(--sk-w-ui); font-size: 16px; box-shadow: 0 10px 30px color-mix(in srgb, var(--sk-primary) 35%, transparent)' + (payBlocked ? '; opacity: 0.45; pointer-events: none; box-shadow: none; cursor: not-allowed' : ''));
+    const healthQs = [
+      ['Do you have a heart, blood pressure or breathing condition?', 'hq_heart'],
+      ['Do you have epilepsy or a history of seizures?', 'hq_seizure'],
+      ['Are you pregnant?', 'hq_pregnant'],
+      ['Are you being treated for a mental-health condition, or taking medicines that make you drowsy?', 'hq_mental']
+    ].map(([q, name]) => ({ q, name }));
+
+    // ---- v3: life stages ----
+    const LIFE = [{"label": "Student", "img": "./assets/07d537c30ca362244793e0c1f05d9da1.jpg", "alt": "Placeholder: a student at a study desk in early light", "items": ["You read the chapter twice. By evening, it’s gone.", "Your phone wins the fight for your attention, most days.", "Everyone has an opinion about your stream or career. You don’t have your own yet.", "In the exam hall you know you studied it, but it won’t come back."]}, {"label": "Working life", "img": "./assets/ab1ae3707a58013520e0e1e1cc3219b9.jpg", "alt": "Placeholder: a young professional at work", "items": ["Your day is meetings and messages. Deep focus never arrives.", "You carry work stress home, then can’t switch off.", "Big decisions feel heavy, and you keep second-guessing them.", "You keep putting off the career change you think about."]}, {"label": "Love & marriage", "img": "./assets/c7153d640bfe892842a6c727af66eb86.jpg", "alt": "Placeholder: a couple talking calmly at home", "items": ["You react in an argument, then regret what you said.", "Expectations from family members pull you in different directions.", "You’re not sure if a big decision is yours or everyone else’s.", "Small misunderstandings turn into fights or long silences."]}, {"label": "Parenthood", "img": "./assets/07d537c30ca362244793e0c1f05d9da1.jpg", "alt": "Placeholder: a parent and child, a calm morning at home", "items": ["Your patience runs out faster than you’d like.", "You react to your child’s small mistakes, then feel guilty.", "Decisions about your child feel driven by worry or comparison.", "Your own time and calm have quietly disappeared."]}, {"label": "Later life", "img": "./assets/6e9b64c643f8948df1e24778d1891c8d.jpg", "alt": "Placeholder: an older adult sitting quietly by a window", "items": ["The mind keeps replaying the past or worrying about tomorrow.", "Your role is changing, and you’re asking ‘what now?’", "Sleep is lighter and the mind feels restless.", "You want calm and purpose, not more advice."]}];
+    const lifeI = this.state.life ?? 0;
+    const lifeChips = LIFE.map((L, i) => ({ label: L.label, sel: i === lifeI ? 'true' : 'false', pick: () => this.setState({ life: i }),
+      style: css('flex: none; min-height: 40px; padding: 0 16px; border-radius: 999px; cursor: pointer; font-family: inherit; font-size: 14px; font-weight: var(--sk-w-ui); white-space: nowrap; transition: background 240ms; ' +
+        (i === lifeI ? 'background: var(--sk-fresh); color: var(--sk-ink); border: 1px solid var(--sk-fresh)' : 'background: transparent; color: rgba(255,255,255,0.8); border: 1px solid color-mix(in srgb, var(--sk-lilac) 30%, transparent)')) }));
+    const LIFE_ICONS = {
+      'Student': 'M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5M22 9v6',
+      'Working life': 'M3 8h18v11H3zM9 8V5h6v3M3 13h18',
+      'Love & marriage': 'M9 8a5 5 0 1 0 0 10a5 5 0 1 0 0-10M15 8a5 5 0 1 0 0 10a5 5 0 1 0 0-10M9.5 4.5L12 2l2.5 2.5',
+      'Parenthood': 'M8 4a2.5 2.5 0 1 0 0 5a2.5 2.5 0 1 0 0-5M3.5 20c0-4 2-6.5 4.5-6.5s4.5 2.5 4.5 6.5M17 9a2 2 0 1 0 0 4a2 2 0 1 0 0-4M14 20c0-3 1.3-5 3-5s3 2 3 5',
+      'Later life': 'M12 21c0-6 0-9 6-13-1 6-3 9-6 10M12 21c0-4-2-7-7-9 1 5 3 7 7 8M12 21v-6'
+    };
+    const lifeAll = LIFE.map((L, i) => ({ label: L.label, img: L.img, alt: L.alt, icon: LIFE_ICONS[L.label] || LIFE_ICONS['Student'], n: 'Stage ' + (i + 1), items: L.items.map((t) => ({ t })) }));
+    const lifeNow = Object.assign({}, lifeAll[lifeI], { count: 'Stage ' + (lifeI + 1) + ' of ' + LIFE.length });
+    // ---- v3: side-by-side comparison ----
+    const PAIRS = [['Attention that wanders', 'Attention you can direct and hold'], ['Confusion', 'Clarity'], ['Reacting at once', 'A small pause, then a choice'], ['Emotions that sweep you away', 'Noticing an emotion as it rises'], ['Self-doubt', 'Self-observation'], ['Living on autopilot', 'Living with awareness']];
+    const PICON = ["M12 11v2M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18", "M12 4V2M12 22v-2M4 12H2M22 12h-2M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8", "M9 6v12M15 6v12", "M2 12c2.5-4 5-4 7.5 0s5 4 7.5 0 3.5-3 5-2", "M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12zM12 9.5a2.5 2.5 0 1 0 0 5a2.5 2.5 0 1 0 0-5", "M12 3c3 3.5 3 8.5 0 12-3-3.5-3-8.5 0-12zM4 13c3.5 0 6.5 2 8 6-4 0-7-2-8-6zM20 13c-3.5 0-6.5 2-8 6 4 0 7-2 8-6z"];
+    const pairs = PAIRS.map(([b, a], i) => ({ before: b, after: a, icon: PICON[i] }));
+    // ---- v3: family registration ----
+    const ppl = this.state.people || [];
+    const setPpl = (list) => this.setState({ people: list });
+    const field = (k, key) => (e) => setPpl((this.state.people || []).map((x) => x.key === k ? Object.assign({}, x, { [key]: e.target.value }) : x));
+    const flip = (k) => () => setPpl((this.state.people || []).map((x) => x.key === k ? Object.assign({}, x, { health: !x.health }) : x));
+    const people = ppl.map((x, i) => ({ n: i + 2, name: x.name, rel: x.rel, role: x.role, age: x.age, phone: x.phone, email: x.email || '', city: x.city || '', area: x.area || '', healthOn: !!x.health, healthText: x.healthText || '',
+      onEmail: field(x.key, 'email'), onCity: field(x.key, 'city'), onArea: field(x.key, 'area'), onHealthText: field(x.key, 'healthText'), toggleHealth: flip(x.key),
+      onName: field(x.key, 'name'), onRel: field(x.key, 'rel'), onRole: field(x.key, 'role'), onAge: field(x.key, 'age'), onPhone: field(x.key, 'phone'),
+      remove: () => setPpl((this.state.people || []).filter((y) => y.key !== x.key)) }));
+    const addPerson = () => { const k = (this.state.nextKey || 1); this.setState({ people: (this.state.people || []).concat([{ key: k, name: '', rel: '', role: 'Student', age: '', phone: '', email: '', city: '', area: '', health: false, healthText: '' }]), nextKey: k + 1 }); };
+    const regAge = this.state.regAge ?? '';
+    const onRegAge = (e) => this.setState({ regAge: e.target.value });
+    const guardianAdded = ppl.some((x) => x.rel === 'Parent' || x.rel === 'Guardian');
+    const showGuardian = regAge !== '' && Number(regAge) > 0 && Number(regAge) < 18 && !guardianAdded;
+    const headCount = 1 + ppl.length;
+    const unit = Number(String(isCore ? corePrice : fullPrice).replace(/[^0-9.]/g, '')) || 0;
+    const totalFmt = (unit * headCount).toLocaleString('en-IN');
+    const totalLabel = headCount === 1 ? 'Total for 1 person' : 'Total · ' + headCount + ' people × ₹' + unit.toLocaleString('en-IN');
+    const bookingFor = headCount === 1 ? 'Booking for 1 person' : 'Booking for ' + headCount + ' people';
+    const shifts = [
+      ['Attention that wanders', 'Attention you can direct and hold'],
+      ['Confusion', 'Clarity'],
+      ['Reacting at once', 'A small pause, then a choice'],
+      ['Emotions that sweep you away', 'Noticing an emotion as it rises'],
+      ['Self-doubt', 'Self-observation'],
+      ['Living on autopilot', 'Living with awareness']
+    ].map(([from, to]) => ({ from, to }));
+
+    const faqItems = [
+      ['Do I need any experience?', 'No. It is built for complete beginners. No yoga, meditation, Sanskrit or belief needed.'],
+      ['Is this religious?', 'No ritual, attire or sect. It is open to every faith, or none.'],
+      ['Is this therapy?', 'No. It is training for attention and awareness, not treatment, and it does not replace medical or psychological care.'],
+      ['Is it scientifically proven?', 'Its parts (breathing, meditation, attention training) are widely researched. A formal study of Shadanga Kriya itself is under way.'],
+      ['I am under 18. Can I join?', 'Yes, with a parent or guardian’s consent in the booking form.'],
+      ['Can parent & child join the programme together?', 'Yes. Parents and children (Class 8 and above) can join the same batch and practise side by side. Book a seat for each person; a child under 18 needs a parent\u2019s consent.'],
+      ['What happens after Day 4?', 'You choose. Continue into the Comprehensive program, or keep practising on your own with the routine you learned.'],
+      ['What if I miss a morning?', 'The program works best daily, with no gap.'],
+      ['Where exactly is it?', 'Nagpur City Multistate Credit Co-operative Society Ltd., Head Office, Main Rd, Chandan Nagar, Nagpur 440024, near Krida Square.']
+    ];
+    const open = this.state.open;
+
+    return {
+      showCoreSeats: (p.seatsLeft ?? 22) > 0 && (p.seatsLeft ?? 22) <= 30, coreSeatsText: (p.seatsLeft ?? 22) + ((p.seatsLeft ?? 22) === 1 ? ' seat' : ' seats') + ' left in this batch',
+      showFullSeats: (p.seatsLeft ?? 22) > 0 && (p.seatsLeft ?? 22) <= 30, fullSeatsText: (p.seatsLeft ?? 22) + ((p.seatsLeft ?? 22) === 1 ? ' seat' : ' seats') + ' left in this batch',
+      refFounderVideo: (el) => { this._founderVideo = el; },
+      playFounderVideo: () => { const v = this._founderVideo; if (!v) return; if (v.paused || v.ended) { const r = v.play(); if (r && r.catch) r.catch(() => {}); this.setState({ videoPlaying: true, videoStarted: true }); } else { v.pause(); this.setState({ videoPlaying: false }); } },
+      onVideoPlay: () => { if (!this.state.videoPlaying || !this.state.videoStarted) this.setState({ videoPlaying: true, videoStarted: true }); },
+      videoNotStarted: !(this.state && this.state.videoStarted),
+      onVideoPause: () => { if (this.state.videoPlaying) this.setState({ videoPlaying: false }); },
+      videoBtnLabel: (this.state && this.state.videoPlaying) ? 'Pause video' : 'Play video: what is Shadanga Kriya, in the founder\u2019s own words',
+      videoControls: !!(this.state && this.state.videoPlaying), videoIdle: !(this.state && this.state.videoPlaying),
+      refWaveMain: (el) => { this._waveMain = el; }, refWaveFaint: (el) => { this._waveFaint = el; },
+      programName: p.programName ?? 'Neuro Mastery Program',
+      dates: isCore ? (p.coreDates ?? '20 – 23 Nov') : (p.fullDates ?? '20 Nov – 19 Dec'),
+      language: p.language ?? 'Hindi and English',
+      corePrice, fullPrice,
+      whatsappUrl: p.whatsappUrl ?? 'https://wa.me/918956391919', callUrl: 'tel:+918956391919', androidUrl: 'https://play.google.com/store/apps/details?id=com.shadangakriya.app&pcampaignid=web_share',
+      mapUrl: p.mapUrl ?? 'https://www.google.com/maps/search/?api=1&query=21.130297,79.102997',
+      iosUrl: p.iosUrl ?? 'https://apps.apple.com/us/app/shadanga-kriya/id6759166813',
+      isCore, isFull: !isCore,
+      coreSel: isCore ? 'true' : 'false',
+      fullSel: isCore ? 'false' : 'true',
+      pickCore: set('core'), pickFull: set('full'),
+      tabCoreStyle: css(isCore ? tabOn : tabOff),
+      tabFullStyle: css(isCore ? tabOff : tabOn),
+      pillCoreStyle: css(isCore ? pillOn : pillOff),
+      pillFullStyle: css(isCore ? pillOff : pillOn),
+      cardCoreStyle: css(isCore ? cardOn : cardOff),
+      cardFullStyle: css(isCore ? cardOff : cardOn),
+      radioCore: css(isCore ? radioOn : radioOff),
+      radioFull: css(isCore ? radioOff : radioOn),
+      price: isCore ? corePrice : fullPrice,
+      planName: isCore ? 'Core · 4 days' : 'Comprehensive · 120 days',
+      planShort: isCore ? 'Core · 4 days' : 'Comprehensive · 120 days',
+      planLine: isCore ? 'Start here. Four mornings for ₹' + corePrice + ' + GST, and you\u2019ll know from your own experience whether this is for you.' : 'The complete transformation: 30 guided mornings, then 90 days of guided practice with the Shadanga Kriya app until it becomes yours.',
+      coreDates: p.coreDates ?? '20 – 23 Nov',
+      fullDates: p.fullDates ?? '20 Nov – 19 Dec',
+      isStudent: who === 'student', isAdult: who !== 'student',
+      stuSel: who === 'student' ? 'true' : 'false', adSel: who === 'student' ? 'false' : 'true',
+      pickStudent: setWho('student'), pickAdult: setWho('adult'),
+      whoStuStyle: css(who === 'student' ? pillWhoOn : pillWhoOff),
+      whoAdStyle: css(who === 'student' ? pillWhoOff : pillWhoOn),
+      durationLabel: isCore ? '4 mornings' : '30 days + 90 days',
+      ctaLabel: isCore ? 'Book my 4 mornings · ₹' + corePrice + ' + GST' : 'Join the Comprehensive program · ₹' + fullPrice + ' + GST',
+      ctaNote: isCore ? 'Book in about a minute and pay securely. Under 18? A parent books for you.' : '30 guided mornings, then 90 days of guided practice with the Shadanga Kriya app until it becomes yours.',
+      payUrl: isCore ? (p.corePayUrl ?? 'https://rzp.io/l/core-payment-link') : (p.fullPayUrl ?? 'https://rzp.io/l/full-payment-link'),
+      payHref: payBlocked ? undefined : (isCore ? (p.corePayUrl ?? 'https://rzp.io/l/core-payment-link') : (p.fullPayUrl ?? 'https://rzp.io/l/full-payment-link')),
+      payDisabled: payBlocked ? 'true' : 'false', payStyle, payBlocked, agreeTerms, agreeConsent, toggleTerms, toggleConsent,
+      expTitle: isCore ? 'What you take home after four mornings' : 'What 120 days can build in you',
+      rootStyle,
+      lifeChips, lifeAll, lifeNow, pairs,
+      people, addPerson, regAge, onRegAge, showGuardian, totalFmt, totalLabel, bookingFor,
+      mindRows, mindPanel, mindLabel, showBefore, showAfter,
+      mindLabelText: mindAfter ? 'With practice' : 'Without training',
+      mindIsBefore: !mindAfter, mindIsAfter: mindAfter,
+      mindBeforeSel: mindAfter ? 'false' : 'true', mindAfterSel: mindAfter ? 'true' : 'false',
+      mindBtnBefore: css(mbOn + (mindAfter ? 'background: transparent; color: rgba(255,255,255,0.75)' : 'background: rgba(255,255,255,0.12); color: #FFFFFF')),
+      mindBtnAfter: css(mbOn + (mindAfter ? 'background: var(--sk-fresh); color: var(--sk-ink); box-shadow: 0 0 18px color-mix(in srgb, var(--sk-wordmark) 45%, transparent)' : 'background: transparent; color: rgba(255,255,255,0.75)')),
+      outcomes,
+      expIntro: isCore ? 'Four mornings won\u2019t change your whole life. They will show you, clearly and in your own body, what a trained mind feels like.' : 'With daily practice, these are the changes practitioners commonly describe. Your pace is your own.',
+      expNote: isCore ? 'Day 1 can feel unfamiliar, and that\u2019s normal. Just follow the voice.' : 'This is practice, not a promise. It grows with every morning you show up.',
+      healthOn, toggleHealth, healthQs,
+      ...(() => {
+        const D = [
+          ['01', 'Body', 'शरीर', 'Notice sensations, tension and relaxation. The body is the first field of awareness.'],
+          ['02', 'Breath', 'श्वास', 'Feel the breath before you control it. It is the bridge between body and mind.'],
+          ['03', 'Senses', 'इंद्रियाँ', 'Seeing is not just seeing; hearing is not just hearing. Sight, sound and touch become finer.'],
+          ['04', 'Mind', 'मन', 'Not stopping thoughts, but noticing yourself between them.'],
+          ['05', 'Emotion', 'भाव', 'Recognise a trigger before it runs you. Observe, don\u2019t suppress.'],
+          ['06', 'Consciousness', 'चेतना', 'Who is watching all this? Here, training becomes self-awareness.']
+        ];
+        const k = this.state.dim ?? 0;
+        const go = (i) => () => this.setState({ dim: Math.max(0, Math.min(5, i)) });
+        const tabBase = 'min-width: 0; min-height: 52px; padding: 6px 4px; border-radius: 14px; cursor: pointer; font-family: inherit; text-align: center; transition: all 240ms cubic-bezier(.45,0,.25,1); ';
+        const ease = 'all 480ms cubic-bezier(.45,0,.25,1)';
+        const ringS = (i) => (i === k
+          ? { stroke: 'var(--sk-lilac)', strokeWidth: 3, filter: 'drop-shadow(0 0 8px var(--sk-wordmark))', transition: ease }
+          : { stroke: i < k ? 'color-mix(in srgb, var(--sk-lilac) 16%, transparent)' : 'color-mix(in srgb, var(--sk-lilac) 34%, transparent)', strokeWidth: 1.5, filter: 'none', transition: ease });
+        const out = {
+          dimTabs: D.map(([n, en], i) => ({ n, en, sel: i === k ? 'true' : 'false', pick: go(i),
+            style: css(tabBase + (i === k ? 'border: 1px solid var(--sk-primary); background: var(--sk-primary); color: #FFFFFF; box-shadow: 0 0 20px color-mix(in srgb, var(--sk-wordmark) 45%, transparent)' : 'border: 1px solid color-mix(in srgb, var(--sk-lilac) 18%, transparent); background: var(--sk-night); color: rgba(255,255,255,0.85)')) })),
+          dimN: D[k][0], dimEn: D[k][1], dimHi: D[k][2], dimDesc: D[k][3],
+          dimPrev: go(k - 1), dimNext: go(k + 1),
+          coreR: k === 5 ? '9' : '6',
+          coreDot: { filter: k === 5 ? 'drop-shadow(0 0 10px #FFFFFF) drop-shadow(0 0 18px var(--sk-wordmark))' : 'drop-shadow(0 0 6px var(--sk-wordmark))', transition: ease },
+          coreHalo: { fill: k === 5 ? 'color-mix(in srgb, var(--sk-wordmark) 55%, transparent)' : 'color-mix(in srgb, var(--sk-wordmark) 25%, transparent)', transition: ease }
+        };
+        for (let i = 0; i < 6; i++) out['pick' + i] = go(i);
+        for (let i = 0; i < 5; i++) out['ring' + i] = ringS(i);
+        return out;
+      })(),
+      dims, shifts,
+      noSubmit: (e) => { if (e && e.preventDefault) e.preventDefault(); },
+      faqs: faqItems.map(([q, a], i) => ({
+        q, a,
+        open: open === i,
+        expanded: open === i ? 'true' : 'false',
+        sign: open === i ? '−' : '+',
+        toggle: () => this.setState({ open: open === i ? -1 : i })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

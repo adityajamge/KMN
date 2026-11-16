@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Payment not completed – Shadanga Kriya</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Satisfy SK";src:url(./assets/376effb2a590333810f2f8c1972439b1.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/ea089e1c6e3a20d23475401a10f735db.woff2) format("woff2");font-weight:100;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/d24b593920fd7ce3a13d5a0a1437712a.woff2) format("woff2");font-weight:200;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/8f786d3ee09cace41dd65233cc24f21c.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/d751ccd464c45367e67f1d6dd6c7311e.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/36cdfe09b7630dfdaaed4a46f941e3e5.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/aaa9e6fd7fcf92c201b6fc43964531e4.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/24cfdd1511e821bfad870b517f6b3130.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/18cdded5ca2129bb18d55786ce52a3d8.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Blauer Nue";src:url(./assets/cea9e378769c7a1c12192b18fdb66382.woff2) format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/b35cc28c04524c57a84601443c238cab.woff2) format("woff2");font-weight:100;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/f35a10fc24036c0125ae7dc6b50ccf35.woff2) format("woff2");font-weight:200;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/fcb04fe9c143aaa5cc756d0eee879bec.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/ef99c79f35a74d7251f517ec0b943baa.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/e74e87ed4e934d1a0b95b9228358e522.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/61763ce2dc02fa2f9056ab6307cf24b1.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/c98f21713d9e205c1263cbf9401b930b.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/26b96487c832ccc957557d3309f1f1ac.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Poppins";src:url(./assets/b589dccfd81fe88cfb2dea4c542eb024.woff2) format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"Arya";src:url(./assets/0e58cdc74af2d9d96716057cd4890221.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Arya";src:url(./assets/736b4b64ff8750809829dd92626631bc.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/de6e6c0da268376d2a91071ccc3a3b59.woff2) format("woff2");font-weight:200;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/1463243fdaa9f96607a7b9690f2bb02c.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/2c8ec2af96f8931b9bd75832f8055a28.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/82ba8036270d14720eaff142f69d38b3.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/17dbf43765765322b04e8aaa8af8911e.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/683c6c2ca577cf1f4c8a4e40772f4e1a.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Objective";src:url(./assets/f0caec91323b0b71d94546783b9ccde5.woff2) format("woff2");font-weight:900;font-display:swap}
+body{margin:0;background:#0A0A0A}
+a{color:var(--sk-primary)}
+.sk-contact>summary{list-style:none}.sk-contact>summary::-webkit-details-marker{display:none}
+@keyframes skBreathe{0%,100%{transform:scale(.95);opacity:.82}50%{transform:scale(1.04);opacity:1}}
+@keyframes skHold{0%,100%{opacity:.55}50%{opacity:1}}
+.sk-hold{animation:skHold 4s cubic-bezier(.45,0,.25,1) infinite}
+@keyframes skRing{0%{transform:scale(.6);opacity:0}30%{opacity:.6}100%{transform:scale(1.6);opacity:0}}
+@keyframes skRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.sk-breathe{animation:skBreathe 4s cubic-bezier(.45,0,.25,1) infinite}
+.sk-ring{animation:skRing 4s cubic-bezier(.25,0,.35,1) infinite}
+.sk-rise{animation:skRise .48s cubic-bezier(.2,0,0,1) both}
+@media (prefers-reduced-motion:reduce){.sk-breathe,.sk-ring,.sk-rise{animation:none}}
+</style>
+</helmet>
+<div style="{{rootStyle}}">
+
+<!-- TOP BAR -->
+<header style="background: var(--sk-ink); border-bottom: 1px solid color-mix(in srgb, var(--sk-lilac) 14%, transparent)">
+<div style="max-width: 560px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center">
+<img src="./assets/5c06d09ab6c67ec4e84529befe0bd77e.png" alt="Shadanga Kriya" style="height: 26px; width: auto; display: block">
+</div>
+</header>
+
+<!-- 1 · NOT COMPLETED -->
+<section style="background: radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--sk-primary) 18%, var(--sk-ink)) 0%, var(--sk-ink) 70%); color: rgba(255,255,255,0.88); padding: 72px 24px 48px">
+<div style="max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px">
+<div aria-hidden="true" style="position: relative; width: 104px; height: 104px; margin-bottom: 14px">
+<span class="sk-hold" style="position: absolute; inset: 0; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--sk-lilac) 60%, transparent); box-shadow: 0 0 40px color-mix(in srgb, var(--sk-glow) 30%, transparent) inset"></span>
+<span style="position: absolute; left: 50%; top: 50%; width: 52px; height: 52px; margin: -26px 0 0 -26px; border-radius: 50%; background: color-mix(in srgb, var(--sk-lilac) 16%, transparent); border: 1px solid color-mix(in srgb, var(--sk-lilac) 40%, transparent); display: flex; align-items: center; justify-content: center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: #FFFFFF"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4"></path></svg></span>
+</div>
+<p style="margin: 0; font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sk-lilac)">Payment not completed</p>
+<h1 style="margin: 0; font-family: var(--sk-font-display); font-weight: var(--sk-w-display); font-size: 36px; line-height: 1.12; color: #FFFFFF">Your payment didn’t go through</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.7; max-width: 320px; color: rgba(255,255,255,0.8)">{{holdLine}}</p>
+<sc-if value="{{showHold}}" hint-placeholder-val="{{true}}"><span class="sk-hold" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: color-mix(in srgb, var(--sk-lilac) 10%, transparent); border: 1px solid color-mix(in srgb, var(--sk-lilac) 22%, transparent); font-size: 13px; color: var(--sk-lilac)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: var(--sk-lilac)"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18M12 7v5l3 2"></path></svg>Held until {{holdUntil}}</span></sc-if>
+</div>
+</section>
+
+<!-- 2 · BOOKING SUMMARY + ACTIONS -->
+<section style="background: var(--sk-ink); color: rgba(255,255,255,0.88); padding: 8px 24px 56px">
+<div style="max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px">
+<div style="border-radius: 22px; padding: 22px 24px; background: linear-gradient(160deg, color-mix(in srgb, var(--sk-primary) 22%, var(--sk-night)) 0%, var(--sk-night) 60%); border: 1px solid color-mix(in srgb, var(--sk-lilac) 20%, transparent); display: flex; flex-direction: column; gap: 14px">
+<span style="font-weight: var(--sk-w-ui); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sk-lilac)">Your booking</span>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px; color: #FFFFFF"><span>{{planShort}}</span><span>{{peopleShort}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.7)"><span>{{dates}} · 7:00 – 9:00 AM</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-top: 14px; border-top: 1px solid color-mix(in srgb, var(--sk-lilac) 14%, transparent)"><span style="font-size: 14px; color: rgba(255,255,255,0.7)">To pay</span><span style="font-family: var(--sk-font-dv-text); font-weight: 500; font-size: 20px; color: #FFFFFF">₹{{totalDue}} <span style="font-family: var(--sk-font-text); font-size: 12px; color: rgba(255,255,255,0.6)">incl. GST</span></span></div>
+</div>
+
+<a href="{{retryUrl}}" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; border-radius: 999px; background: var(--sk-primary); color: #FFFFFF; text-decoration: none; font-weight: var(--sk-w-ui); font-size: 16px; box-shadow: 0 14px 34px color-mix(in srgb, var(--sk-glow) 40%, transparent)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: #FFFFFF"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4"></path></svg>Try again</a>
+<details class="sk-contact" style="width: 100%"><summary style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--sk-lilac) 40%, transparent); color: #FFFFFF; font-weight: var(--sk-w-ui); font-size: 15px; cursor: pointer; list-style: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: currentColor"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>Call or WhatsApp us</summary><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 10px"><a href="{{callUrl}}" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--sk-lilac) 40%, transparent); color: #FFFFFF; text-decoration: none; font-weight: var(--sk-w-ui); font-size: 14px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: currentColor"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>Call</a><a href="{{whatsappUrl}}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--sk-lilac) 40%, transparent); color: #FFFFFF; text-decoration: none; font-weight: var(--sk-w-ui); font-size: 14px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; stroke: currentColor"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1 1 21 12zM9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-1.8-.9-.8.8c-1-.4-2-1.4-2.4-2.4l.8-.8-.9-1.8z"></path></svg>WhatsApp</a></div><p style="margin: 8px 0 0; text-align: center; font-size: 12px; color: rgba(255,255,255,0.6)">+91 89563 91919 · choose call or WhatsApp message</p></details>
+<p style="margin: 4px 0 0; text-align: center; font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.6)">Try again opens the same secure payment page.</p>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: var(--sk-ink); color: rgba(255,255,255,0.6); padding: 32px 24px 56px; border-top: 1px solid color-mix(in srgb, var(--sk-lilac) 12%, transparent)">
+<div style="max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; text-align: center">
+<p style="margin: 0; font-size: 11px; line-height: 1.6">Training for attention and awareness, not treatment. Going through a hard time? Call Tele-MANAS 14416 (free, 24×7).</p>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"weightPreset": {"editor": "enum", "options": ["Brand", "Lighter", "Bolder"], "default": "Brand", "section": "Typography · one-click weights"}, "fontDisplay": {"editor": "enum", "options": ["Satisfy SK (brand)", "Blauer Nue", "Poppins", "Custom"], "default": "Satisfy SK (brand)", "section": "Typography · English display"}, "fontDisplayCustom": {"editor": "text", "default": "", "section": "Typography · English display"}, "weightDisplay": {"editor": "enum", "options": ["Preset", "100", "200", "300", "400", "500", "600", "700", "800", "900"], "default": "Preset", "section": "Typography · English display"}, "fontText": {"editor": "enum", "options": ["Objective (brand)", "Blauer Nue", "Poppins", "Custom"], "default": "Objective (brand)", "section": "Typography · English text and UI"}, "fontTextCustom": {"editor": "text", "default": "", "section": "Typography · English text and UI"}, "weightBody": {"editor": "enum", "options": ["Preset", "100", "200", "300", "400", "500", "600", "700", "800", "900"], "default": "Preset", "section": "Typography · English text and UI"}, "weightUI": {"editor": "enum", "options": ["Preset", "100", "200", "300", "400", "500", "600", "700", "800", "900"], "default": "Preset", "section": "Typography · English text and UI"}, "fontDvDisplay": {"editor": "enum", "options": ["Arya (brand)", "Poppins", "Custom"], "default": "Arya (brand)", "section": "Typography · Devanagari"}, "fontDvText": {"editor": "enum", "options": ["Poppins (brand)", "Custom"], "default": "Poppins (brand)", "section": "Typography · Devanagari"}, "fontDvCustom": {"editor": "text", "default": "", "section": "Typography · Devanagari"}, "colorPrimary": {"editor": "color", "default": "#7B3FF6", "section": "Colours"}, "colorWordmark": {"editor": "color", "default": "#8F5BFF", "section": "Colours"}, "colorLilac": {"editor": "color", "default": "#C7A7FF", "section": "Colours"}, "colorFresh": {"editor": "color", "default": "#F6F1FF", "section": "Colours"}, "colorRelax": {"editor": "color", "default": "#F8F1E7", "section": "Colours"}, "colorInk": {"editor": "color", "default": "#0A0A0A", "section": "Colours"}, "colorNight": {"editor": "color", "default": "#140A2E", "section": "Colours"}, "colorGlow": {"editor": "color", "default": "#6808FF", "section": "Colours"}, "colorRim": {"editor": "color", "default": "#E9DDFF", "section": "Colours"}, "plan": {"editor": "enum", "options": ["core", "full"], "default": "core", "section": "Preview"}, "headCount": {"editor": "int", "min": 1, "max": 6, "default": 3, "section": "Preview"}, "flow": {"editor": "enum", "options": ["booking", "upgrade"], "default": "booking", "section": "Preview"}, "$preview": {"width": 390, "height": 1150}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props || {};
+    // Upgrade flow: Tweaks › flow, or the payment return URL carries ?type=upgrade
+    let urlType = ''; try { urlType = new URLSearchParams(window.location.search).get('type') || ''; } catch (e) {}
+    const up = p.flow === 'upgrade' || (p.flow == null && urlType === 'upgrade');
+    const isCore = !up && (p.plan ?? 'core') !== 'full';
+    const n = Math.max(1, Math.min(6, Number(p.headCount ?? 3) || 1));
+    const unit = up ? 12000 : isCore ? 499 : 12499;
+    const total = Math.round(unit * n * 1.18 * 100) / 100;
+    const inr = (v) => v.toLocaleString('en-IN', { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 });
+    // ---- Theme from Tweaks: fonts, weights and brand colours in one place ----
+    const pick = (choice, custom, map, fb) => (choice === 'Custom' && custom && custom.trim()) ? '"' + custom.trim() + '", ' + fb : (map[choice] || Object.values(map)[0]);
+    const W = { Brand: ['400', '300', '500'], Lighter: ['300', '200', '400'], Bolder: ['400', '400', '600'] }[p.weightPreset ?? 'Brand'] || ['400', '300', '500'];
+    const wt = (v, i) => (v && v !== 'Preset') ? v : W[i];
+    const theme = {
+      '--sk-primary': p.colorPrimary ?? '#7B3FF6', '--sk-wordmark': p.colorWordmark ?? '#8F5BFF', '--sk-lilac': p.colorLilac ?? '#C7A7FF',
+      '--sk-fresh': p.colorFresh ?? '#F6F1FF', '--sk-relax': p.colorRelax ?? '#F8F1E7', '--sk-ink': p.colorInk ?? '#0A0A0A',
+      '--sk-night': p.colorNight ?? '#140A2E', '--sk-glow': p.colorGlow ?? '#6808FF', '--sk-rim': p.colorRim ?? '#E9DDFF',
+      '--sk-font-display': pick(p.fontDisplay ?? 'Satisfy SK (brand)', p.fontDisplayCustom, { 'Satisfy SK (brand)': '"Satisfy SK", Georgia, serif', 'Blauer Nue': '"Blauer Nue", system-ui, sans-serif', 'Poppins': '"Poppins", system-ui, sans-serif' }, 'serif'),
+      '--sk-font-text': pick(p.fontText ?? 'Objective (brand)', p.fontTextCustom, { 'Objective (brand)': '"Objective", system-ui, sans-serif', 'Blauer Nue': '"Blauer Nue", system-ui, sans-serif', 'Poppins': '"Poppins", system-ui, sans-serif' }, 'system-ui, sans-serif'),
+      '--sk-font-dv-display': pick(p.fontDvDisplay ?? 'Arya (brand)', p.fontDvCustom, { 'Arya (brand)': '"Arya", "Poppins", sans-serif', 'Poppins': '"Poppins", sans-serif' }, '"Poppins", sans-serif'),
+      '--sk-font-dv-text': pick(p.fontDvText ?? 'Poppins (brand)', p.fontDvCustom, { 'Poppins (brand)': '"Poppins", system-ui, sans-serif' }, '"Poppins", sans-serif'),
+      '--sk-w-display': wt(p.weightDisplay, 0), '--sk-w-body': wt(p.weightBody, 1), '--sk-w-ui': wt(p.weightUI, 2)
+    };
+    return {
+      rootStyle: Object.assign({}, theme, { fontFamily: 'var(--sk-font-text)', fontWeight: 'var(--sk-w-body)', background: 'var(--sk-ink)', color: 'var(--sk-ink)', WebkitFontSmoothing: 'antialiased', overflowX: 'clip', minHeight: '100vh' }),
+      holdLine: up ? 'No money was taken. Your Core booking is unchanged, and your seat from Day 5 is kept until 23 Nov, 9 PM.' : 'No money was taken. Your ' + (n === 1 ? 'seat is' : n + ' seats are') + ' held for 10 more minutes.',
+      showHold: !up,
+      holdUntil: '[HH:MM AM]',
+      planShort: up ? 'Upgrade · Comprehensive' : isCore ? 'Core · 4 days' : 'Comprehensive · 30 days + 90 days with the app',
+      dates: up ? '24 Nov – 19 Dec' : isCore ? '20 – 23 Nov' : '20 Nov – 19 Dec',
+      peopleShort: n === 1 ? '1 person' : n + ' people',
+      totalDue: inr(total),
+      retryUrl: up ? '[UPGRADE_RETRY_LINK]' : '[RAZORPAY_RETRY_LINK]',
+      whatsappUrl: 'https://wa.me/918956391919', callUrl: 'tel:+918956391919'
+    };
+  }
+}
+</script>
+</body>
+</html>

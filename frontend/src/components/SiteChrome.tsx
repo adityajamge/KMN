@@ -1,0 +1,49 @@
+import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { ANDROID_APP_URL, CALL_URL, COMPANY, DISCLAIMER, EMAIL_URL, INSTAGRAM_URL, IOS_APP_URL, RAZORPAY_URL, VENUE_FULL, WHATSAPP_URL } from "../lib/constants";
+
+export function Logo({ small = false }: { small?: boolean }) {
+  return <img className={small ? "logo small" : "logo"} src="/media/logo.png" alt="Shadanga Kriya" />;
+}
+
+export function TopBar({ action }: { action?: ReactNode }) {
+  return (
+    <header className="topbar">
+      <div className="wrap">
+        <Link to="/" aria-label="Shadanga Kriya home"><Logo /></Link>
+        {action}
+      </div>
+    </header>
+  );
+}
+
+export function SiteFooter() {
+  return (
+    <footer className="footer">
+      <div className="wrap">
+        <div className="row">
+          <Logo small />
+          <div className="links">
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href={CALL_URL}>Call</a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href={EMAIL_URL}>Email</a>
+            <a href={IOS_APP_URL} target="_blank" rel="noopener noreferrer">App Store</a>
+            <a href={ANDROID_APP_URL} target="_blank" rel="noopener noreferrer">Google Play</a>
+            <a href={RAZORPAY_URL} target="_blank" rel="noopener noreferrer">Razorpay</a>
+            <Link to="/privacy">Privacy</Link>
+            <Link to="/terms">Terms & refunds</Link>
+            <Link to="/consent">Consent form</Link>
+            <Link to="/admin">Event desk</Link>
+          </div>
+        </div>
+        <p>Shadanga Kriya · {COMPANY} · {VENUE_FULL}</p>
+        <p style={{ maxWidth: 860, lineHeight: 1.7 }}>{DISCLAIMER}</p>
+      </div>
+    </footer>
+  );
+}
+
+export function GstNote({ amount }: { amount: string }) {
+  return <span className="num">₹{amount}<span style={{ marginLeft: 4, fontFamily: "inherit", fontWeight: 300, fontSize: "0.55em" }}>+ GST</span></span>;
+}

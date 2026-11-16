@@ -1,0 +1,19 @@
+{
+  "name": "kmn-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Registration API for the offline Neuro Mastery Program event",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "db:setup": "node scripts/setup.js",
+    "db:seed": "node scripts/seed.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "pg": "^8.16.0"
+  }
+}
