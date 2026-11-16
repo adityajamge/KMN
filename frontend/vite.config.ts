@@ -5,5 +5,5 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   server: { port: 5174 },
-  preview: { allowedHosts: true },
+  preview: { allowedHosts: ["kmn-1.onrender.com", ".onrender.com"] },
 })
