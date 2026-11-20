@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ARRIVE, SESSION_TIME, STARTS_AT } from "../lib/constants";
 import type { Plan } from "../lib/types";
 
 const LIFE = [
@@ -87,13 +88,6 @@ const OUT_FULL: [string, string][] = [
   ["Your personal blueprint for life", "Bring it all together into your own way of life: what you value, how you want to live, and a daily practice for the 90 days after, and beyond. Yours, not borrowed."],
 ];
 
-const VOICES = [
-  ["/media/landing/voice-1.jpg", "Placeholder portrait for a practitioner video"],
-  ["/media/landing/voice-2.jpg", "Placeholder portrait for a practitioner video"],
-  ["/media/landing/voice-3.jpg", "Placeholder portrait for a practitioner video"],
-  ["/media/landing/voice-4.jpg", "Placeholder portrait for a practitioner video"],
-];
-
 const NOT_FOR = [
   "Want a guru or a set of beliefs to follow",
   "Expect instant results without daily practice",
@@ -146,23 +140,6 @@ export function LandingStory({ plan, setPlan }: { plan: Plan; setPlan: (plan: Pl
 
   return (
     <>
-      <section className="section-ink voices">
-        <div className="wrap stack">
-          <p className="eyebrow">Real practitioners</p>
-          <div className="story-head">
-            <h2 className="display">In their own words</h2>
-            <p>Real practitioners, in their own words, shared with consent</p>
-          </div>
-          <div className="voice-grid">
-            {VOICES.map(([src, alt]) => (
-              <figure key={src}>
-                <img src={src} alt={alt} />
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="section-ink">
         <div className="wrap stack story-gap">
           <div className="split-copy">
@@ -242,11 +219,11 @@ export function LandingStory({ plan, setPlan }: { plan: Plan; setPlan: (plan: Pl
           <img src="/media/landing/morning.webp" alt="Participants seated in the Shadanga Kriya hall, eyes closed, in soft violet light" />
           <div className="morning-copy">
             <div>
-              <p className="eyebrow">7:00 – 9:00 AM</p>
+              <p className="eyebrow">{SESSION_TIME}</p>
               <h2 className="display">What a morning looks like</h2>
             </div>
             <ol>
-              <li><strong>Arrive and settle</strong> · 6:30 – 7:00, register and leave the rush at the door; we begin at 7:00 sharp</li>
+              <li><strong>Arrive and settle</strong> · {ARRIVE.replace(" AM", "")}, register and leave the rush at the door; we begin at {STARTS_AT} sharp</li>
               <li><strong>Understand</strong> · the scientific and spiritual reasoning behind the mind, the brain and their link with the body</li>
               <li><strong>Practise</strong> · the same morning, live it through Shadanga Kriya: core meditative practice with sound frequencies</li>
               <li><strong>Settle into clarity</strong> · come back slowly, with clarity and a realisation about your own life</li>

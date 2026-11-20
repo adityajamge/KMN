@@ -14,12 +14,12 @@ function firstName(name) {
 }
 
 function planLabel(plan) {
-  return plan === "core" ? "Core, 20–23 Nov" : "Comprehensive, 20 Nov–19 Dec";
+  return plan === "core" ? "Core, 24–27 Nov" : "Comprehensive, 24 Nov–23 Dec";
 }
 
 function whenLabel(plan) {
-  const dates = plan === "core" ? "20–23 Nov" : "20 Nov–19 Dec";
-  return `${dates}, 7:00–9:00 AM, Chandan Nagar near Krida Square`;
+  const dates = plan === "core" ? "24–27 Nov" : "24 Nov–23 Dec";
+  return `${dates}, 6:00–8:00 AM, Shadanga Kriya Centre, Hanuman Nagar, near Krida Chowk`;
 }
 
 function site() {
@@ -119,7 +119,7 @@ async function upgrade(result) {
     await deliver(`upgrade:${person.id}`, person.id, person.whatsapp, TEMPLATES.upgrade, [
       firstName(person.name),
       person.code,
-      "24 Nov–19 Dec, then 90 days, 7:00–9:00 AM, same hall",
+      "28 Nov–23 Dec, then 90 days, 6:00–8:00 AM, same hall",
     ]);
   }
 }
@@ -159,24 +159,24 @@ async function runSchedule(now = kolkataNow()) {
   if (!configured()) return;
   await retryFailed();
   const people = await paidPeople();
-  const dayBefore = now.date === "2026-11-19" && now.hour >= 8;
-  const morning = now.date === "2026-11-20" && now.hour >= 5 && now.hour < 9;
-  const upgradeLink = (now.date === "2026-11-22" && now.hour >= 18) || (now.date === "2026-11-23" && now.hour < 12);
-  const nudge = now.date === "2026-11-23" && now.hour >= 18 && now.hour < 21;
-  const thanks = now.date > "2026-11-23" || (now.date === "2026-11-23" && now.hour >= 21);
+  const dayBefore = now.date === "2026-11-23" && now.hour >= 8;
+  const morning = now.date === "2026-11-24" && now.hour >= 5 && now.hour < 8;
+  const upgradeLink = (now.date === "2026-11-26" && now.hour >= 18) || (now.date === "2026-11-27" && now.hour < 12);
+  const nudge = now.date === "2026-11-27" && now.hour >= 18 && now.hour < 21;
+  const thanks = now.date > "2026-11-27" || (now.date === "2026-11-27" && now.hour >= 21);
 
   for (const person of people) {
     if (dayBefore) {
-      await deliver(`reminder-19:${person.id}`, person.id, person.whatsapp, TEMPLATES.note, [
+      await deliver(`reminder-23:${person.id}`, person.id, person.whatsapp, TEMPLATES.note, [
         firstName(person.name),
-        "Tomorrow is Day 1, 7:00–9:00 AM at Chandan Nagar near Krida Square. Arrive between 6:30 and 7:00. Bring headphones.",
+        "Tomorrow is Day 1, 6:00–8:00 AM at Shadanga Kriya Centre, Hanuman Nagar, near Krida Chowk. Arrive between 5:30 and 6:00. Bring headphones.",
         person.code,
       ]);
     }
     if (morning) {
-      await deliver(`reminder-20:${person.id}`, person.id, person.whatsapp, TEMPLATES.note, [
+      await deliver(`reminder-24:${person.id}`, person.id, person.whatsapp, TEMPLATES.note, [
         firstName(person.name),
-        "See you between 6:30 and 7:00 AM. We begin at 7:00 sharp.",
+        "See you between 5:30 and 6:00 AM. We begin at 6:00 sharp.",
         person.code,
       ]);
     }
@@ -185,7 +185,7 @@ async function runSchedule(now = kolkataNow()) {
       if (stillCore) {
         await deliver(`upgrade-link:${person.booking_id}`, person.id, person.whatsapp, TEMPLATES.note, [
           firstName(person.name),
-          `Continue into Comprehensive. Your seat is kept until 23 Nov, 9 PM. ${site()}/upgrade?c=${encodeURIComponent(person.code)}`,
+          `Continue into Comprehensive. Your seat is kept until 27 Nov, 9 PM. ${site()}/upgrade?c=${encodeURIComponent(person.code)}`,
           person.code,
         ]);
       }

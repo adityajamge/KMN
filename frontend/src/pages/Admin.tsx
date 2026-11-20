@@ -4,7 +4,7 @@ import { BusyButton, Spinner } from "../components/BusyButton";
 import { Logo } from "../components/SiteChrome";
 import { Bone, SkeletonRows } from "../components/Skeleton";
 import { occupiesSeat, seatsUsed, useEvent } from "../data/store";
-import { CAPACITY, CORE_DAYS, CORE_DATES, FULL_DAYS, FULL_DATES, SESSION_TIME } from "../lib/constants";
+import { CAPACITY, CORE_DAYS, CORE_DATES, FULL_DAYS, FULL_DATES, SESSION_TIME, UPGRADE_HOLD } from "../lib/constants";
 import { downloadAttendance } from "../lib/excel";
 import { formatWhen, inr, maskPhone } from "../lib/format";
 import type { Booking, Participant, Plan } from "../lib/types";
@@ -220,7 +220,7 @@ export function AttendancePage() {
   const { bookings, toggleAttendance, adminLoaded } = useEvent();
   const [batch, setBatch] = useState<Plan>("core");
   const days = batch === "core" ? CORE_DAYS : FULL_DAYS;
-  const [day, setDay] = useState(days[0] ?? "20 Nov");
+  const [day, setDay] = useState(days[0] ?? CORE_DAYS[0]);
   const [pendingKey, setPendingKey] = useState<string | null>(null);
   const attendLock = useRef(false);
   const selected = days.includes(day) ? day : days[0];
@@ -247,8 +247,8 @@ export function AttendancePage() {
         <button className="btn btn-primary" type="button" disabled={!adminLoaded} onClick={() => downloadAttendance(bookings)}>Download Excel</button>
       </div>
       <div className="filters">
-        <button type="button" className={batch === "core" ? "on" : ""} onClick={() => { setBatch("core"); setDay(CORE_DAYS[0] ?? "20 Nov"); }}>Core mornings</button>
-        <button type="button" className={batch === "comprehensive" ? "on" : ""} onClick={() => { setBatch("comprehensive"); setDay("24 Nov"); }}>Comprehensive mornings</button>
+        <button type="button" className={batch === "core" ? "on" : ""} onClick={() => { setBatch("core"); setDay(CORE_DAYS[0]); }}>Core mornings</button>
+        <button type="button" className={batch === "comprehensive" ? "on" : ""} onClick={() => { setBatch("comprehensive"); setDay(FULL_DAYS[0]); }}>Comprehensive mornings</button>
       </div>
       <div className="filters">
         {days.slice(0, batch === "core" ? 4 : 12).map((item) => <button className={item === selected ? "day on" : "day"} type="button" key={item} onClick={() => setDay(item)}>{item}</button>)}
@@ -284,7 +284,7 @@ export function UpgradesPage() {
   const rows = peopleOf(bookings).filter(({ booking }) => booking.plan === "core" && booking.status === "paid");
   return (
     <div className="stack">
-      <div className="admin-head"><h1>Upgrades</h1><p className="hint">Seat kept until 23 Nov, 9 PM for anyone still on Core.</p></div>
+      <div className="admin-head"><h1>Upgrades</h1><p className="hint">Seat kept until {UPGRADE_HOLD} for anyone still on Core.</p></div>
       <section className="block table-wrap">
         {!adminLoaded ? <SkeletonRows columns={["Person", "Code", "Status", "Action"]} /> : (
         <table className="data">

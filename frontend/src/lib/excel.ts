@@ -39,8 +39,8 @@ export function buildAttendanceWorkbook(bookings: Booking[]) {
     .sort((a, b) => a.name.localeCompare(b.name, "en"));
   const continuing = rows.filter((row) => row.programme !== "Core");
   return workbook([
-    sheet("20-23 Nov", CORE_DAYS, rows),
-    sheet("24 Nov-19 Dec", LATER_DAYS, continuing),
+    sheet("24-27 Nov", CORE_DAYS, rows),
+    sheet("28 Nov-23 Dec", LATER_DAYS, continuing),
   ]);
 }
 

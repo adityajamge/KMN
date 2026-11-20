@@ -103,7 +103,7 @@ export default function Payment() {
                 <span className="num">₹{inr(booking.subtotal / booking.participants.length)}</span>
               </div>
             ))}
-            <div className="split"><span>GST (18%)</span><span className="num">₹{inr(booking.gst)}</span></div>
+            {booking.gst > 0 && <div className="split"><span>GST (18%)</span><span className="num">₹{inr(booking.gst)}</span></div>}
             <div className="total-row"><span>To pay</span><strong className="num">₹{inr(booking.total)}</strong></div>
             {booking.holdUntil && held && <p className="hint">Seats held until {formatClock(booking.holdUntil)}. No money is taken until you pay.</p>}
             {!held && booking.status !== "paid" && <p className="form-error">The 10-minute hold has ended. These seats are no longer reserved.</p>}

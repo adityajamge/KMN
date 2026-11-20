@@ -44,6 +44,6 @@ export function SiteFooter() {
   );
 }
 
-export function GstNote({ amount }: { amount: string }) {
-  return <span className="num">₹{amount}<span style={{ marginLeft: 4, fontFamily: "inherit", fontWeight: 300, fontSize: "0.55em" }}>+ GST</span></span>;
+export function GstNote({ amount, gst = false }: { amount: string; gst?: boolean }) {
+  return <span className="num">₹{amount}{gst && <span style={{ marginLeft: 4, fontFamily: "inherit", fontWeight: 300, fontSize: "0.55em" }}>+ 18% GST</span>}</span>;
 }

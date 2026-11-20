@@ -16,7 +16,9 @@ export function withGst(subtotal: number) {
 
 export function registrationPrice(plan: Plan, count: number) {
   const unit = plan === "core" ? CORE_FEE : FULL_FEE;
-  return { unit, ...withGst(unit * count) };
+  const subtotal = unit * count;
+  if (plan === "core") return { unit, subtotal, gst: 0, total: subtotal };
+  return { unit, ...withGst(subtotal) };
 }
 
 export function upgradePrice(count: number) {
@@ -69,6 +71,6 @@ export function planLabel(plan: Plan, upgraded = false) {
 }
 
 export function planDates(plan: Plan, upgraded = false) {
-  if (upgraded) return "24 Nov – 19 Dec (then 90 days of guided self-practice)";
-  return plan === "core" ? "20 – 23 Nov" : "20 Nov – 19 Dec (then 90 days of self-practice)";
+  if (upgraded) return "28 Nov – 23 Dec (then 90 days of guided self-practice)";
+  return plan === "core" ? "24 – 27 Nov" : "24 Nov – 23 Dec (then 90 days of self-practice)";
 }

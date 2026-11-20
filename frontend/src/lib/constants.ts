@@ -1,20 +1,21 @@
 export const PROGRAM_NAME = "Neuro Mastery Program";
-export const VENUE_SHORT = "Chandan Nagar, near Krida Sq.";
+export const VENUE_SHORT = "Shadanga Kriya Centre, near Krida Chowk";
 export const VENUE_FULL =
-  "Nagpur City Multistate Credit Co-operative Society Ltd., Head Office, Main Rd, Chandan Nagar, Nagpur 440024 · Landmark: Krida Square";
-export const SESSION_TIME = "7:00 – 9:00 AM";
-export const ARRIVE = "6:30 – 7:00 AM";
+  "Shadanga Kriya Centre, 5th Floor, NCM Society Building, Pl. No. 434, Hanuman Nagar, Near Krida Chowk, Medical Road, Nagpur 440024, Maharashtra, India";
+export const SESSION_TIME = "6:00 – 8:00 AM";
+export const ARRIVE = "5:30 – 6:00 AM";
+export const STARTS_AT = "6:00 AM";
 export const LANGUAGE = "Hindi and English";
 export const CAPACITY = 150;
 export const CORE_FEE = 499;
 export const FULL_FEE = 12499;
 export const GST_RATE = 0.18;
-export const CORE_DATES = "20 – 23 Nov";
-export const FULL_DATES = "20 Nov – 19 Dec";
-export const UPGRADE_DATES = "24 Nov – 19 Dec";
-export const UPGRADE_HOLD = "23 Nov, 9 PM";
+export const CORE_DATES = "24 – 27 Nov";
+export const FULL_DATES = "24 Nov – 23 Dec";
+export const UPGRADE_DATES = "28 Nov – 23 Dec";
+export const UPGRADE_HOLD = "27 Nov, 9 PM";
 export const MAP_URL =
-  "https://www.google.com/maps/search/?api=1&query=21.130297,79.102997";
+  "https://www.google.com/maps/search/?api=1&query=Shadanga%20Kriya%20Centre%2C%205th%20Floor%2C%20NCM%20Society%20Building%2C%20Plot%20434%2C%20Hanuman%20Nagar%2C%20Near%20Krida%20Chowk%2C%20Medical%20Road%2C%20Nagpur";
 export const INSTAGRAM_URL = "https://www.instagram.com/shadangakriya";
 export const EMAIL = "hello@shadangakriya.com";
 export const EMAIL_URL = "mailto:hello@shadangakriya.com";
@@ -93,7 +94,7 @@ export const FAQS: [string, string][] = [
   ["Can parent & child join the programme together?", "Yes. Parents and children (Class 8 and above) can join the same batch and practise side by side. Book a seat for each person; a child under 18 needs a parent’s consent."],
   ["What happens after Day 4?", "You choose. Continue into the full program, or keep practising on your own with the routine you learned."],
   ["What if I miss a morning?", "The program works best daily, with no gap."],
-  ["Where exactly is it?", "Nagpur City Multistate Credit Co-operative Society Ltd., Head Office, Main Rd, Chandan Nagar, Nagpur 440024, near Krida Square."],
+  ["Where exactly is it?", "Shadanga Kriya Centre, 5th Floor, NCM Society Building, Pl. No. 434, Hanuman Nagar, Near Krida Chowk, Medical Road, Nagpur 440024, Maharashtra."],
 ];
 
 function eachDay(start: Date, end: Date) {
@@ -106,8 +107,8 @@ function eachDay(start: Date, end: Date) {
   return out;
 }
 
-export const CORE_DAYS = eachDay(new Date(2026, 10, 20), new Date(2026, 10, 23));
-export const FULL_DAYS = eachDay(new Date(2026, 10, 20), new Date(2026, 11, 19));
+export const CORE_DAYS = eachDay(new Date(2026, 10, 24), new Date(2026, 10, 27));
+export const FULL_DAYS = eachDay(new Date(2026, 10, 24), new Date(2026, 11, 23));
 
 export const DISCLAIMER =
   "Shadanga Kriya is training for attention and awareness, not medical or psychological treatment. Results vary from person to person. If you're going through a hard time or having thoughts of harming yourself, please talk to a mental health professional, or call Tele-MANAS on 14416 (free, 24×7, India).";

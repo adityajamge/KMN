@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Bone } from "../components/Skeleton";
 import { TopBar } from "../components/SiteChrome";
 import { readCheckout, useBooking, useEvent, useUpgrade } from "../data/store";
-import { CALL_URL, CORE_GROUP_URL, DISCLAIMER, EMAIL_URL, FULL_GROUP_URL, MAP_URL, SESSION_TIME, SUPPORT_PHONE, UPGRADE_DATES, UPGRADE_HOLD, VENUE_SHORT, WHATSAPP_URL } from "../lib/constants";
+import { ARRIVE, CALL_URL, CORE_GROUP_URL, DISCLAIMER, EMAIL_URL, FULL_GROUP_URL, MAP_URL, SESSION_TIME, STARTS_AT, SUPPORT_PHONE, UPGRADE_DATES, UPGRADE_HOLD, VENUE_SHORT, WHATSAPP_URL } from "../lib/constants";
 import { firstName, formatClock, inr, planDates, planLabel, upgradePrice } from "../lib/format";
 
 export function BookingConfirmed() {
@@ -47,11 +47,11 @@ export function BookingConfirmed() {
                     ))}
                   </ul>
                 )}
-                <p>{count === 1 ? "Show this code at the entrance on Day 1." : "Each person shows their own code at the entrance on Day 1."} Please arrive between 6:30 and 7:00 AM for registration. The program starts at 7:00 sharp.</p>
+                <p>{count === 1 ? "Show this code at the entrance on Day 1." : "Each person shows their own code at the entrance on Day 1."} Please arrive between {ARRIVE.replace(" AM", "")} AM for registration. The program starts at {STARTS_AT} sharp.</p>
               </div>
             </div>
           </article>
-          <Link className="download" to={`/invoice/${booking.id}`}><span>Tax invoice<small>₹{inr(booking.total)} incl. GST · {booking.invoiceNo}</small></span></Link>
+          <Link className="download" to={`/invoice/${booking.id}`}><span>Tax invoice<small>₹{inr(booking.total)}{booking.gst ? " incl. 18% GST" : ""} · {booking.invoiceNo}</small></span></Link>
           <Link className="download" to={`/invitation/${booking.id}`}><span>Invitation (PDF)<small>{count === 1 ? "Your invitation with its code" : `All ${count} invitations with their codes`}</small></span></Link>
           <CommunityLink
             href={community}
@@ -87,7 +87,7 @@ export function PaymentFailed() {
               <p className="eyebrow">Your booking</p>
               <div className="split" style={{ marginTop: 12 }}><span>{planLabel(booking.plan)}</span><span>{booking.participants.length === 1 ? "1 person" : `${booking.participants.length} people`}</span></div>
               <p>{planDates(booking.plan)} · {SESSION_TIME}</p>
-              <div className="split" style={{ marginTop: 12 }}><span>To pay</span><strong className="num">₹{inr(booking.total)} <span style={{ fontSize: 12, fontWeight: 300 }}>incl. GST</span></strong></div>
+              <div className="split" style={{ marginTop: 12 }}><span>To pay</span><strong className="num">₹{inr(booking.total)}{booking.gst > 0 && <span style={{ fontSize: 12, fontWeight: 300 }}> incl. 18% GST</span>}</strong></div>
             </div>
           )}
           <Link className="btn btn-primary" to="/pay">Try again</Link>
@@ -135,7 +135,7 @@ export function UpgradeConfirmed() {
                   <li key={person.id}><span>{person.name}</span><span className="code">{person.code}</span></li>
                 ))}
               </ul>
-              <p>{count === 1 ? "Show the same code at the entrance." : "Each person shows the same code they used for Core."} See you on 24 Nov between 6:30 and 7:00 AM, same hall, same batch. We begin at 7:00 sharp.</p>
+              <p>{count === 1 ? "Show the same code at the entrance." : "Each person shows the same code they used for Core."} See you from {UPGRADE_DATES.split("–")[0].trim()} between {ARRIVE}, same hall, same batch. We begin at {STARTS_AT} sharp.</p>
             </div>
           </article>
           <div className="panel">

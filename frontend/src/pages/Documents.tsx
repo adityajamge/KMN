@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { Bone } from "../components/Skeleton";
 import { TopBar } from "../components/SiteChrome";
 import { useBooking, useEvent, useUpgrade } from "../data/store";
-import { ARRIVE, COMPANY, CORE_FEE, MAP_URL, PROGRAM_NAME, SESSION_TIME, SUPPORT_PHONE, VENUE_FULL } from "../lib/constants";
+import { ARRIVE, COMPANY, CORE_DATES, CORE_FEE, FULL_DATES, MAP_URL, PROGRAM_NAME, SESSION_TIME, SUPPORT_PHONE, UPGRADE_DATES, VENUE_FULL } from "../lib/constants";
 import { formatWhen, inr, planDates, planLabel } from "../lib/format";
 
 function download(filename: string, body: string) {
@@ -36,7 +36,7 @@ export function InvoicePage() {
             <tr><td>Programme</td><td>{planLabel(booking.plan)} · {planDates(booking.plan)}</td></tr>
             <tr><td>People</td><td>{booking.participants.map((person) => person.name).join(", ")}</td></tr>
             <tr><td>Subtotal</td><td className="num">₹{inr(booking.subtotal)}</td></tr>
-            <tr><td>GST 18%</td><td className="num">₹{inr(booking.gst)}</td></tr>
+            {booking.gst > 0 && <tr><td>GST 18%</td><td className="num">₹{inr(booking.gst)}</td></tr>}
             <tr><td>Total</td><td className="num">₹{inr(booking.total)}</td></tr>
           </tbody>
         </table>
@@ -97,7 +97,7 @@ export function InvitationPage() {
       {booking.participants.map((person) => {
         const upgraded = person.upgraded;
         const core = person.programme === "core" && !upgraded;
-        const dates = upgraded ? "24 Nov – 19 Dec" : person.programme === "core" ? "20 – 23 Nov" : "20 Nov – 19 Dec";
+        const dates = upgraded ? UPGRADE_DATES : person.programme === "core" ? CORE_DATES : FULL_DATES;
         return (
           <article className="invite-ticket" key={person.id}>
             <p className="invite-kicker"><span>Invitation</span><span className="dot" /><span lang="hi">निमंत्रण</span></p>
@@ -117,7 +117,7 @@ export function InvitationPage() {
                 <div><span>Arrive by</span><b>{ARRIVE}</b></div>
               </div>
               <div className="ticket-venue">
-                <div><span>Venue</span><b>Nagpur City Multistate Credit Co-op Society, Head Office, Main Rd, Chandan Nagar · near Krida Square</b></div>
+                <div><span>Venue</span><b>{VENUE_FULL}</b></div>
                 <a href={MAP_URL}>Maps</a>
               </div>
             </div>

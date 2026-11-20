@@ -27,7 +27,9 @@ function money(subtotal) {
 
 function registrationPrice(plan, count) {
   const unit = plan === "core" ? CORE_FEE : FULL_FEE;
-  return money(unit * count);
+  const subtotal = unit * count;
+  if (plan === "core") return { subtotal, gst: 0, total: subtotal };
+  return money(subtotal);
 }
 
 function upgradePrice(count) {

@@ -192,11 +192,11 @@ export default function Landing() {
             <div className="tabs" role="tablist" aria-label="Choose a plan">
               <button type="button" className={isCore ? "on" : ""} onClick={() => setPlan("core")}>
                 <strong>Core · 4 days</strong>
-                <span className="num">₹{inr(CORE_FEE)} + GST</span>
+                <span className="num">₹{inr(CORE_FEE)}</span>
               </button>
               <button type="button" className={!isCore ? "on" : ""} onClick={() => setPlan("comprehensive")}>
                 <strong>Comprehensive · 120 days</strong>
-                <span className="num">₹{inr(FULL_FEE)} + GST</span>
+                <span className="num">₹{inr(FULL_FEE)} + 18% GST</span>
               </button>
             </div>
             <p>{isCore ? `Start here. Four mornings for ₹${inr(CORE_FEE)}, and you’ll know from your own experience whether this is for you.` : "The complete transformation: 30 guided mornings, then 90 days of guided practice with the Shadanga Kriya app until it becomes yours."}</p>
@@ -206,11 +206,11 @@ export default function Landing() {
               <Info label="Duration" value={isCore ? "4 mornings" : "30 days + 90 days"} />
               <Info label="Venue" value={VENUE_SHORT} />
               <Info label="Language" value={LANGUAGE} />
-              <Info label="Fee" value={`₹${inr(price)} + GST`} />
+              <Info label="Fee" value={isCore ? `₹${inr(price)}` : `₹${inr(price)} + 18% GST`} />
             </div>
             <div className="cta-row">
-              <a className="btn btn-primary" href="#choose">{isCore ? "Book my 4 mornings" : "Join the Comprehensive program"} · <GstNote amount={inr(price)} /></a>
-              <p>{isCore ? "Book in about a minute and pay securely. Under 18? A parent books for you." : "30 guided mornings, then 90 days of guided practice with the Shadanga Kriya app until it becomes yours."}</p>
+              <a className="btn btn-primary" href="#choose">{isCore ? "Book my 4 mornings" : "Join the Comprehensive program"} · <GstNote amount={inr(price)} gst={!isCore} /></a>
+              <p>{isCore ? "Book in about a minute and pay securely. Under 18? A parent books for you." : "30 guided mornings, then 90 days of guided practice with the Shadanga Kriya app until it becomes yours. EMI available on selected banks."}</p>
             </div>
           </div>
           <Video playing={playing} setPlaying={setPlaying} />
@@ -248,13 +248,13 @@ export default function Landing() {
           </div>
           <div className="plan-grid">
             <PlanCard title="Core" selected={isCore} onSelect={() => setPlan("core")} badge="Recommended first step" detail={`4 mornings · ${SESSION_TIME}`} price={CORE_FEE} seats={seatLine(seatsReady, coreLeft)} points={CORE_POINTS} />
-            <PlanCard title="Comprehensive" selected={!isCore} onSelect={() => setPlan("comprehensive")} badge="The complete training" dark detail="30 mornings + 90 days of guided practice · 120 days" price={FULL_FEE} seats={seatLine(seatsReady, fullLeft)} points={FULL_POINTS} />
+            <PlanCard title="Comprehensive" selected={!isCore} onSelect={() => setPlan("comprehensive")} badge="The complete training" dark detail="30 mornings + 90 days of guided practice · 120 days" price={FULL_FEE} gst seats={seatLine(seatsReady, fullLeft)} points={FULL_POINTS} />
           </div>
 
           <form className="form-card" onSubmit={submit}>
             <div>
               <span className="hint">Step 1 of 2 · about a minute</span>
-              <h3 style={{ fontWeight: 500, fontSize: 22 }}>Book: {isCore ? "Core · 4 days" : "Comprehensive · 120 days"} <span className="num" style={{ color: "var(--primary)" }}>· ₹{inr(price)} + GST per person</span></h3>
+              <h3 style={{ fontWeight: 500, fontSize: 22 }}>Book: {isCore ? "Core · 4 days" : "Comprehensive · 120 days"} <span className="num" style={{ color: "var(--primary)" }}>· ₹{inr(price)}{isCore ? "" : " + 18% GST"} per person</span></h3>
             </div>
             <span className="tag">{headCount === 1 ? "Booking for 1 person" : `Booking for ${headCount} people`}</span>
             <strong>Person 1 · You</strong>
@@ -332,11 +332,11 @@ export default function Landing() {
             </div>
             <div className="total-row">
               <span>{headCount === 1 ? "Total for 1 person" : `Total · ${headCount} people × ₹${inr(price)}`}</span>
-              <strong className="num">₹{inr(quote.subtotal)} <span style={{ fontSize: 12, fontWeight: 300 }}>+ GST</span></strong>
+              <strong className="num">₹{inr(quote.total)}{!isCore && <span style={{ fontSize: 12, fontWeight: 300 }}> incl. 18% GST</span>}</strong>
             </div>
             {connectionError && <p className="form-error">{connectionError}</p>}
             {formError && <p className="form-error">{formError}</p>}
-            <BusyButton className="btn btn-primary" type="submit" busy={holding} disabled={!agreeTerms || !agreeConsent}>Continue to payment · ₹{inr(quote.subtotal)} + GST</BusyButton>
+            <BusyButton className="btn btn-primary" type="submit" busy={holding} disabled={!agreeTerms || !agreeConsent}>Continue to payment · ₹{inr(quote.total)}</BusyButton>
             {(!agreeTerms || !agreeConsent) && <p className="hint" style={{ textAlign: "center", color: "var(--primary)" }}>Tick both boxes above to continue.</p>}
             <span className="hint">UPI, cards, netbanking · Confirmation on WhatsApp</span>
             {!isCore && <p className="hint" style={{ textAlign: "center", color: "var(--primary)" }}>Already did Core? Use the personal upgrade link we send you on WhatsApp after Day 3, so your ₹{inr(CORE_FEE)} comes off.</p>}
@@ -376,7 +376,7 @@ export default function Landing() {
       <div className="sticky">
         <div className="wrap">
           <div>
-            <div>{isCore ? "Core · 4 days" : "Comprehensive · 120 days"} · <span className="num">₹{inr(price)} + GST</span></div>
+            <div>{isCore ? "Core · 4 days" : "Comprehensive · 120 days"} · <span className="num">₹{inr(price)}{isCore ? "" : " + 18% GST"}</span></div>
             <small>{isCore ? "4 mornings" : "30 days + 90 days"} · {SESSION_TIME} · {dates}</small>
           </div>
           <a className="btn btn-primary" href="#choose">Book seat</a>
@@ -425,13 +425,14 @@ function seatLine(ready: boolean, left: number) {
   return null;
 }
 
-function PlanCard({ title, selected, onSelect, badge, dark, detail, price, seats, points }: { title: string; selected: boolean; onSelect: () => void; badge: string; dark?: boolean; detail: string; price: number; seats: ReactNode; points: string[] }) {
+function PlanCard({ title, selected, onSelect, badge, dark, detail, price, gst = false, seats, points }: { title: string; selected: boolean; onSelect: () => void; badge: string; dark?: boolean; detail: string; price: number; gst?: boolean; seats: ReactNode; points: string[] }) {
   return (
     <button type="button" className={selected ? "plan-card on" : "plan-card"} onClick={onSelect} aria-pressed={selected}>
       <span className="badge"><span className={dark ? "pill dark" : "pill"}>{badge}</span><span className="radio" /></span>
       <h3 className="display">{title}</h3>
       <span>{detail}</span>
-      <span className="price num">₹{inr(price)} <span style={{ fontSize: 14, fontWeight: 300 }}>+ GST</span></span>
+      <span className="price num">₹{inr(price)}{gst && <span style={{ fontSize: 14, fontWeight: 300 }}> + 18% GST</span>}</span>
+      {gst && <span className="hint">EMI available on selected banks</span>}
       {seats ? <span className="seats">{seats}</span> : null}
       <ul>{points.map((point) => <li key={point}><span aria-hidden="true">✓</span>{point}</li>)}</ul>
     </button>

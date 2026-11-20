@@ -4,7 +4,7 @@ import { BusyButton } from "../components/BusyButton";
 import { Bone } from "../components/Skeleton";
 import { TopBar } from "../components/SiteChrome";
 import { writeCheckout, useEvent } from "../data/store";
-import { CALL_URL, CORE_FEE, FULL_FEE, FULL_POINTS, SUPPORT_PHONE, UPGRADE_DATES, UPGRADE_HOLD, WHATSAPP_URL } from "../lib/constants";
+import { ARRIVE, CALL_URL, CORE_FEE, FULL_FEE, FULL_POINTS, SESSION_TIME, SUPPORT_PHONE, UPGRADE_DATES, UPGRADE_HOLD, VENUE_FULL, WHATSAPP_URL } from "../lib/constants";
 import { inr, maskPhone, upgradePrice, validPhone } from "../lib/format";
 
 type Extra = { key: string; name: string; code: string; phone: string; participantId: string; status: "" | "ok" | "bad" };
@@ -135,11 +135,11 @@ export default function Upgrade() {
           <div className="upgrade-price">
             <span className="eyebrow">Comprehensive · 120 days</span>
             <span className="strike num">₹{inr(FULL_FEE)}</span>
-            <strong className="num">₹{inr(FULL_FEE - CORE_FEE)} <span>+ GST per person</span></strong>
+            <strong className="num">₹{inr(FULL_FEE - CORE_FEE)} <span>+ 18% GST per person</span></strong>
             <span>Your ₹{inr(CORE_FEE)} Core fee comes off</span>
-            <span>Continues from Day 5, 24 Nov · until 19 Dec, then 90 days of practice</span>
-            <span>7:00 – 9:00 AM, same batch · arrive 6:30 – 7:00</span>
-            <span>Nagpur City Multistate Credit Co-op Society, Head Office, Main Rd, Chandan Nagar · near Krida Square</span>
+            <span>Continues from Day 5, {UPGRADE_DATES}, then 90 days of practice</span>
+            <span>{SESSION_TIME}, same batch · arrive {ARRIVE}</span>
+            <span>{VENUE_FULL}</span>
             <strong>Your seat is kept until {UPGRADE_HOLD}.</strong>
           </div>
           <a className="btn btn-primary" href="#upgrade">Continue to the Comprehensive program</a>

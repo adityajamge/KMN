@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { TopBar } from "../components/SiteChrome";
-import { DISCLAIMER, UPGRADE_HOLD } from "../lib/constants";
+import { ARRIVE, DISCLAIMER, SESSION_TIME, STARTS_AT, UPGRADE_HOLD } from "../lib/constants";
 
 export function TermsPage() {
   return (
@@ -9,7 +9,7 @@ export function TermsPage() {
       <p>A seat is confirmed only after payment succeeds. If payment fails, no money is taken and the seats stay held for 10 minutes.</p>
       <p>If the batch fills while a payment is in progress, the payment is refunded in full and the next batch is offered.</p>
       <p>Core participants can upgrade until {UPGRADE_HOLD}. The ₹499 Core fee is counted against the Comprehensive fee. A failed upgrade leaves the Core booking unchanged.</p>
-      <p>The programme is in person, in Nagpur, at 7:00–9:00 AM. Arrive between 6:30 and 7:00 AM. Each person needs their own seat and their own invitation code.</p>
+      <p>The programme is in person, in Nagpur, at {SESSION_TIME}. Arrive between {ARRIVE}. The session starts at {STARTS_AT} sharp. Each person needs their own seat and their own invitation code.</p>
       <p>{DISCLAIMER}</p>
     </Legal>
   );
