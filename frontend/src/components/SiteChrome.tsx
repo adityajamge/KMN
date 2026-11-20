@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { ANDROID_APP_URL, CALL_URL, COMPANY, DISCLAIMER, EMAIL_URL, INSTAGRAM_URL, IOS_APP_URL, RAZORPAY_URL, VENUE_FULL, WHATSAPP_URL } from "../lib/constants";
+import { ANDROID_APP_URL, CALL_URL, DISCLAIMER, EMAIL_URL, INSTAGRAM_URL, IOS_APP_URL, RAZORPAY_URL, WHATSAPP_URL } from "../lib/constants";
 
 export function Logo({ small = false }: { small?: boolean }) {
   return <img className={small ? "logo small" : "logo"} src="/media/logo.png" alt="Shadanga Kriya" />;
@@ -37,8 +37,15 @@ export function SiteFooter() {
             <Link to="/admin">Event desk</Link>
           </div>
         </div>
-        <p>Shadanga Kriya · {COMPANY} · {VENUE_FULL}</p>
-        <p style={{ maxWidth: 860, lineHeight: 1.7 }}>{DISCLAIMER}</p>
+        <address className="venue-lines">
+          <strong>Shadanga Kriya Centre</strong>
+          <span>5th Floor, NCM Society Building,</span>
+          <span>Pl. No. 434, Hanuman Nagar,</span>
+          <span>Near Krida Chowk,</span>
+          <span>Medical Road Nagpur -24,</span>
+          <span>Maharashtra, INDIA</span>
+        </address>
+        <p className="disclaimer">{DISCLAIMER}</p>
       </div>
     </footer>
   );

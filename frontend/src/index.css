@@ -290,6 +290,9 @@ h1, h2, h3, p { margin: 0; }
 .footer .links { display: flex; flex-wrap: wrap; gap: 18px 28px; }
 .footer a { color: var(--lilac); text-decoration: none; }
 .footer .row { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center; margin-bottom: 22px; }
+.venue-lines { display: flex; flex-direction: column; gap: 2px; margin: 0 0 18px; font-style: normal; line-height: 1.55; }
+.venue-lines strong { color: #fff; font-weight: 500; }
+.footer .disclaimer { max-width: 860px; line-height: 1.7; }
 .sticky {
   position: sticky; bottom: 0; z-index: 8;
   background: rgba(10,10,10,.92);
