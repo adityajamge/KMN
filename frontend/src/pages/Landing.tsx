@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BusyButton } from "../components/BusyButton";
 import { LandingStory, LifeStages } from "./LandingStory";
+import { Mark, Waterline } from "./marks";
 import { Bone } from "../components/Skeleton";
 import { GstNote, SiteFooter, TopBar } from "../components/SiteChrome";
 import { writeCheckout, useEvent } from "../data/store";
@@ -17,7 +18,6 @@ import {
   GOALS,
   LANGUAGE,
   CALL_URL,
-  EMAIL_URL,
   MAP_URL,
   PROGRAM_NAME,
   RELATIONS,
@@ -45,6 +45,7 @@ type Extra = {
   health: boolean;
   healthNote: string;
   relation: string;
+  gender: string;
 };
 
 const emptyExtra = (): Extra => ({
@@ -60,6 +61,7 @@ const emptyExtra = (): Extra => ({
   health: false,
   healthNote: "",
   relation: "",
+  gender: "",
 });
 
 function toggleItem(list: string[], item: string) {
@@ -79,6 +81,7 @@ export default function Landing() {
   const [area, setArea] = useState("");
   const [role, setRole] = useState<string>(ROLES[0]);
   const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
   const [goals, setGoals] = useState<string[]>([]);
   const [health, setHealth] = useState(false);
   const [healthNote, setHealthNote] = useState("");
@@ -178,11 +181,16 @@ export default function Landing() {
     }
   };
 
+  const feeNote = isCore ? "incl. GST" : "+ 18% GST";
+
   return (
-    <div>
+    <div className="landing">
       <TopBar action={<a className="btn btn-primary" href="#choose">Book seat</a>} />
       <section className="hero">
-        <div className="ripples" aria-hidden="true"><span /><span /><span /><span /></div>
+        <div className="ripples" aria-hidden="true">
+          <span /><span /><span /><span />
+          <div className="ripple-glow" />
+        </div>
         <div className="wrap hero-grid">
           <div className="stack">
             <p className="eyebrow">Shadanga Kriya · {PROGRAM_NAME}</p>
@@ -190,56 +198,49 @@ export default function Landing() {
             <p className="hindi" lang="hi">आपका मन कमज़ोर नहीं है। उसे कभी train ही नहीं किया गया।</p>
             <p className="lede">Guided meditation that trains concentration, awareness, calmness, confidence, emotional regulation and decisiveness, building the clarity to decide your way of life. Experience it in person, every morning, in Nagpur.</p>
             <div className="tabs" role="tablist" aria-label="Choose a plan">
-              <button type="button" className={isCore ? "on" : ""} onClick={() => setPlan("core")}>
+              <button type="button" role="tab" aria-selected={isCore} className={isCore ? "on" : ""} onClick={() => setPlan("core")}>
                 <strong>Core · 4 days</strong>
-                <span className="num">₹{inr(CORE_FEE)}</span>
+                <span className="num">₹{inr(CORE_FEE)}<span className="gst-bit">incl. GST</span></span>
               </button>
-              <button type="button" className={!isCore ? "on" : ""} onClick={() => setPlan("comprehensive")}>
+              <button type="button" role="tab" aria-selected={!isCore} className={!isCore ? "on" : ""} onClick={() => setPlan("comprehensive")}>
                 <strong>Comprehensive · 120 days</strong>
-                <span className="num">₹{inr(FULL_FEE)} + 18% GST <span className="emi">| EMI opt. Avl.</span></span>
+                <span className="num">₹{inr(FULL_FEE)}<span className="gst-bit">+ 18% GST</span><span className="emi"><span className="pipe">|</span>EMI opt. Avl.</span></span>
               </button>
             </div>
-            <p>{isCore ? `Start here. Four mornings for ₹${inr(CORE_FEE)}, and you’ll know from your own experience whether this is for you.` : "The complete transformation: 30 guided mornings, then 90 days of guided practice with the Shadanga Kriya app until it becomes yours."}</p>
+            <p className="plan-blurb">{isCore ? `Start here. Four mornings for ₹${inr(CORE_FEE)}, and you’ll know from your own experience whether this is for you.` : "The complete transformation: 30 guided mornings, then 90 days of guided practice with the Shadanga Kriya app until it becomes yours."}</p>
             <div className="info-grid">
-              <Info label="Dates" value={dates} />
-              <Info label="Every morning" value={SESSION_TIME} />
-              <Info label="Duration" value={isCore ? "4 mornings" : "30 days + 90 days"} />
-              <Info label="Venue" value={VENUE_SHORT} />
-              <Info label="Language" value={LANGUAGE} />
-              <Info label="Fee" value={isCore ? `₹${inr(price)}` : `₹${inr(price)} + 18% GST`} />
+              <Info label="Dates" value={dates} icon={<Mark stroke="var(--lilac)"><rect x="3.5" y="5" width="17" height="15" rx="3" /><path d="M3.5 10h17M8 3v4M16 3v4" /></Mark>} />
+              <Info label="Every morning" value={SESSION_TIME} icon={<Mark stroke="var(--lilac)"><path d="M3 17h18M6 17a6 6 0 0 1 12 0M12 5v2M5.6 8.6l1.4 1.4M18.4 8.6L17 10M8 21h8" /></Mark>} />
+              <Info label="Duration" value={isCore ? "4 mornings" : "30 days + 90 days"} icon={<Mark stroke="var(--lilac)"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></Mark>} />
+              <Info label="Venue" value={VENUE_SHORT} icon={<Mark stroke="var(--lilac)"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.3" /></Mark>} />
+              <Info label="Language" value={LANGUAGE} icon={<Mark stroke="var(--lilac)"><path d="M4 5h10M4 9h7M9 5c0 6-2.5 10-5 12M6.5 11c1.5 2 3.5 3.5 6 4.5M13 21l3.5-9 3.5 9M14.2 18h4.6" /></Mark>} />
+              <Info label="Fee" value={<span className="num">₹{inr(price)}<span className="gst-bit">{feeNote}</span></span>} icon={<Mark stroke="var(--lilac)"><path d="M7 5h10M7 9h10M7 5c4 0 6 1.5 6 4s-2 4-6 4l7 6" /></Mark>} />
             </div>
             <div className="cta-row">
-              <a className="btn btn-primary" href="#choose">{isCore ? "Book my 4 mornings" : "Join the Comprehensive program"} · <GstNote amount={inr(price)} gst={!isCore} /></a>
+              <a className="btn btn-primary hero-cta" href="#choose">{isCore ? "Book my 4 mornings" : "Join the Comprehensive program"} · <GstNote amount={inr(price)} gst={!isCore} /></a>
               <p>{isCore ? "Book in about a minute and pay securely. Under 18? A parent books for you." : "30 guided mornings, then 90 days of guided practice with the Shadanga Kriya app until it becomes yours. EMI available on selected banks."}</p>
             </div>
           </div>
           <Video playing={playing} setPlaying={setPlaying} />
         </div>
+        <Waterline to="night" />
       </section>
 
       <LifeStages />
 
       <section className="section-dark">
         <div className="wrap stack">
-          <p className="eyebrow">Heavy to light</p>
-          <h2 className="display" style={{ fontSize: "clamp(34px, 4vw, 52px)", color: "#fff" }}>What changes when you train the mind</h2>
-          <p style={{ textAlign: "center", maxWidth: 560, margin: "0 auto" }}>Same you. Same busy day. Training turns the noise into a steady flow.</p>
+          <div className="dark-center">
+            <p className="eyebrow">Heavy to light</p>
+            <h2 className="display">What changes when you train the mind</h2>
+            <p>Same you. Same busy day. Training turns the noise into a steady flow.</p>
+          </div>
           <div className="wave-card">
             <div className="wave-labels">
               <div><span>Without training</span><small>Scattered · reactive</small></div>
               <div><span>With practice</span><small>Steady · clear</small></div>
             </div>
-            <svg viewBox="0 0 1200 220" preserveAspectRatio="none" role="img" aria-label="A disturbed, jagged frequency wave on the left that flows into a smooth, steady wave on the right">
-              <defs>
-                <linearGradient id="skwd" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stopColor="#C7A7FF" stopOpacity="0.45" />
-                  <stop offset="0.45" stopColor="#8F5BFF" stopOpacity="0.85" />
-                  <stop offset="1" stopColor="#FFFFFF" />
-                </linearGradient>
-              </defs>
-              <path fill="none" stroke="url(#skwd)" strokeWidth="1.2" strokeOpacity="0.45" d="M0 110 C 40 40, 70 180, 110 90 S 180 30, 220 150 S 280 200, 330 80 S 400 20, 460 160 S 540 40, 600 120 C 700 150, 820 90, 980 100 S 1120 130, 1200 110" />
-              <path fill="none" stroke="url(#skwd)" strokeWidth="2.4" strokeLinecap="round" d="M0 130 C 30 20, 55 190, 90 40 S 140 210, 180 50 S 230 180, 280 70 S 340 200, 400 60 S 470 30, 530 150 S 590 40, 650 120 C 740 160, 860 80, 1000 95 S 1140 140, 1200 115" />
-            </svg>
+            <FrequencyWave />
             <div className="wave-scale"><span>noise</span><span>breath by breath</span><span>flow</span></div>
           </div>
           <div className="compare">
@@ -247,8 +248,8 @@ export default function Landing() {
             <header>With practice</header>
             {SHIFTS.map(([before, after]) => (
               <div className="row" key={before}>
-                <div className="before">{before}</div>
-                <div className="after">{after}</div>
+                <div className="before"><Mark size={18} width={1.6} stroke="rgba(255,255,255,0.35)"><path d="M2 12l3-5 3 9 3-8 3 7 3-6 3 5 2-2" /></Mark><span>{before}</span></div>
+                <div className="after"><span>{after}</span><Mark size={18} width={1.8} stroke="var(--lilac)"><path d="M2 12c2.5-4 5-4 7.5 0s5 4 7.5 0 3.5-3 5-2" /></Mark></div>
               </div>
             ))}
           </div>
@@ -258,8 +259,9 @@ export default function Landing() {
 
       <LandingStory plan={plan} setPlan={setPlan} />
 
-      <section className="section-fresh" id="choose">
-        <div className="wrap stack" style={{ gap: 40 }}>
+      <section className="section-fresh choose" id="choose">
+        <img className="choose-bg" src="/media/landing/choose-bg.jpg" alt="" />
+        <div className="wrap stack" style={{ gap: 52 }}>
           <div className="center-copy">
             <p className="eyebrow" style={{ color: "var(--primary)" }}>{PROGRAM_NAME}</p>
             <h2 className="display">Your clearer mornings start here</h2>
@@ -273,7 +275,7 @@ export default function Landing() {
           <form className="form-card" onSubmit={submit}>
             <div>
               <span className="hint">Step 1 of 2 · about a minute</span>
-              <h3 style={{ fontWeight: 500, fontSize: 22 }}>Book: {isCore ? "Core · 4 days" : "Comprehensive · 120 days"} <span className="num" style={{ color: "var(--primary)" }}>· ₹{inr(price)}{isCore ? "" : " + 18% GST"} per person</span></h3>
+              <h3>Book: {isCore ? "Core · 4 days" : "Comprehensive · 120 days"} <span className="num">· ₹{inr(price)}<span className="gst-bit">{feeNote}</span></span> per person</h3>
             </div>
             <span className="tag">{headCount === 1 ? "Booking for 1 person" : `Booking for ${headCount} people`}</span>
             <strong>Person 1 · You</strong>
@@ -290,6 +292,7 @@ export default function Landing() {
               <Field label="I am a"><select value={role} onChange={(event) => setRole(event.target.value)}>{ROLES.map((item) => <option key={item}>{item}</option>)}</select></Field>
               <Field label="Age" error={errors.age}><input value={age} onChange={(event) => setAge(event.target.value)} placeholder="e.g. 16" inputMode="numeric" /></Field>
             </div>
+            <Gender name="gender" value={gender} onChange={setGender} />
             {showGuardian && (
               <div className="guardian">
                 <strong>You're under 18: add a parent or guardian</strong>
@@ -310,7 +313,7 @@ export default function Landing() {
               <div className="person" key={person.key}>
                 <header>
                   <strong>Person {index + 2}</strong>
-                  <button type="button" className="btn" style={{ minHeight: 40, background: "#fff", border: "1px solid rgba(10,10,10,.16)" }} onClick={() => setPeople((current) => current.filter((item) => item.key !== person.key))}>Remove</button>
+                  <button type="button" className="btn remove" onClick={() => setPeople((current) => current.filter((item) => item.key !== person.key))}><Mark size={14} width={2} stroke="currentColor"><path d="M7 7l10 10M17 7L7 17" /></Mark>Remove</button>
                 </header>
                 <div className="grid-2">
                   <Field label="Full name" error={errors[`${person.key}-name`]}><input value={person.name} onChange={(event) => patchExtra(person.key, { name: event.target.value })} placeholder="Their name" /></Field>
@@ -325,6 +328,7 @@ export default function Landing() {
                   <Field label="They are a"><select value={person.role} onChange={(event) => patchExtra(person.key, { role: event.target.value })}>{ROLES.map((item) => <option key={item}>{item}</option>)}</select></Field>
                   <Field label="Age" error={errors[`${person.key}-age`]}><input value={person.age} onChange={(event) => patchExtra(person.key, { age: event.target.value })} placeholder="Age" inputMode="numeric" /></Field>
                 </div>
+                <Gender name={`gender-${person.key}`} value={person.gender} onChange={(value) => patchExtra(person.key, { gender: value })} />
                 <div className="grid-2">
                   <Field label="WhatsApp number" error={errors[`${person.key}-whatsapp`]}><input value={person.whatsapp} onChange={(event) => patchExtra(person.key, { whatsapp: event.target.value })} placeholder="+91" inputMode="tel" /></Field>
                   <Field label="Email" hint="(for their invitation and updates)" error={errors[`${person.key}-email`]}><input value={person.email} onChange={(event) => patchExtra(person.key, { email: event.target.value })} placeholder="name@example.com" /></Field>
@@ -340,7 +344,7 @@ export default function Landing() {
             ))}
 
             {people.length < 5 && (
-              <button type="button" className="btn btn-ghost" onClick={() => setPeople((current) => [...current, emptyExtra()])}>+ Add more people</button>
+              <button type="button" className="btn btn-ghost" onClick={() => setPeople((current) => [...current, emptyExtra()])}><span className="plus" aria-hidden="true"><Mark size={16} width={2.4} stroke="#fff"><path d="M12 5v14M5 12h14" /></Mark></span>Add more people</button>
             )}
             <p className="hint">Coming as a family? Add each person here. Everyone sits in the same batch, and each person gets their own invitation. The fee is per person.</p>
             <div className="agreements">
@@ -351,13 +355,13 @@ export default function Landing() {
             </div>
             <div className="total-row">
               <span>{headCount === 1 ? "Total for 1 person" : `Total · ${headCount} people × ₹${inr(price)}`}</span>
-              <strong className="num">₹{inr(quote.total)}{!isCore && <span style={{ fontSize: 12, fontWeight: 300 }}> incl. 18% GST</span>}</strong>
+              <strong className="num">₹{inr(quote.total)}<span className="gst-bit">incl. GST</span></strong>
             </div>
             {connectionError && <p className="form-error">{connectionError}</p>}
             {formError && <p className="form-error">{formError}</p>}
-            <BusyButton className="btn btn-primary" type="submit" busy={holding} disabled={!agreeTerms || !agreeConsent}>Continue to payment · ₹{inr(quote.total)}</BusyButton>
+            <BusyButton className="btn btn-primary pay-btn" type="submit" busy={holding} disabled={!agreeTerms || !agreeConsent}>Continue to payment · <span className="num">₹{inr(quote.total)}<span className="gst-bit">incl. GST</span></span><Mark size={18} width={2} stroke="#fff"><path d="M5 12h14M13 6l6 6-6 6" /></Mark></BusyButton>
             {(!agreeTerms || !agreeConsent) && <p className="hint" style={{ textAlign: "center", color: "var(--primary)" }}>Tick both boxes above to continue.</p>}
-            <span className="hint">UPI, cards, netbanking · Confirmation on WhatsApp</span>
+            <span className="hint lock-note"><Mark size={14} width={2} stroke="currentColor"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></Mark>UPI, cards, netbanking · Confirmation on WhatsApp</span>
             {!isCore && <p className="hint" style={{ textAlign: "center", color: "var(--primary)" }}>EMI available on selected banks · choose EMI on the payment page</p>}
             {!isCore && <p className="hint" style={{ textAlign: "center", color: "var(--primary)" }}>Already did Core? Use the personal upgrade link we send you on WhatsApp after Day 3, so your ₹{inr(CORE_FEE)} comes off.</p>}
           </form>
@@ -379,15 +383,20 @@ export default function Landing() {
             ))}
           </div>
           <aside className="aside">
+            <img className="aside-photo" src="/media/landing/question.jpg" alt="A person sitting quietly, looking up at a glowing question mark" />
             <div className="pad">
               <h3 className="display">Still have a question?</h3>
               <p>Talk to a real person from the team. We reply the same day.</p>
-              <a className="btn btn-light" href={CALL_URL}>Call us</a>
-              <a className="btn btn-light" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp us</a>
-              <p style={{ color: "var(--lilac)", fontSize: 13 }}>{SUPPORT_PHONE} · call or WhatsApp the sales team</p>
-              <a className="btn btn-line" href={EMAIL_URL}>Email us</a>
-              <a className="btn btn-line" href={MAP_URL} target="_blank" rel="noopener noreferrer">Open venue in Maps</a>
-              <p style={{ color: "var(--lilac)", fontSize: 13, lineHeight: 1.6 }}>{VENUE_FULL}</p>
+              <details className="contact">
+                <summary><Mark size={20} width={1.7} stroke="var(--primary)"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" /></Mark>Call or WhatsApp us</summary>
+                <div className="contact-actions">
+                  <a href={CALL_URL}><Mark size={20} width={1.7} stroke="currentColor"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" /></Mark>Call</a>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"><Mark size={20} width={1.7} stroke="currentColor"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1 1 21 12zM9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-1.8-.9-.8.8c-1-.4-2-1.4-2.4-2.4l.8-.8-.9-1.8z" /></Mark>WhatsApp</a>
+                </div>
+                <p>{SUPPORT_PHONE} · choose call or WhatsApp message</p>
+              </details>
+              <a className="btn btn-line" href={MAP_URL} target="_blank" rel="noopener noreferrer"><Mark size={20} width={1.6} stroke="var(--lilac)"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.3" /></Mark>Open venue in Maps</a>
+              <p className="venue-note">{VENUE_FULL}</p>
             </div>
           </aside>
         </div>
@@ -396,7 +405,7 @@ export default function Landing() {
       <div className="sticky">
         <div className="wrap">
           <div>
-            <div>{isCore ? "Core · 4 days" : "Comprehensive · 120 days"} · <span className="num">₹{inr(price)}{isCore ? "" : " + 18% GST"}</span></div>
+            <div>{isCore ? "Core · 4 days" : "Comprehensive · 120 days"} · <span className="num">₹{inr(price)}<span className="gst-bit">{feeNote}</span></span></div>
             <small>{isCore ? "4 mornings" : "30 days + 90 days"} · {SESSION_TIME} · {dates}</small>
           </div>
           <a className="btn btn-primary" href="#choose">Book seat</a>
@@ -406,8 +415,8 @@ export default function Landing() {
   );
 }
 
-function Info({ label, value }: { label: string; value: string }) {
-  return <div className="info-card"><div><small>{label}</small><b>{value}</b></div></div>;
+function Info({ label, value, icon }: { label: string; value: ReactNode; icon: ReactNode }) {
+  return <div className="info-card">{icon}<div><small>{label}</small><b>{value}</b></div></div>;
 }
 
 function Video({ playing, setPlaying }: { playing: boolean; setPlaying: (value: boolean) => void }) {
@@ -422,19 +431,27 @@ function Video({ playing, setPlaying }: { playing: boolean; setPlaying: (value: 
       >
         <source src="/media/founder.mp4" type="video/mp4" />
       </video>
-      {!playing && (
-        <button className="play" type="button" aria-label="Play video" onClick={(event) => {
-          const video = event.currentTarget.parentElement?.querySelector("video");
-          void video?.play();
+      <button className={playing ? "play playing" : "play"} type="button" aria-label={playing ? "Pause video" : "Play video: what is Shadanga Kriya, in the founder's own words"} onClick={(event) => {
+        const video = event.currentTarget.parentElement?.querySelector("video");
+        if (!video) return;
+        if (video.paused || video.ended) {
+          void video.play();
           setPlaying(true);
-        }}>
-          <span className="play-orb" aria-hidden="true">▶</span>
-          <span className="video-caption">
-            <span className="eyebrow">Watch · 2:51</span>
-            <span>What is Shadanga Kriya, in the founder's own words</span>
+        } else {
+          video.pause();
+          setPlaying(false);
+        }
+      }}>
+        {!playing && (
+          <span className="play-orb" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="#fff" /></svg>
           </span>
-        </button>
-      )}
+        )}
+        <span className="video-caption">
+          <span className="eyebrow">Watch · 2:51</span>
+          <span>What is Shadanga Kriya, in the founder's own words</span>
+        </span>
+      </button>
     </div>
   );
 }
@@ -451,10 +468,10 @@ function PlanCard({ title, selected, onSelect, badge, dark, detail, price, gst =
       <span className="badge"><span className={dark ? "pill dark" : "pill"}>{badge}</span><span className="radio" /></span>
       <h3 className="display">{title}</h3>
       <span>{detail}</span>
-      <span className="price num">₹{inr(price)}{gst && <span style={{ fontSize: 14, fontWeight: 300 }}> + 18% GST</span>}</span>
-      {gst && <span className="hint">EMI available on selected banks</span>}
+      <span className="price num">₹{inr(price)}<span className="gst-bit">{gst ? "+ 18% GST" : "incl. GST"}</span></span>
+      {gst && <span className="emi-pill"><Mark size={16} width={1.8} stroke="currentColor"><path d="M3 6h18v12H3zM3 10h18M7 15h4" /></Mark>EMI available on selected banks</span>}
       {seats ? <span className="seats">{seats}</span> : null}
-      <ul>{points.map((point) => <li key={point}><span aria-hidden="true">✓</span>{point}</li>)}</ul>
+      <ul>{points.map((point) => <li key={point}><Mark size={18} width={2} stroke="var(--primary)"><path d="M5 12.5l4.5 4.5L19 7.5" /></Mark>{point}</li>)}</ul>
     </button>
   );
 }
@@ -466,6 +483,74 @@ function Field({ label, hint, error, children }: { label: string; hint?: string;
       {children}
       {error && <span className="err">{error}</span>}
     </label>
+  );
+}
+
+function Gender({ name, value, onChange }: { name: string; value: string; onChange: (value: string) => void }) {
+  return (
+    <fieldset className="gender">
+      <legend>Gender</legend>
+      <div className="gender-row">
+        {["Female", "Male", "Other"].map((option) => (
+          <label className="check" key={option}>
+            <input type="radio" name={name} value={option} checked={value === option} onChange={() => onChange(option)} />
+            {option}
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
+function FrequencyWave() {
+  const main = useRef<SVGPathElement>(null);
+  const faint = useRef<SVGPathElement>(null);
+  useEffect(() => {
+    const width = 1200;
+    const height = 220;
+    const steps = 240;
+    const duration = 7000;
+    const ease = (start: number, end: number, value: number) => {
+      const t = Math.max(0, Math.min(1, (value - start) / (end - start)));
+      return t * t * (3 - 2 * t);
+    };
+    const wave = (t: number, amp: number, phase: number) => {
+      let path = "";
+      for (let i = 0; i <= steps; i += 1) {
+        const u = i / steps;
+        const x = u * width;
+        const settle = ease(0.16, 0.52, u);
+        const turn = 2 * Math.PI;
+        const chaos = 0.55 * Math.sin(turn * (9 * u - 2 * t) + phase) + 0.35 * Math.sin(turn * (17 * u - 3 * t) + 1.3 + phase) + 0.25 * Math.sin(turn * (31 * u - 5 * t) + 2.1) + 0.18 * Math.sin(turn * (47 * u - 7 * t) + 0.7);
+        const calm = Math.sin(turn * (3.2 * u - t) + phase);
+        const y = height / 2 + amp * ((1 - settle) * chaos * height * 0.36 + settle * calm * height * 0.22);
+        path += `${i ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`;
+      }
+      return path;
+    };
+    const started = performance.now();
+    let frame = 0;
+    const tick = (now: number) => {
+      const t = ((now - started) % duration) / duration;
+      main.current?.setAttribute("d", wave(t, 1, 0));
+      faint.current?.setAttribute("d", wave(t, 0.6, 1.7));
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+  return (
+    <svg viewBox="0 0 1200 220" preserveAspectRatio="none" role="img" aria-label="A disturbed, jagged frequency wave on the left that flows into a smooth, steady wave on the right">
+      <defs>
+        <linearGradient id="skwd" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#C7A7FF" stopOpacity="0.45" />
+          <stop offset="0.45" stopColor="#8F5BFF" stopOpacity="0.85" />
+          <stop offset="1" stopColor="#FFFFFF" />
+        </linearGradient>
+      </defs>
+      <path ref={faint} fill="none" stroke="url(#skwd)" strokeWidth="1.2" strokeOpacity="0.45" strokeLinejoin="round" />
+      <path ref={main} fill="none" stroke="url(#skwd)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }
 

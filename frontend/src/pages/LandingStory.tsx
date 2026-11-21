@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { ARRIVE, SESSION_TIME, STARTS_AT } from "../lib/constants";
+import { ARRIVE, CORE_FEE, FULL_FEE, SESSION_TIME, STARTS_AT } from "../lib/constants";
+import { inr } from "../lib/format";
 import type { Plan } from "../lib/types";
+import { Mark, Waterline } from "./marks";
 
 const LIFE = [
   {
@@ -69,23 +71,23 @@ const LAYERS = [
   ["06", "Consciousness", "चेतना", "Who is watching all this?", "Recognising the awareness that observes everything else.", "Here training becomes self-awareness: the single point of light at the centre.", "the centre"],
 ] as const;
 
-const OUT_CORE: [string, string][] = [
-  ["Settle into the alpha state", "Guided breath and sound frequencies help your brain move toward alpha, the calm-but-alert state linked with deep focus and rest. Many people feel the shift in the first mornings; results vary."],
-  ["Steady attention and focus", "Train your mind to hold on one point, and to come back each time it drifts. A skill you carry straight into study, work and conversations."],
-  ["See your thoughts and emotions clearly", "Watch thoughts and feelings as they rise, without getting pulled along by them. Seeing them clearly is where real change begins."],
-  ["Bring your emotions into balance", "Find the small pause between what happens and how you react, so anger, worry and restlessness have less grip on your day."],
-  ["Your own answer", "By Day 4 you’ll know from your own experience, not from anyone’s promise, whether to go further."],
+const OUT_CORE: [string, string, string][] = [
+  ["Settle into the alpha state", "Guided breath and sound frequencies help your brain move toward alpha, the calm-but-alert state linked with deep focus and rest. Many people feel the shift in the first mornings; results vary.", "M2 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0"],
+  ["Steady attention and focus", "Train your mind to hold on one point, and to come back each time it drifts. A skill you carry straight into study, work and conversations.", "M12 11a1 1 0 1 0 0 2a1 1 0 1 0 0-2M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18"],
+  ["See your thoughts and emotions clearly", "Watch thoughts and feelings as they rise, without getting pulled along by them. Seeing them clearly is where real change begins.", "M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6a3 3 0 1 0 0-6"],
+  ["Bring your emotions into balance", "Find the small pause between what happens and how you react, so anger, worry and restlessness have less grip on your day.", "M12 4v16M7 20h10M4 8h16M6.5 8L4 14h5zM17.5 8L15 14h5z"],
+  ["Your own answer", "By Day 4 you’ll know from your own experience, not from anyone’s promise, whether to go further.", "M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18M15.5 8.5l-2 5-5 2 2-5z"],
 ];
 
-const OUT_FULL: [string, string][] = [
-  ["Know who you are, and what state you’re in", "Learn to recognise your own state from moment to moment: tired, anxious, scattered or clear. Knowing where you are is the first step to changing it."],
-  ["Go deeper: alpha and theta", "30 guided mornings of breath and sound train your brain to settle toward alpha, and in deeper practice toward theta, the states linked with calm focus and deep rest. Results vary."],
-  ["Balance in all six dimensions of you", "Body, breath, senses, mind, emotion and consciousness, trained one layer at a time, so every part of your life gets steadier, not just one."],
-  ["Awareness, focus and attention that hold", "Stay with a chapter, a task or a conversation for longer, and take things in fully, which makes them easier to recall in class, at work or in an exam."],
-  ["Train the automatic mind", "Daily repetition works on the part of you that runs below conscious thought, so calm and clarity begin to show up on their own, not only when you try."],
-  ["Break old habit patterns", "Catch the loops that keep repeating, the same anger, worry or procrastination, and choose a different response, again and again, until it becomes yours."],
-  ["Emotional independence", "Feel steady from the inside, without needing anyone else’s approval, opinion or answers to know you’re okay."],
-  ["Your personal blueprint for life", "Bring it all together into your own way of life: what you value, how you want to live, and a daily practice for the 90 days after, and beyond. Yours, not borrowed."],
+const OUT_FULL: [string, string, string][] = [
+  ["Know who you are, and what state you’re in", "Learn to recognise your own state from moment to moment: tired, anxious, scattered or clear. Knowing where you are is the first step to changing it.", "M12 4a4 4 0 1 0 0 8a4 4 0 1 0 0-8M4 21c1-4 4-6 8-6s7 2 8 6"],
+  ["Go deeper: alpha and theta", "30 guided mornings of breath and sound train your brain to settle toward alpha, and in deeper practice toward theta, the states linked with calm focus and deep rest. Results vary.", "M2 12c1.5-5 3-5 4.5 0s3 5 4.5 0 3-5 4.5 0 3 5 4.5 0 1.5-3 2-3"],
+  ["Balance in all six dimensions of you", "Body, breath, senses, mind, emotion and consciousness, trained one layer at a time, so every part of your life gets steadier, not just one.", "M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20M12 6a6 6 0 1 0 0 12a6 6 0 1 0 0-12M12 10a2 2 0 1 0 0 4a2 2 0 1 0 0-4"],
+  ["Awareness, focus and attention that hold", "Stay with a chapter, a task or a conversation for longer, and take things in fully, which makes them easier to recall in class, at work or in an exam.", "M12 11v2M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18"],
+  ["Train the subconscious mind", "Daily repetition works on the part of you that runs below conscious thought, so calm and clarity begin to show up on their own, not only when you try.", "M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"],
+  ["Break old habit patterns", "Catch the loops that keep repeating, the same anger, worry or procrastination, and choose a different response, again and again, until it becomes yours.", "M4 12h6M14 12h6M10 8l4 8M7 5l-3 7 3 7M17 5l3 7-3 7"],
+  ["Emotional independence", "Feel steady from the inside, without needing anyone else’s approval, opinion or answers to know you’re okay.", "M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"],
+  ["Your personal blueprint for life", "Bring it all together into your own way of life: what you value, how you want to live, and a daily practice for the 90 days after, and beyond. Yours, not borrowed.", "M4 4h16v16H4zM4 9h16M9 9v11M12 13h5M12 16h3"],
 ];
 
 const NOT_FOR = [
@@ -119,7 +121,7 @@ export function LifeStages() {
             <span className="eyebrow">Stage {life + 1} of {LIFE.length}</span>
             <h3 className="display">{stage.label}</h3>
             <ul>
-              {stage.items.map((item) => <li key={item}>{item}</li>)}
+              {stage.items.map((item) => <li key={item}><span className="dot" aria-hidden="true" /><span>{item}</span></li>)}
             </ul>
           </div>
         </div>
@@ -140,7 +142,7 @@ export function LandingStory({ plan, setPlan }: { plan: Plan; setPlan: (plan: Pl
 
   return (
     <>
-      <section className="section-ink">
+      <section className="section-ink dims">
         <div className="wrap stack story-gap">
           <div className="split-copy">
             <div>
@@ -154,7 +156,10 @@ export function LandingStory({ plan, setPlan }: { plan: Plan; setPlan: (plan: Pl
               <p className="eyebrow">Six dimensions · outer to inner</p>
               <h3 className="display">Tap a layer to go inward</h3>
               <p className="hint light">Each layer lighter than the last, like the lotus. Tap a ring or a name.</p>
-              <Rings active={layer} onPick={setLayer} />
+              <div className="ring-wrap">
+                <Rings active={layer} onPick={setLayer} />
+                <div className="ring-glow sk-breathe" aria-hidden="true" />
+              </div>
             </div>
             <div className="layer-side">
               <div className="dim-chips">
@@ -182,14 +187,27 @@ export function LandingStory({ plan, setPlan }: { plan: Plan; setPlan: (plan: Pl
           </div>
           <div className="shift-flow">
             <h3 className="display">The one shift it trains</h3>
-            <p className="muted-pills"><span>Something happens</span><span>You react at once</span></p>
-            <p className="live-pills"><span>Something happens</span><span>You notice</span><span>A small pause · you choose</span><span>You respond</span></p>
+            <div className="shift-row muted">
+              <span>Something happens</span>
+              <svg width="56" height="12" viewBox="0 0 56 12" aria-hidden="true"><path d="M2 6h50M46 1l6 5-6 5" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <span>You react at once</span>
+            </div>
+            <div className="shift-row live">
+              <span className="s2">Something happens</span>
+              <svg width="34" height="12" viewBox="0 0 34 12" aria-hidden="true"><path d="M2 6h28" stroke="var(--wordmark)" strokeWidth="1.5" strokeLinecap="round" /></svg>
+              <span className="s3">You notice</span>
+              <svg width="34" height="12" viewBox="0 0 34 12" aria-hidden="true"><path d="M2 6h28" stroke="var(--wordmark)" strokeWidth="1.5" strokeLinecap="round" /></svg>
+              <span className="pause">A small pause · you choose</span>
+              <svg width="34" height="12" viewBox="0 0 34 12" aria-hidden="true"><path d="M2 6h28" stroke="var(--lilac)" strokeWidth="1.5" strokeLinecap="round" /></svg>
+              <span className="respond">You respond</span>
+            </div>
             <p>No beliefs, rituals or prior experience needed.</p>
           </div>
         </div>
+        <Waterline to="fresh" />
       </section>
 
-      <section className="section-fresh">
+      <section className="section-fresh experience">
         <div className="wrap stack">
           <div className="story-head">
             <div>
@@ -203,12 +221,18 @@ export function LandingStory({ plan, setPlan }: { plan: Plan; setPlan: (plan: Pl
             </div>
           </div>
           <div className="outcome-grid">
-            {outcomes.map(([title, text], index) => (
-              <article key={title} className={index === outcomes.length - 1 ? "last" : ""}>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
-            ))}
+            {outcomes.map(([title, text, icon], index) => {
+              const last = index === outcomes.length - 1;
+              return (
+                <article key={title} className={last ? "last" : ""}>
+                  <span className="outcome-badge"><Mark size={24} stroke={last ? "var(--lilac)" : "var(--primary)"}><path d={icon} /></Mark></span>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
           <p className="hint">{isCore ? "Day 1 can feel unfamiliar, and that’s normal. Just follow the voice." : "This is practice, not a promise. It grows with every morning you show up."}</p>
         </div>
@@ -223,11 +247,11 @@ export function LandingStory({ plan, setPlan }: { plan: Plan; setPlan: (plan: Pl
               <h2 className="display">What a morning looks like</h2>
             </div>
             <ol>
-              <li><strong>Arrive and settle</strong> · {ARRIVE.replace(" AM", "")}, register and leave the rush at the door; we begin at {STARTS_AT} sharp</li>
-              <li><strong>Understand</strong> · the scientific and spiritual reasoning behind the mind, the brain and their link with the body</li>
-              <li><strong>Practise</strong> · the same morning, live it through Shadanga Kriya: core meditative practice with sound frequencies</li>
-              <li><strong>Settle into clarity</strong> · come back slowly, with clarity and a realisation about your own life</li>
-              <li className="last"><strong>Integrate</strong> · carry the patterns and learning into your own day, in time for school or work</li>
+              <li><Mark stroke="var(--lilac)"><path d="M3 17h18M6 17a6 6 0 0 1 12 0M12 5v2M5.6 8.6l1.4 1.4M18.4 8.6L17 10" /></Mark><span><strong>Arrive and settle</strong> · {ARRIVE.replace(" AM", "")}, register and leave the rush at the door; we begin at {STARTS_AT} sharp</span></li>
+              <li><Mark stroke="var(--lilac)"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20M9 8h7M9 11.5h5" /></Mark><span><strong>Understand</strong> · the scientific and spiritual reasoning behind the mind, the brain and their link with the body</span></li>
+              <li><Mark stroke="var(--lilac)"><path d="M12 11a1 1 0 1 0 0 2a1 1 0 1 0 0-2M12 7a5 5 0 1 0 0 10a5 5 0 1 0 0-10M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18" /></Mark><span><strong>Practise</strong> · the same morning, live it through Shadanga Kriya: core meditative practice with sound frequencies</span></li>
+              <li><Mark stroke="var(--lilac)"><path d="M12 3c3 3.5 3 8.5 0 12-3-3.5-3-8.5 0-12zM4 13c3.5 0 6.5 2 8 6-4 0-7-2-8-6zM20 13c-3.5 0-6.5 2-8 6 4 0 7-2 8-6z" /></Mark><span><strong>Settle into clarity</strong> · come back slowly, with clarity and a realisation about your own life</span></li>
+              <li className="last"><Mark stroke="var(--primary)"><path d="M12 3v12M7 10l5 5 5-5M5 21h14" /></Mark><span><strong>Integrate</strong> · carry the patterns and learning into your own day, in time for school or work</span></li>
             </ol>
           </div>
         </div>
@@ -240,24 +264,33 @@ export function LandingStory({ plan, setPlan }: { plan: Plan; setPlan: (plan: Pl
             {isCore ? (
               <>
                 <h2 className="display">After Day 4, you decide.</h2>
-                <p>No pressure, and no follow-up calls you didn't ask for. If you want to continue, move to the Comprehensive program <strong>and your ₹499 comes off the ₹12,499 fee</strong>. If not, you keep the breathing and relaxation routine you learned, and you can keep practising on your own.</p>
+                <p>No pressure, and no follow-up calls you didn't ask for. If you want to continue, move to the Comprehensive program <span className="accent">and your ₹{inr(CORE_FEE)} comes off the ₹{inr(FULL_FEE)} fee</span>. If not, you keep the breathing and relaxation routine you learned, and you can keep practising on your own.</p>
               </>
             ) : (
               <>
                 <h2 className="display">30 days build the practice. 90 days make it yours.</h2>
                 <ul>
-                  <li>30 guided mornings at the centre, then 90 days of guided self-practice with the Shadanga Kriya app</li>
-                  <li>Weekend sessions at the centre for doubt-clearing and community gathering</li>
-                  <li>A weekly progress check by the team</li>
+                  <li><Mark size={22} width={1.6} stroke="var(--primary)"><path d="M3 18v-6a9 9 0 0 1 18 0v6M3 18a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2zM21 18a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2z" /></Mark><span>30 guided mornings at the centre, then 90 days of guided self-practice with the Shadanga Kriya app</span></li>
+                  <li><Mark size={22} width={1.6} stroke="var(--primary)"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1 1 21 12z" /></Mark><span>Weekend sessions at the centre for doubt-clearing and community gathering</span></li>
+                  <li><Mark size={22} width={1.6} stroke="var(--primary)"><circle cx="9" cy="8" r="3" /><circle cx="17" cy="9" r="2.5" /><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.2c2.9.1 6 1.6 6 5.8" /></Mark><span>A weekly progress check by the team</span></li>
                 </ul>
                 <p><strong>Why 120 days:</strong> a new habit takes about 66 days on average to feel automatic (Lally et al., 2009), so 30 days alone isn't enough.</p>
               </>
             )}
           </div>
-          <div className="day-ring" aria-label="120 days: 30 guided mornings, then 90 days of practice">
-            <strong>120</strong>
-            <span>DAYS</span>
-            <small>4 · Core · 30 · guided · 90 · practice</small>
+          <div className="day-ring">
+            <svg viewBox="-8 -10 368 348" role="img" aria-label="120 days: 30 guided mornings, then 90 days of practice">
+              <circle cx="160" cy="160" r="130" fill="none" stroke="var(--lilac)" strokeWidth="22" />
+              <circle cx="160" cy="160" r="130" fill="none" stroke="var(--primary)" strokeWidth="22" strokeDasharray="204.2 816.8" transform="rotate(-90 160 160)" />
+              <circle cx="160" cy="160" r="130" fill="none" stroke="var(--night)" strokeWidth="22" strokeDasharray="27.2 816.8" transform="rotate(-90 160 160)" />
+              <circle cx="160" cy="160" r="70" fill="#FFFFFF" />
+              <circle cx="160" cy="160" r="9" fill="none" stroke="var(--wordmark)" strokeWidth="2" />
+              <text x="160" y="140" textAnchor="middle" fontFamily="Satisfy SK, Georgia, serif" fontSize="36" fill="var(--ink)">120</text>
+              <text x="160" y="190" textAnchor="middle" fontFamily="Objective, sans-serif" fontSize="11" fontWeight="500" letterSpacing="2" fill="var(--primary)">DAYS</text>
+              <text x="40" y="22" fontFamily="Objective, sans-serif" fontSize="11" fontWeight="500" fill="var(--ink)">● 4 · Core</text>
+              <text x="230" y="22" fontFamily="Objective, sans-serif" fontSize="11" fontWeight="500" fill="var(--primary)">● 30 · guided</text>
+              <text x="210" y="312" fontFamily="Objective, sans-serif" fontSize="11" fontWeight="500" fill="var(--ink)">● 90 · practice</text>
+            </svg>
           </div>
         </div>
       </section>
@@ -266,12 +299,12 @@ export function LandingStory({ plan, setPlan }: { plan: Plan; setPlan: (plan: Pl
         <div className="wrap not-for">
           <p className="eyebrow">It's not for you if you</p>
           <ul>
-            {NOT_FOR.map((item) => <li key={item}>{item}</li>)}
+            {NOT_FOR.map((item) => <li key={item}><Mark size={18} width={2} stroke="rgba(10,10,10,0.5)"><path d="M7 7l10 10M17 7L7 17" /></Mark><span>{item}</span></li>)}
           </ul>
         </div>
       </section>
 
-      <section className="section-ink">
+      <section className="section-ink guide">
         <div className="wrap founder">
           <img src="/media/landing/yogee.webp" alt="Yogee, founder of Shadanga Kriya, seated and smiling" />
           <div>
@@ -291,12 +324,31 @@ function Rings({ active, onPick }: { active: number; onPick: (index: number) => 
   return (
     <svg className="rings" viewBox="0 0 300 300" role="img" aria-label="Six rings, from Body on the outside to Consciousness at the centre">
       {radii.map((radius, index) => (
-        <g key={radius} onClick={() => onPick(index)} style={{ cursor: "pointer" }}>
-          <circle cx="150" cy="150" r={radius} fill="none" stroke="transparent" strokeWidth="18" />
-          <circle cx="150" cy="150" r={radius} fill="none" stroke={index === active ? "var(--lilac)" : "rgba(199,167,255,.4)"} strokeWidth={index === active ? 5 : 2.5} />
+        <g key={radius}>
+          <circle
+            cx="150"
+            cy="150"
+            r={radius}
+            fill="none"
+            stroke={index === active ? "var(--lilac)" : `color-mix(in srgb, var(--lilac) ${16 + index * 8}%, transparent)`}
+            strokeWidth={index === active ? 6 - index * 0.6 : 4 - index * 0.5}
+            style={index === active ? { filter: "drop-shadow(0 0 6px var(--wordmark))" } : undefined}
+          />
+          <circle cx="150" cy="150" r={radius} fill="none" stroke="transparent" strokeWidth="20" onClick={() => onPick(index)}>
+            <title>{LAYERS[index][0]} {LAYERS[index][1]}</title>
+          </circle>
         </g>
       ))}
-      <circle cx="150" cy="150" r="7" fill="#fff" />
+      <defs>
+        <radialGradient id="skAtmaD">
+          <stop offset="0" stopColor="#FFFFFF" stopOpacity="0.95" />
+          <stop offset="0.35" stopColor="var(--lilac)" stopOpacity="0.7" />
+          <stop offset="0.7" stopColor="var(--wordmark)" stopOpacity="0.25" />
+          <stop offset="1" stopColor="var(--wordmark)" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <circle className="sk-atma" cx="150" cy="150" r="30" fill="url(#skAtmaD)" />
+      <circle className="sk-atma-dot" cx="150" cy="150" r="7" fill="#FFFFFF" />
     </svg>
   );
 }

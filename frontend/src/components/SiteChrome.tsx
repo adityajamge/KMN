@@ -52,5 +52,5 @@ export function SiteFooter() {
 }
 
 export function GstNote({ amount, gst = false }: { amount: string; gst?: boolean }) {
-  return <span className="num">₹{amount}{gst && <span style={{ marginLeft: 4, fontFamily: "inherit", fontWeight: 300, fontSize: "0.55em" }}>+ 18% GST</span>}</span>;
+  return <span className="num">₹{amount}<span className="gst-bit">{gst ? "+ 18% GST" : "incl. GST"}</span></span>;
 }
