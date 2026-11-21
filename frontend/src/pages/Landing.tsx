@@ -196,7 +196,7 @@ export default function Landing() {
               </button>
               <button type="button" className={!isCore ? "on" : ""} onClick={() => setPlan("comprehensive")}>
                 <strong>Comprehensive · 120 days</strong>
-                <span className="num">₹{inr(FULL_FEE)} + 18% GST</span>
+                <span className="num">₹{inr(FULL_FEE)} + 18% GST <span className="emi">| EMI opt. Avl.</span></span>
               </button>
             </div>
             <p>{isCore ? `Start here. Four mornings for ₹${inr(CORE_FEE)}, and you’ll know from your own experience whether this is for you.` : "The complete transformation: 30 guided mornings, then 90 days of guided practice with the Shadanga Kriya app until it becomes yours."}</p>
@@ -224,6 +224,24 @@ export default function Landing() {
           <p className="eyebrow">Heavy to light</p>
           <h2 className="display" style={{ fontSize: "clamp(34px, 4vw, 52px)", color: "#fff" }}>What changes when you train the mind</h2>
           <p style={{ textAlign: "center", maxWidth: 560, margin: "0 auto" }}>Same you. Same busy day. Training turns the noise into a steady flow.</p>
+          <div className="wave-card">
+            <div className="wave-labels">
+              <div><span>Without training</span><small>Scattered · reactive</small></div>
+              <div><span>With practice</span><small>Steady · clear</small></div>
+            </div>
+            <svg viewBox="0 0 1200 220" preserveAspectRatio="none" role="img" aria-label="A disturbed, jagged frequency wave on the left that flows into a smooth, steady wave on the right">
+              <defs>
+                <linearGradient id="skwd" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stopColor="#C7A7FF" stopOpacity="0.45" />
+                  <stop offset="0.45" stopColor="#8F5BFF" stopOpacity="0.85" />
+                  <stop offset="1" stopColor="#FFFFFF" />
+                </linearGradient>
+              </defs>
+              <path fill="none" stroke="url(#skwd)" strokeWidth="1.2" strokeOpacity="0.45" d="M0 110 C 40 40, 70 180, 110 90 S 180 30, 220 150 S 280 200, 330 80 S 400 20, 460 160 S 540 40, 600 120 C 700 150, 820 90, 980 100 S 1120 130, 1200 110" />
+              <path fill="none" stroke="url(#skwd)" strokeWidth="2.4" strokeLinecap="round" d="M0 130 C 30 20, 55 190, 90 40 S 140 210, 180 50 S 230 180, 280 70 S 340 200, 400 60 S 470 30, 530 150 S 590 40, 650 120 C 740 160, 860 80, 1000 95 S 1140 140, 1200 115" />
+            </svg>
+            <div className="wave-scale"><span>noise</span><span>breath by breath</span><span>flow</span></div>
+          </div>
           <div className="compare">
             <header>Without training</header>
             <header>With practice</header>
@@ -234,6 +252,7 @@ export default function Landing() {
               </div>
             ))}
           </div>
+          <p className="wave-note">This is practice. Experience at your own pace.</p>
         </div>
       </section>
 
@@ -339,6 +358,7 @@ export default function Landing() {
             <BusyButton className="btn btn-primary" type="submit" busy={holding} disabled={!agreeTerms || !agreeConsent}>Continue to payment · ₹{inr(quote.total)}</BusyButton>
             {(!agreeTerms || !agreeConsent) && <p className="hint" style={{ textAlign: "center", color: "var(--primary)" }}>Tick both boxes above to continue.</p>}
             <span className="hint">UPI, cards, netbanking · Confirmation on WhatsApp</span>
+            {!isCore && <p className="hint" style={{ textAlign: "center", color: "var(--primary)" }}>EMI available on selected banks · choose EMI on the payment page</p>}
             {!isCore && <p className="hint" style={{ textAlign: "center", color: "var(--primary)" }}>Already did Core? Use the personal upgrade link we send you on WhatsApp after Day 3, so your ₹{inr(CORE_FEE)} comes off.</p>}
           </form>
         </div>
