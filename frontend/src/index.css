@@ -139,9 +139,9 @@ h1, h2, h3, p { margin: 0; }
 .waterline.rise { height: 110px; margin-top: 40px; }
 .tabs { display: flex; gap: 6px; padding: 6px; border-radius: 22px; background: rgba(199, 167, 255, 0.08); border: 1px solid var(--line); max-width: 560px; }
 .tabs button { flex: 1; min-width: 0; min-height: 64px; border: 0; border-radius: 16px; cursor: pointer; text-align: left; padding: 8px 14px; color: rgba(255, 255, 255, 0.8); background: transparent; }
-.tabs button strong, .tabs button span { display: block; }
+.tabs button > strong, .tabs button > span { display: block; }
 .tabs button strong { font-weight: 500; font-size: 15px; }
-.tabs button span { font-size: 13px; opacity: 0.85; }
+.tabs button > span { font-size: 13px; opacity: 0.85; }
 .tabs button.on { background: var(--primary); color: #fff; box-shadow: 0 0 24px rgba(143, 91, 255, 0.45); }
 .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; max-width: 640px; }
 .info-card { display: flex; gap: 14px; align-items: center; padding: 16px 20px; border-radius: 14px; background: color-mix(in srgb, var(--night) 75%, transparent); border: 1px solid color-mix(in srgb, var(--lilac) 16%, transparent); }
@@ -238,7 +238,7 @@ h1, h2, h3, p { margin: 0; }
 .mini-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 999px; background: #fff; border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent); }
 .mini-tabs button { border: 0; background: transparent; color: var(--ink); min-height: 44px; padding: 0 18px; font-size: 14px; white-space: nowrap; }
 .mini-tabs button.on { background: var(--primary); color: #fff; }
-.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 22px; }
 .outcome-grid article { display: flex; gap: 16px; align-items: flex-start; padding: 32px; border-radius: 22px; background: #fff; color: var(--ink); border: 1px solid color-mix(in srgb, var(--primary) 12%, transparent); }
 .outcome-badge { flex: none; width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: var(--fresh); }
 .outcome-grid h3 { margin: 0 0 6px; font-size: 21px; font-weight: 500; line-height: 1.3; font-family: inherit; }
@@ -307,6 +307,7 @@ h1, h2, h3, p { margin: 0; }
 .choose { position: relative; overflow: hidden; }
 .choose-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.9; pointer-events: none; }
 .choose .wrap { position: relative; }
+.choose-stack { gap: 52px; }
 .center-copy { text-align: center; display: flex; flex-direction: column; gap: 14px; align-items: center; }
 .center-copy h2 { font-size: clamp(36px, 5vw, 60px); }
 .center-copy p { max-width: 560px; font-size: 17px; line-height: 1.7; color: rgba(10,10,10,.75); }
@@ -503,7 +504,7 @@ table.data td { padding: 12px 10px; border-bottom: 1px solid rgba(10,10,10,.06);
 .admin-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 18px; }
 
 @media (max-width: 900px) {
-  .plan-grid, .grid-3, .compare, .life-panel, .voice-grid, .not-for ul, .ticket-meta { grid-template-columns: 1fr; }
+  .plan-grid, .grid-3, .life-panel, .voice-grid, .not-for ul, .ticket-meta { grid-template-columns: 1fr; }
   .morning-copy, .founder { padding: 24px; }
   .voice-grid { grid-template-columns: 1fr 1fr; }
   .tabs { flex-direction: column; }
@@ -534,7 +535,6 @@ table.data td { padding: 12px 10px; border-bottom: 1px solid rgba(10,10,10,.06);
   .admin-head .hint { max-width: 100%; }
   .admin .split { flex-wrap: wrap; }
   .search, .filters .search { width: 100%; }
-  .compare .before, .compare .after { justify-content: flex-start; text-align: left; }
   .wrap, .narrow { width: min(1200px, calc(100% - 32px)); }
 }
 
@@ -556,6 +556,202 @@ table.data td { padding: 12px 10px; border-bottom: 1px solid rgba(10,10,10,.06);
 @media (max-width: 640px) {
   .info-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
   .aside { position: static; }
+}
+
+@media (max-width: 760px) {
+  .landing .topbar .wrap { padding: 12px 0; gap: 10px; }
+  .landing .topbar .logo { width: 148px; height: 32px; }
+  .landing .topbar .btn-primary { min-height: 40px; padding: 0 14px; font-size: 14px; letter-spacing: 0; }
+
+  .landing .hero { padding: 28px 0 0; }
+  .landing .hero-grid { gap: 36px; }
+  .landing .hero-grid > .stack { gap: 16px; }
+  .landing .hero .eyebrow { font-size: 11px; letter-spacing: 0.12em; }
+  .landing .hero h1 { font-size: clamp(24px, 6.6vw, 30px); line-height: 1.05; }
+  .landing .hindi { font-size: 14px; line-height: 1.45; }
+  .landing .lede, .landing .plan-blurb, .landing .center-copy p { font-size: 14px; line-height: 1.6; }
+  .landing .tabs { flex-direction: row; max-width: none; align-items: stretch; }
+  .landing .tabs button { padding: 10px 10px; min-height: 0; white-space: normal; overflow: hidden; }
+  .landing .tabs button > strong { font-size: 14px; line-height: 1.25; white-space: normal; }
+  .landing .tabs button > span { font-size: 13px; line-height: 1.35; white-space: normal; }
+  .landing .tabs .emi { display: block; margin-left: 0; }
+  .landing .tabs .pipe { display: none; }
+  .landing .info-grid { grid-template-columns: 1fr 1fr; gap: 10px; max-width: none; }
+  .landing .info-card { padding: 14px 12px; gap: 10px; align-items: center; }
+  .landing .info-card b { font-size: 14px; line-height: 1.35; }
+  .landing .info-card small { font-size: 11px; letter-spacing: 0.08em; }
+  .landing .cta-row { align-items: stretch; }
+  .landing .cta-row p { max-width: none; font-size: 13px; }
+  .landing .hero-cta { width: 100%; height: auto; min-height: 52px; padding: 12px 14px; font-size: 14px; letter-spacing: 0; white-space: nowrap; flex-wrap: wrap; justify-content: center; row-gap: 2px; text-align: center; }
+  .landing .gst-bit, .landing .emi { font-size: 0.85em; }
+  .landing .video-card { flex-basis: 100%; max-width: min(100%, 420px); }
+  .landing .waterline { height: 56px; margin-top: 28px; }
+  .landing .waterline.rise { height: 64px; margin-top: 12px; }
+
+  .landing .section-dark,
+  .landing .section-ink,
+  .landing .section-relax,
+  .landing .section-fresh,
+  .landing .section-white { padding: 56px 0; }
+  .landing .section-night { padding: 48px 0 64px; }
+  .landing .section-ink.dims { padding: 48px 0 0; }
+  .landing .section-fresh.experience { padding: 48px 0 56px; }
+  .landing .section-fresh.morning-wrap,
+  .landing .morning-wrap,
+  .landing .not-wrap { padding: 0 0 56px; }
+  .landing h2.display,
+  .landing .center-copy h2,
+  .landing .founder h2 { font-size: clamp(28px, 8vw, 36px); }
+  .landing .layers h3.display { font-size: clamp(26px, 7vw, 34px); }
+  .landing .story-gap { gap: 48px; }
+  .landing .story-head,
+  .landing .split-copy,
+  .landing .founder { gap: 20px; align-items: stretch; }
+  .landing .story-head > div,
+  .landing .split-copy > div { flex-basis: 100%; gap: 12px; }
+
+  .landing .life-chips { flex-wrap: nowrap; gap: 8px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; scrollbar-width: none; mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
+  .landing .life-chips::-webkit-scrollbar { display: none; }
+  .landing .life-chips button { flex: none; scroll-snap-align: start; min-height: 42px; font-size: 14px; }
+  .landing .life-panel { padding: 12px; gap: 16px; }
+  .landing .life-panel img { aspect-ratio: 16 / 10; max-height: 220px; }
+  .landing .life-panel h3 { font-size: 26px; }
+  .landing .life-panel ul { grid-template-columns: 1fr; }
+  .landing .life-panel li { padding: 14px; font-size: 14px; }
+  .landing .story-band { padding: 22px 18px; }
+  .landing .story-band p { font-size: 14px; }
+  .landing .story-band .display { font-size: 22px; }
+
+  .landing .wave-labels,
+  .landing .wave-scale { padding: 0 14px; font-size: 13px; }
+  .landing .wave-labels span { font-size: 11px; letter-spacing: 0.06em; }
+  .landing .wave-labels small { font-size: 13px; }
+  .landing .compare header,
+  .landing .compare .before,
+  .landing .compare .after { padding: 12px; }
+  .landing .compare header { font-size: 11px; letter-spacing: 0.06em; }
+  .landing .compare .before,
+  .landing .compare .after { min-height: 0; font-size: 14px; line-height: 1.4; align-items: flex-start; overflow-wrap: anywhere; }
+  .landing .dark-center p:last-child { font-size: 14px; }
+
+  .landing .layers { gap: 28px; }
+  .landing .ring-wrap { max-width: 280px; }
+  .landing .dim-chips { grid-template-columns: 1fr 1fr; }
+  .landing .dim-chips button { min-height: 52px; padding: 8px 8px; font-size: 14px; line-height: 1.25; }
+  .landing .layer-card { padding: 20px; }
+  .landing .shift-row { gap: 8px; }
+  .landing .shift-row.muted,
+  .landing .shift-row.live { font-size: 14px; }
+  .landing .shift-row.muted span,
+  .landing .shift-row.live span { padding: 8px 12px; }
+  .landing .shift-flow { gap: 18px; }
+  .landing .shift-flow h3 { font-size: 22px; }
+
+  .landing .experience .story-head { flex-direction: column; align-items: stretch; gap: 20px; }
+  .landing .experience .story-head > div { flex: none; width: 100%; gap: 14px; }
+  .landing .experience .story-head h2 + p { margin: 0; font-size: 14px; line-height: 1.65; }
+  .landing .experience h2.display { font-size: clamp(28px, 8vw, 36px); }
+  .landing .experience .mini-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    min-width: 0;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
+  }
+  .landing .experience .mini-tabs button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    margin: 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    box-shadow: none;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 12.5px;
+    line-height: 1.15;
+    letter-spacing: 0;
+    white-space: nowrap;
+    text-align: center;
+    padding: 0 4px;
+  }
+  .landing .experience .mini-tabs button.on { background: var(--primary); color: #fff; }
+  .landing .outcome-grid { grid-template-columns: 1fr; gap: 16px; }
+  .landing .outcome-grid article { padding: 22px 20px; gap: 14px; }
+  .landing .outcome-grid h3 { font-size: 18px; }
+  .landing .outcome-grid p { font-size: 14px; line-height: 1.65; }
+
+  .landing .morning { min-height: 0; border-radius: 24px; }
+  .landing .morning-copy { min-height: 0; gap: 24px; padding: 28px 14px; }
+  .landing .morning ol { flex-basis: 100%; }
+  .landing .morning li { align-items: flex-start; padding: 14px; font-size: 14px; gap: 12px; }
+
+  .landing .after { gap: 32px; }
+  .landing .after > div:not(.day-ring) { flex-basis: 100%; }
+  .landing .after p, .landing .after ul, .landing .not-for ul, .landing .plan-card ul, .landing .founder p { font-size: 14px; }
+  .landing .day-ring { width: min(100%, 280px); margin: 0 auto; }
+  .landing .not-for { padding: 22px 18px; }
+  .landing .founder img { width: min(100%, 280px); margin: 0 auto; }
+  .landing .founder > div { flex-basis: 100%; }
+  .landing .shift-flow > p { font-size: 14px; }
+
+  .landing .choose-stack { gap: 28px; }
+  .landing .plan-card { padding: 22px 18px; gap: 14px; }
+  .landing .plan-card h3 { font-size: 28px; }
+  .landing .plan-card .price { font-size: 28px; }
+  .landing .pill { font-size: 11px; letter-spacing: 0.08em; }
+  .landing .form-card { padding: 22px 16px; border-radius: 24px; gap: 16px; }
+  .landing .form-card h3 { font-size: 20px; line-height: 1.25; }
+  .landing .form-card .fee-line { display: block; margin-top: 2px; color: var(--primary); font-size: 14px; }
+  .landing .form-card h3 .gst-bit,
+  .landing .total-row .gst-bit { color: var(--primary); opacity: 0.85; }
+  .landing .hint { font-size: 13px; }
+  .landing .field { font-size: 14px; }
+  .landing .form-card .field em { display: block; margin-top: 2px; font-size: 13px; }
+  .landing .form-card .field input,
+  .landing .form-card .field select { padding: 0 8px; font-size: 16px; }
+  .landing .form-card .field input::placeholder { font-size: 13px; }
+  .landing .form-card .grid-2 { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .landing .person .person-wide { grid-template-columns: 1fr; }
+  .landing .person .checks { grid-template-columns: 1fr; }
+  .landing .person fieldset legend { font-size: 14px; }
+  .landing .total-row { flex-wrap: nowrap; padding: 14px 16px; font-size: 14px; }
+  .landing .total-row strong { color: var(--primary); font-size: 18px; }
+  .landing .gender-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .landing .gender-row .check,
+  .landing .checks .check { padding: 8px 8px; font-size: 14px; }
+  .landing .agree { font-size: 14px; }
+  .landing .checks { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .landing .pay-btn { width: 100%; height: auto; min-height: 52px; padding: 12px 14px; font-size: 14px; letter-spacing: 0; white-space: nowrap; flex-wrap: wrap; justify-content: center; row-gap: 2px; }
+  .landing .pay-btn .gst-bit { color: #fff; opacity: 0.9; }
+  .landing .lock-note { justify-content: center; width: 100%; font-size: 13px; text-align: center; }
+  .landing .person header { align-items: flex-start; }
+
+  .landing .faq { gap: 24px; }
+  .landing .faq-layout { gap: 32px; }
+  .landing .faq-item button { font-size: 14px; min-height: 56px; align-items: center; }
+  .landing .faq-item p { padding-right: 0; font-size: 14px; }
+  .landing .aside { position: static; }
+  .landing .aside-photo { height: 200px; }
+  .landing .aside .pad { padding: 22px 18px; }
+  .landing .aside h3 { font-size: 22px; }
+  .landing .aside .pad > p, .landing .contact > summary, .landing .contact-actions a { font-size: 14px; }
+
+  .landing .sticky { padding-bottom: env(safe-area-inset-bottom); }
+  .landing .sticky .wrap { gap: 10px; align-items: center; }
+  .landing .sticky .wrap > div { min-width: 0; font-size: 14px; line-height: 1.35; }
+  .landing .sticky small { display: block; font-size: 13px; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .landing .sticky .btn { flex: none; min-height: 44px; padding: 0 14px; font-size: 14px; }
+  .landing .footer { padding: 40px 0 112px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ripples span, .spinner, .bone, .sk-drift, .sk-breathe, .sk-atma, .sk-atma-dot { animation: none; }

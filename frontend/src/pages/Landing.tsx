@@ -261,7 +261,7 @@ export default function Landing() {
 
       <section className="section-fresh choose" id="choose">
         <img className="choose-bg" src="/media/landing/choose-bg.jpg" alt="" />
-        <div className="wrap stack" style={{ gap: 52 }}>
+        <div className="wrap stack choose-stack">
           <div className="center-copy">
             <p className="eyebrow" style={{ color: "var(--primary)" }}>{PROGRAM_NAME}</p>
             <h2 className="display">Your clearer mornings start here</h2>
@@ -275,7 +275,7 @@ export default function Landing() {
           <form className="form-card" onSubmit={submit}>
             <div>
               <span className="hint">Step 1 of 2 · about a minute</span>
-              <h3>Book: {isCore ? "Core · 4 days" : "Comprehensive · 120 days"} <span className="num">· ₹{inr(price)}<span className="gst-bit">{feeNote}</span></span> per person</h3>
+              <h3>Book: {isCore ? "Core · 4 days" : "Comprehensive · 120 days"} <span className="fee-line"><span className="num">· ₹{inr(price)}<span className="gst-bit">{feeNote}</span></span> per person</span></h3>
             </div>
             <span className="tag">{headCount === 1 ? "Booking for 1 person" : `Booking for ${headCount} people`}</span>
             <strong>Person 1 · You</strong>
@@ -315,7 +315,7 @@ export default function Landing() {
                   <strong>Person {index + 2}</strong>
                   <button type="button" className="btn remove" onClick={() => setPeople((current) => current.filter((item) => item.key !== person.key))}><Mark size={14} width={2} stroke="currentColor"><path d="M7 7l10 10M17 7L7 17" /></Mark>Remove</button>
                 </header>
-                <div className="grid-2">
+                <div className="grid-2 person-wide">
                   <Field label="Full name" error={errors[`${person.key}-name`]}><input value={person.name} onChange={(event) => patchExtra(person.key, { name: event.target.value })} placeholder="Their name" /></Field>
                   <Field label="Relation to Person 1" error={errors[`${person.key}-relation`]}>
                     <select value={person.relation} onChange={(event) => patchExtra(person.key, { relation: event.target.value })}>
@@ -329,7 +329,7 @@ export default function Landing() {
                   <Field label="Age" error={errors[`${person.key}-age`]}><input value={person.age} onChange={(event) => patchExtra(person.key, { age: event.target.value })} placeholder="Age" inputMode="numeric" /></Field>
                 </div>
                 <Gender name={`gender-${person.key}`} value={person.gender} onChange={(value) => patchExtra(person.key, { gender: value })} />
-                <div className="grid-2">
+                <div className="grid-2 person-wide">
                   <Field label="WhatsApp number" error={errors[`${person.key}-whatsapp`]}><input value={person.whatsapp} onChange={(event) => patchExtra(person.key, { whatsapp: event.target.value })} placeholder="+91" inputMode="tel" /></Field>
                   <Field label="Email" hint="(for their invitation and updates)" error={errors[`${person.key}-email`]}><input value={person.email} onChange={(event) => patchExtra(person.key, { email: event.target.value })} placeholder="name@example.com" /></Field>
                 </div>
