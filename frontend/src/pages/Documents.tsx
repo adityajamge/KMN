@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Bone } from "../components/Skeleton";
 import { TopBar } from "../components/SiteChrome";
 import { useBooking, useEvent, useUpgrade } from "../data/store";
 import { ARRIVE, COMPANY, CORE_DATES, CORE_FEE, FULL_DATES, MAP_URL, PROGRAM_NAME, SESSION_TIME, SUPPORT_PHONE, UPGRADE_DATES, VENUE_FULL } from "../lib/constants";
-import { formatWhen, inr, planDates, planLabel } from "../lib/format";
+import { formatWhen, inr, planDates, planLabel, upgradePrice } from "../lib/format";
+import { downloadInvitationPdf } from "../lib/invitationPdf";
 
 function download(filename: string, body: string) {
   const blob = new Blob([body], { type: "text/html" });
@@ -86,48 +88,73 @@ export function UpgradeInvoicePage() {
 export function InvitationPage() {
   const { id } = useParams();
   const { booking, ready } = useBooking(id);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState("");
   if (!ready) return <Waiting />;
   if (!booking) return <Missing />;
+  const upgradeTotal = upgradePrice(1).total;
+  const invoiceNo = booking.invoiceNo;
+  async function downloadPdf() {
+    const cards = [...document.querySelectorAll<HTMLElement>(".invite-ticket")];
+    if (!cards.length || saving) return;
+    setSaving(true);
+    setSaveError("");
+    const filename = `${invoiceNo || cards[0]?.querySelector("strong")?.textContent || "invitation"}.pdf`;
+    try {
+      await downloadInvitationPdf(cards, filename);
+    } catch (error) {
+      console.error(error);
+      setSaveError("The PDF could not be created. Please try again.");
+    } finally {
+      setSaving(false);
+    }
+  }
   return (
-    <div className="doc">
-      <TopBar />
-      <div className="no-print" style={{ width: "min(420px, calc(100% - 32px))", margin: "20px auto" }}>
-        <button className="btn btn-primary" type="button" onClick={() => window.print()}>Download / print invitations</button>
+    <div className="invite-page">
+      <div className="no-print invite-actions">
+        <button className="btn btn-primary" type="button" disabled={saving} onClick={downloadPdf}>{saving ? "Preparing the PDF…" : booking.participants.length === 1 ? "Download invitation" : "Download invitations"}</button>
+        {saveError && <p className="invite-save-error">{saveError}</p>}
       </div>
       {booking.participants.map((person) => {
         const upgraded = person.upgraded;
         const core = person.programme === "core" && !upgraded;
         const dates = upgraded ? UPGRADE_DATES : person.programme === "core" ? CORE_DATES : FULL_DATES;
         return (
-          <article className="invite-ticket" key={person.id}>
-            <p className="invite-kicker"><span>Invitation</span><span className="dot" /><span lang="hi">निमंत्रण</span></p>
-            <img className="logo" src="/media/logo.png" alt="Shadanga Kriya" />
-            <p className="eyebrow">You are invited to</p>
-            <h2 className="display">{PROGRAM_NAME}</h2>
-            <span className="plan-pill">{planLabel(person.programme, upgraded)}</span>
-            <p className="for-label">This invitation is for</p>
-            <p className="person-name display">{person.name}</p>
+          <article className="invite-ticket" key={person.id} aria-label="Invitation">
+            <p className="invite-kicker"><span>Invitation</span><span className="dot" aria-hidden="true" /><span lang="hi">निमंत्रण</span></p>
+            <div className="invite-head">
+              <img className="invite-lockup" src="/media/invite-lockup.webp" alt="Shadanga Kriya · The Eternal State of Realization" />
+              <span className="invite-rule" aria-hidden="true" />
+              <p className="invite-eyebrow">You are invited to</p>
+              <h1 className="display">{PROGRAM_NAME}</h1>
+              <span className="plan-pill">{planLabel(person.programme, upgraded)}</span>
+              <p className="for-label">This invitation is for</p>
+              <p className="person-name display">{person.name}</p>
+            </div>
             <div className="ticket">
-              <p className="eyebrow">{upgraded ? "Invitation code · same as Core" : "Invitation code"}</p>
-              <p className="code">{person.code || "Issued after payment"}</p>
-              <p>{upgraded ? "Show this at the entrance · for this person only" : "Show this at the registration desk · for this person only"}</p>
+              <div className="ticket-code">
+                <span>{upgraded ? "Invitation code · same as Core" : "Invitation code"}</span>
+                <strong>{person.code || "Issued after payment"}</strong>
+                <p>{upgraded ? "Show this at the entrance · for this person only" : "Show this at the registration desk · for this person only"}</p>
+              </div>
+              <div className="ticket-tear" aria-hidden="true"><span /><span /></div>
               <div className="ticket-meta">
                 <div><span>Dates</span><b>{dates}</b></div>
                 <div><span>Time</span><b>{SESSION_TIME}</b></div>
                 <div><span>Arrive by</span><b>{ARRIVE}</b></div>
               </div>
               <div className="ticket-venue">
-                <div><span>Venue</span><b>{VENUE_FULL}</b></div>
+                <div><span>Venue</span><b>Shadanga Kriya Centre, 5th Floor, NCM Society Building, Plot 434, Hanuman Nagar · near Krida Chowk</b></div>
                 <a href={MAP_URL}>Maps</a>
               </div>
             </div>
             <p className="bring"><strong>Please bring</strong> · Loose clothes · Water bottle · A small notebook · Phone on silent</p>
             {core && (
-              <p className="invite-upgrade"><strong>Want to continue after 4 mornings?</strong> Upgrade to the Comprehensive program for ₹12,000 + 18% GST, with your ₹{CORE_FEE} counted. <Link to={`/upgrade?c=${encodeURIComponent(person.code)}`}>Register and pay here</Link></p>
+              <p className="invite-upgrade"><strong>Want to continue after 4 mornings?</strong> Upgrade to the Comprehensive program for ₹{inr(upgradeTotal)} incl. GST, with your ₹{inr(CORE_FEE)} counted. <Link to={`/upgrade?c=${encodeURIComponent(person.code)}`}>Register and pay here</Link></p>
             )}
             <footer>
               <span lang="hi">अनुभूति पदं नित्यम्</span>
-              <small>Training for attention and awareness, not treatment. Going through a hard time? Call Tele-MANAS 14416 (free, 24×7). {COMPANY} · {booking.invoiceNo} · Questions: call or WhatsApp {SUPPORT_PHONE}</small>
+              <small>Training for attention and awareness, not treatment. Going through a hard time? Call Tele-MANAS 14416 (free, 24×7).<br />{COMPANY} · {booking.invoiceNo || "INV-XXXX"} · Questions: call or WhatsApp {SUPPORT_PHONE}</small>
             </footer>
           </article>
         );
