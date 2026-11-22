@@ -423,13 +423,13 @@ function Video({ playing, setPlaying }: { playing: boolean; setPlaying: (value: 
   return (
     <div className="video-card">
       <video
-        poster="/media/founder.jpg"
+        poster="/media/hero.png"
         playsInline
         controls={playing}
         onPlay={() => setPlaying(true)}
         aria-label="What is Shadanga Kriya, in the founder's own words"
       >
-        <source src="/media/founder.mp4" type="video/mp4" />
+        <source src="/media/hero.mp4" type="video/mp4" />
       </video>
       <button className={playing ? "play playing" : "play"} type="button" aria-label={playing ? "Pause video" : "Play video: what is Shadanga Kriya, in the founder's own words"} onClick={(event) => {
         const video = event.currentTarget.parentElement?.querySelector("video");
