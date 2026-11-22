@@ -65,7 +65,7 @@ function sheet(name: string, days: string[], rows: SheetRow[]) {
     row.whatsapp,
     row.age,
     row.programme,
-    ...days.map((day) => (row.attendance.includes(day) ? "P" : "")),
+    ...days.map((day) => (row.attendance.includes(`${day} late`) ? "L" : row.attendance.includes(day) ? "P" : "")),
     "",
   ]);
   return `<Worksheet ss:Name="${escapeXml(name)}">

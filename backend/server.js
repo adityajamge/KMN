@@ -87,7 +87,7 @@ app.patch("/api/admin/participants/:id/check-in", requireAdmin, asyncRoute(async
 }));
 
 app.patch("/api/admin/participants/:id/attendance", requireAdmin, asyncRoute(async (req, res) => {
-  res.json({ booking: await service.toggleAttendance(req.params.id, req.body?.day) });
+  res.json({ booking: await service.toggleAttendance(req.params.id, req.body?.day, req.body?.mark) });
 }));
 
 app.use((error, _req, res, _next) => {

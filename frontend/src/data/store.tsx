@@ -81,6 +81,7 @@ type StoreValue = {
   createHold: (plan: Plan, people: Registrant[]) => Promise<Booking | StoreError>;
   completePayment: (payment: PaymentConfirm) => Promise<PaymentResult | StoreError>;
   setCheckIn: (id: string, checkedIn: boolean) => Promise<void>;
+  setAttendance: (id: string, day: string, mark: "P" | "L" | "") => Promise<void>;
   toggleAttendance: (id: string, day: string) => Promise<void>;
 };
 
@@ -222,6 +223,16 @@ export function EventProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  const setAttendance = useCallback(async (id: string, day: string, mark: "P" | "L" | "") => {
+    try {
+      const data = await api.attendance(id, day, mark);
+      setBookings((current) => mergeBooking(current, data.booking));
+      setConnectionError("");
+    } catch (error) {
+      setConnectionError(message(error, "Attendance could not be saved."));
+    }
+  }, []);
+
   const toggleAttendance = useCallback(async (id: string, day: string) => {
     try {
       const data = await api.attendance(id, day);
@@ -268,11 +279,12 @@ export function EventProvider({ children }: { children: ReactNode }) {
     createHold,
     completePayment,
     setCheckIn,
+    setAttendance,
     toggleAttendance,
   }), [
     bookings, upgrades, connectionError, adminLoaded, seatsReady, seats,
     refreshAdmin, loadBooking, loadParticipant, loadUpgrade, lookupCode,
-    createHold, completePayment, setCheckIn, toggleAttendance,
+    createHold, completePayment, setCheckIn, setAttendance, toggleAttendance,
   ]);
 
   return <EventContext.Provider value={value}>{children}</EventContext.Provider>;

@@ -78,9 +78,9 @@ export const api = {
       method: "PATCH",
       body: JSON.stringify({ checkedIn }),
     }),
-  attendance: (id: string, day: string) =>
+  attendance: (id: string, day: string, mark?: "P" | "L" | "") =>
     request<{ booking: Booking }>(`/api/admin/participants/${id}/attendance`, {
       method: "PATCH",
-      body: JSON.stringify({ day }),
+      body: JSON.stringify({ day, mark }),
     }),
 };

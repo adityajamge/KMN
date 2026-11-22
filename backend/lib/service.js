@@ -483,14 +483,19 @@ async function setCheckIn(id, checkedIn) {
   return booking;
 }
 
-async function toggleAttendance(id, day) {
+async function toggleAttendance(id, day, mark) {
   assertUuid(id, "Participant");
-  if (!/^[\d A-Za-z-]{1,40}$/.test(String(day || ""))) throw new HttpError(400, "Choose a programme day.");
+  if (!/^[\d A-Za-z-]{1,24}$/.test(String(day || ""))) throw new HttpError(400, "Choose a programme day.");
+  const mode = mark == null ? null : String(mark);
+  if (mode != null && mode !== "P" && mode !== "L" && mode !== "") throw new HttpError(400, "Choose on time, late, or clear.");
   return withTx(async (client) => {
     const found = await client.query("SELECT booking_id, attendance FROM participants WHERE id = $1 FOR UPDATE", [id]);
     if (!found.rows[0]) throw new HttpError(404, "Participant not found.");
     const current = Array.isArray(found.rows[0].attendance) ? found.rows[0].attendance : [];
-    const next = current.includes(day) ? current.filter((item) => item !== day) : [...current, day];
+    const late = `${day} late`;
+    const without = current.filter((item) => item !== day && item !== late);
+    const present = current.some((item) => item === day || item === late);
+    const next = mode === "P" ? [...without, day] : mode === "L" ? [...without, late] : mode === "" ? without : (present ? without : [...without, day]);
     await client.query("UPDATE participants SET attendance = $2::jsonb WHERE id = $1", [id, JSON.stringify(next)]);
     const [booking] = await loadBookings(client, [found.rows[0].booking_id], true);
     return booking;
