@@ -1,13 +1,15 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { BusyButton } from "../components/BusyButton";
 import { Logo } from "../components/SiteChrome";
 import { Bone, SkeletonRows } from "../components/Skeleton";
 import { occupiesSeat, seatsUsed, useEvent } from "../data/store";
 import { CAPACITY, CORE_DAYS, CORE_DATES, FULL_DAYS, FULL_DATES, SESSION_TIME, UPGRADE_HOLD } from "../lib/constants";
+import { api } from "../lib/api";
 import { downloadAttendance } from "../lib/excel";
 import { formatWhen, inr } from "../lib/format";
 import type { Booking, Participant, Plan } from "../lib/types";
+import { AdminLock } from "./AdminLock";
 
 const NAV = [
   { to: "/admin", end: true, label: "Overview", icon: "M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" },
@@ -34,12 +36,43 @@ export function AdminLayout() {
   const location = useLocation();
   const page = PAGE[location.pathname] ?? PAGE["/admin"];
   const [menuOpen, setMenuOpen] = useState(false);
+  const [gate, setGate] = useState<"loading" | "setup" | "login" | "ok">("loading");
+  const [gateNotice, setGateNotice] = useState("");
+  const openDesk = useCallback(() => setGate("ok"), []);
+  const showLogin = useCallback(() => setGate("login"), []);
   useEffect(() => {
-    void refreshAdmin();
-    const timer = window.setInterval(() => { void refreshAdmin(); }, 20000);
+    let live = true;
+    api.adminSession()
+      .then((data) => { if (live) setGate(data.status); })
+      .catch((error) => {
+        if (!live) return;
+        setGateNotice(error instanceof Error ? error.message : "The event desk could not reach the server.");
+        setGate("login");
+      });
+    return () => { live = false; };
+  }, []);
+  useEffect(() => {
+    if (gate !== "ok") return;
+    const tick = () => { refreshAdmin().catch(() => setGate("login")); };
+    tick();
+    const timer = window.setInterval(tick, 20000);
     return () => window.clearInterval(timer);
-  }, [refreshAdmin]);
+  }, [gate, refreshAdmin]);
   useEffect(() => { setMenuOpen(false); }, [location.pathname]);
+  async function signOut() {
+    try { await api.adminLogout(); } catch { /* the sign-in screen is shown either way */ }
+    setGate("login");
+  }
+  if (gate !== "ok") {
+    return (
+      <AdminLock
+        gate={gate}
+        notice={gateNotice}
+        onReady={openDesk}
+        onNeedLogin={showLogin}
+      />
+    );
+  }
   return (
     <div className={menuOpen ? "admin menu-open" : "admin"}>
       <aside className="side">
@@ -60,6 +93,7 @@ export function AdminLayout() {
           <span>Nagpur desk</span>
           <strong>One centre</strong>
           <Link to="/">Public site</Link>
+          <button className="side-out" type="button" onClick={() => { void signOut(); }}>Sign out</button>
         </div>
       </aside>
       <div className="desk-main">

@@ -87,7 +87,7 @@ const OUT_FULL: [string, string, string][] = [
   ["Train the subconscious mind", "Daily repetition works on the part of you that runs below conscious thought, so calm and clarity begin to show up on their own, not only when you try.", "M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"],
   ["Break old habit patterns", "Catch the loops that keep repeating, the same anger, worry or procrastination, and choose a different response, again and again, until it becomes yours.", "M4 12h6M14 12h6M10 8l4 8M7 5l-3 7 3 7M17 5l3 7-3 7"],
   ["Emotional independence", "Feel steady from the inside, without needing anyone else’s approval, opinion or answers to know you’re okay.", "M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"],
-  ["Your personal blueprint for life", "Bring it all together into your own way of life: what you value, how you want to live, and a daily practice for the 90 days after, and beyond. Yours, not borrowed.", "M4 4h16v16H4zM4 9h16M9 9v11M12 13h5M12 16h3"],
+  ["Your personal blueprint for life", "Bring it all together into your own way of life: what you value, how you want to live, and a daily practice you keep. Yours, not borrowed.", "M4 4h16v16H4zM4 9h16M9 9v11M12 13h5M12 16h3"],
 ];
 
 const NOT_FOR = [
@@ -212,12 +212,12 @@ export function LandingStory({ plan, setPlan }: { plan: Plan; setPlan: (plan: Pl
           <div className="story-head">
             <div>
               <p className="eyebrow" style={{ color: "var(--primary)" }}>What you'll experience</p>
-              <h2 className="display">{isCore ? "What you take home after four mornings" : "What 120 days can build in you"}</h2>
+              <h2 className="display">{isCore ? "What you take home after four mornings" : "What 30 days can build in you"}</h2>
               <p>{isCore ? "Four mornings won’t change your whole life. They will show you, clearly and in your own body, what a trained mind feels like." : "With daily practice, these are the changes practitioners commonly describe. Your pace is your own."}</p>
             </div>
             <div className="mini-tabs" role="tablist" aria-label="Choose a plan">
               <button type="button" className={isCore ? "on" : ""} onClick={() => setPlan("core")}>Core · 4 days</button>
-              <button type="button" className={!isCore ? "on" : ""} onClick={() => setPlan("comprehensive")}>Comprehensive · 120 days</button>
+              <button type="button" className={!isCore ? "on" : ""} onClick={() => setPlan("comprehensive")}>Comprehensive · 30 days</button>
             </div>
           </div>
           <div className="outcome-grid">
@@ -268,28 +268,27 @@ export function LandingStory({ plan, setPlan }: { plan: Plan; setPlan: (plan: Pl
               </>
             ) : (
               <>
-                <h2 className="display">30 days build the practice. 90 days make it yours.</h2>
+                <h2 className="display">Thirty mornings. One practice.</h2>
                 <ul>
-                  <li><Mark size={22} width={1.6} stroke="var(--primary)"><path d="M3 18v-6a9 9 0 0 1 18 0v6M3 18a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2zM21 18a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2z" /></Mark><span>30 guided mornings at the centre, then 90 days of guided self-practice with the Shadanga Kriya app</span></li>
+                  <li><Mark size={22} width={1.6} stroke="var(--primary)"><path d="M3 18v-6a9 9 0 0 1 18 0v6M3 18a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2zM21 18a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2z" /></Mark><span>30 guided mornings at the centre, 24 Nov to 23 Dec, with the Shadanga Kriya app</span></li>
                   <li><Mark size={22} width={1.6} stroke="var(--primary)"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1 1 21 12z" /></Mark><span>Weekend sessions at the centre for doubt-clearing and community gathering</span></li>
                   <li><Mark size={22} width={1.6} stroke="var(--primary)"><circle cx="9" cy="8" r="3" /><circle cx="17" cy="9" r="2.5" /><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.2c2.9.1 6 1.6 6 5.8" /></Mark><span>A weekly progress check by the team</span></li>
                 </ul>
-                <p><strong>Why 120 days:</strong> a new habit takes about 66 days on average to feel automatic (Lally et al., 2009), so 30 days alone isn't enough.</p>
+                <p>Core is the first four mornings, 24–27 Nov. Comprehensive is the full 30 mornings, through 23 Dec.</p>
               </>
             )}
           </div>
           <div className="day-ring">
-            <svg viewBox="-8 -10 368 348" role="img" aria-label="120 days: 30 guided mornings, then 90 days of practice">
+            <svg viewBox="-8 -10 368 348" role="img" aria-label="30 days: 4 Core mornings, then 26 more guided mornings">
               <circle cx="160" cy="160" r="130" fill="none" stroke="var(--lilac)" strokeWidth="22" />
-              <circle cx="160" cy="160" r="130" fill="none" stroke="var(--primary)" strokeWidth="22" strokeDasharray="204.2 816.8" transform="rotate(-90 160 160)" />
-              <circle cx="160" cy="160" r="130" fill="none" stroke="var(--night)" strokeWidth="22" strokeDasharray="27.2 816.8" transform="rotate(-90 160 160)" />
+              <circle cx="160" cy="160" r="130" fill="none" stroke="var(--primary)" strokeWidth="22" />
+              <circle cx="160" cy="160" r="130" fill="none" stroke="var(--night)" strokeWidth="22" strokeDasharray="108.9 707.9" transform="rotate(-90 160 160)" />
               <circle cx="160" cy="160" r="70" fill="#FFFFFF" />
               <circle cx="160" cy="160" r="9" fill="none" stroke="var(--wordmark)" strokeWidth="2" />
-              <text x="160" y="140" textAnchor="middle" fontFamily="Satisfy SK, Georgia, serif" fontSize="36" fill="var(--ink)">120</text>
+              <text x="160" y="140" textAnchor="middle" fontFamily="Satisfy SK, Georgia, serif" fontSize="36" fill="var(--ink)">30</text>
               <text x="160" y="190" textAnchor="middle" fontFamily="Objective, sans-serif" fontSize="11" fontWeight="500" letterSpacing="2" fill="var(--primary)">DAYS</text>
               <text x="40" y="22" fontFamily="Objective, sans-serif" fontSize="11" fontWeight="500" fill="var(--ink)">● 4 · Core</text>
-              <text x="230" y="22" fontFamily="Objective, sans-serif" fontSize="11" fontWeight="500" fill="var(--primary)">● 30 · guided</text>
-              <text x="210" y="312" fontFamily="Objective, sans-serif" fontSize="11" fontWeight="500" fill="var(--ink)">● 90 · practice</text>
+              <text x="210" y="22" fontFamily="Objective, sans-serif" fontSize="11" fontWeight="500" fill="var(--primary)">● 30 · mornings</text>
             </svg>
           </div>
         </div>

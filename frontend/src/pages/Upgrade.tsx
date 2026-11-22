@@ -131,13 +131,13 @@ export default function Upgrade() {
         <div className="narrow stack">
           <p className="eyebrow">After your 4 mornings</p>
           <h1 className="display">You’ve felt the shift. Now make it yours.</h1>
-          <p>Continue into the full 120-day Comprehensive program, in the same hall and the same morning slot. Your ₹{inr(CORE_FEE)} Core fee is already counted.</p>
+          <p>Continue into the full 30-day Comprehensive program, in the same hall and the same morning slot. Your ₹{inr(CORE_FEE)} Core fee is already counted.</p>
           <div className="upgrade-price">
-            <span className="eyebrow">Comprehensive · 120 days</span>
+            <span className="eyebrow">Comprehensive · 30 days</span>
             <span className="strike num">₹{inr(FULL_FEE)}</span>
             <strong className="num">₹{inr(FULL_FEE - CORE_FEE)} <span>+ 18% GST per person</span></strong>
             <span>Your ₹{inr(CORE_FEE)} Core fee comes off</span>
-            <span>Continues from Day 5, {UPGRADE_DATES}, then 90 days of practice</span>
+            <span>Continues from Day 5, {UPGRADE_DATES}</span>
             <span>{SESSION_TIME}, same batch · arrive {ARRIVE}</span>
             <span>{VENUE_FULL}</span>
             <strong>Your seat is kept until {UPGRADE_HOLD}.</strong>
@@ -147,10 +147,10 @@ export default function Upgrade() {
       </section>
       <section className="section-fresh">
         <div className="narrow stack">
-          <p className="eyebrow" style={{ color: "var(--primary)" }}>What the next 116 days add</p>
+          <p className="eyebrow" style={{ color: "var(--primary)" }}>What the next 26 mornings add</p>
           <h2 className="display" style={{ fontSize: 32 }}>From a good start to a trained mind</h2>
           <ul className="upgrade-points">
-            {FULL_POINTS.map((point) => <li key={point}>{point === "30 mornings at the centre, then 90 days of guided self-practice with the Shadanga Kriya app" ? "26 more mornings at the centre, then 90 days of guided self-practice with the Shadanga Kriya app" : point}</li>)}
+            {FULL_POINTS.map((point) => <li key={point}>{point === "30 mornings at the centre, 24 Nov to 23 Dec, with the Shadanga Kriya app" ? "26 more mornings at the centre, through 23 Dec, with the Shadanga Kriya app" : point}</li>)}
           </ul>
           <p className="hint">Training, not treatment. Results vary with daily practice.</p>
         </div>

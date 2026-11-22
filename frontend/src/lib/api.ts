@@ -40,11 +40,13 @@ export type PaymentResult =
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const headers = new Headers(options.headers);
   if (options.body) headers.set("Content-Type", "application/json");
-  const adminKey = import.meta.env.VITE_ADMIN_KEY;
-  if (adminKey && path.startsWith("/api/admin")) headers.set("x-admin-key", adminKey);
   let response: Response;
   try {
-    response = await fetch(`${base}${path}`, { ...options, headers });
+    response = await fetch(`${base}${path}`, {
+      ...options,
+      headers,
+      credentials: path.startsWith("/api/admin") ? "include" : "same-origin",
+    });
   } catch {
     throw new ApiError(0, "The registration server is not running.");
   }
@@ -72,6 +74,11 @@ export const api = {
     request<PaymentOrder>("/api/payments/order", { method: "POST", body: JSON.stringify(body) }),
   confirmPayment: (body: PaymentConfirm) =>
     request<PaymentResult>("/api/payments/confirm", { method: "POST", body: JSON.stringify(body) }),
+  adminSession: () => request<{ status: "setup" | "login" | "ok" }>("/api/admin/session"),
+  adminSetupQr: () => request<{ qr: string }>("/api/admin/setup"),
+  adminSetup: (code: string) => request<{ ok: true }>("/api/admin/setup", { method: "POST", body: JSON.stringify({ code }) }),
+  adminLogin: (code: string) => request<{ ok: true }>("/api/admin/login", { method: "POST", body: JSON.stringify({ code }) }),
+  adminLogout: () => request<{ ok: true }>("/api/admin/logout", { method: "POST" }),
   adminState: () => request<{ bookings: Booking[]; upgrades: UpgradeRecord[] }>("/api/admin/state"),
   checkIn: (id: string, checkedIn: boolean) =>
     request<{ booking: Booking }>(`/api/admin/participants/${id}/check-in`, {

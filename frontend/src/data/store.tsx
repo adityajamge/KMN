@@ -181,6 +181,7 @@ export function EventProvider({ children }: { children: ReactNode }) {
       setAdminLoaded(true);
       setConnectionError("");
     } catch (error) {
+      if (error instanceof ApiError && error.status === 401) throw error;
       setConnectionError(message(error, "The event desk could not reach the server."));
     }
   }, []);

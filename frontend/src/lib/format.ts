@@ -67,10 +67,10 @@ export function firstName(name: string) {
 
 export function planLabel(plan: Plan, upgraded = false) {
   if (upgraded) return "Comprehensive · from Day 5";
-  return plan === "core" ? "Core · 4 mornings" : "Comprehensive · 30 mornings + 90 days";
+  return plan === "core" ? "Core · 4 mornings" : "Comprehensive · 30 mornings";
 }
 
 export function planDates(plan: Plan, upgraded = false) {
-  if (upgraded) return "28 Nov – 23 Dec (then 90 days of guided self-practice)";
-  return plan === "core" ? "24 – 27 Nov" : "24 Nov – 23 Dec (then 90 days of self-practice)";
+  if (upgraded) return "28 Nov – 23 Dec";
+  return plan === "core" ? "24 – 27 Nov" : "24 Nov – 23 Dec";
 }

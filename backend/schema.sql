@@ -87,6 +87,14 @@ CREATE TABLE IF NOT EXISTS payment_orders (
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS admin_auth (
+  id INTEGER PRIMARY KEY,
+  totp_secret TEXT NOT NULL,
+  session_key TEXT NOT NULL,
+  confirmed BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 CREATE TABLE IF NOT EXISTS whatsapp_sends (
   id UUID PRIMARY KEY,
   participant_id UUID REFERENCES participants(id) ON DELETE CASCADE,

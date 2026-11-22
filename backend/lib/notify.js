@@ -119,7 +119,7 @@ async function upgrade(result) {
     await deliver(`upgrade:${person.id}`, person.id, person.whatsapp, TEMPLATES.upgrade, [
       firstName(person.name),
       person.code,
-      "28 Nov–23 Dec, then 90 days, 6:00–8:00 AM, same hall",
+      "28 Nov–23 Dec, 6:00–8:00 AM, same hall",
     ]);
   }
 }

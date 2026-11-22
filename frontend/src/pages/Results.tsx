@@ -87,7 +87,7 @@ export function PaymentFailed() {
           {booking && (
             <div className="pay-summary">
               <span className="pay-kicker">Your booking</span>
-              <div className="pay-split"><span>{booking.plan === "core" ? "Core · 4 days" : "Comprehensive · 30 days + 90 days with the app"}</span><span>{count === 1 ? "1 person" : `${count} people`}</span></div>
+              <div className="pay-split"><span>{booking.plan === "core" ? "Core · 4 days" : "Comprehensive · 30 days"}</span><span>{count === 1 ? "1 person" : `${count} people`}</span></div>
               <p>{planDates(booking.plan)} · {SESSION_TIME}</p>
               <div className="pay-due"><span>To pay</span><strong>₹{inr(booking.total)} <span>incl. GST</span></strong></div>
             </div>
@@ -135,7 +135,7 @@ export function UpgradeConfirmed() {
               <div className="split"><span className="eyebrow">Your invitation</span><span>{upgrade.invoiceNo}</span></div>
               <h2 className="display" style={{ fontSize: 32, color: "#fff", marginTop: 12 }}>Neuro Mastery Program</h2>
               <p style={{ color: "var(--lilac)" }}>Comprehensive · from Day 5 · {count === 1 ? "1 person" : `${count} people`}</p>
-              <div className="meta"><span>{UPGRADE_DATES} (then 90 days of guided self-practice)</span></div>
+              <div className="meta"><span>{UPGRADE_DATES}</span></div>
               <div className="meta"><span>{SESSION_TIME}</span></div>
               <div className="meta"><span>{VENUE_SHORT}</span><a href={MAP_URL} target="_blank" rel="noopener noreferrer" style={{ color: "var(--lilac)" }}>Maps</a></div>
               <ul className="people">

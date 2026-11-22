@@ -69,7 +69,7 @@ export const FULL_POINTS = [
   "Going deeper, from alpha toward theta, across all six dimensions",
   "Steady focus and attention, sharper senses, and easier recall of what you study and learn",
   "Break old patterns, build emotional independence and your personal blueprint",
-  "30 mornings at the centre, then 90 days of guided self-practice with the Shadanga Kriya app",
+  "30 mornings at the centre, 24 Nov to 23 Dec, with the Shadanga Kriya app",
   "Weekend sessions for doubt-clearing and community",
   "Weekly progress check by the team",
 ];

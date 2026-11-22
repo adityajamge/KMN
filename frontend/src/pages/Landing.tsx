@@ -203,22 +203,22 @@ export default function Landing() {
                 <span className="num">₹{inr(CORE_FEE)}<span className="gst-bit">incl. GST</span></span>
               </button>
               <button type="button" role="tab" aria-selected={!isCore} className={!isCore ? "on" : ""} onClick={() => setPlan("comprehensive")}>
-                <strong>Comprehensive · 120 days</strong>
+                <strong>Comprehensive · 30 days</strong>
                 <span className="num">₹{inr(FULL_FEE)}<span className="gst-bit">+ 18% GST</span><span className="emi"><span className="pipe">|</span>EMI opt. Avl.</span></span>
               </button>
             </div>
-            <p className="plan-blurb">{isCore ? `Start here. Four mornings for ₹${inr(CORE_FEE)}, and you’ll know from your own experience whether this is for you.` : "The complete transformation: 30 guided mornings, then 90 days of guided practice with the Shadanga Kriya app until it becomes yours."}</p>
+            <p className="plan-blurb">{isCore ? `Start here. Four mornings for ₹${inr(CORE_FEE)}, and you’ll know from your own experience whether this is for you.` : "The complete training: 30 guided mornings at the centre, from 24 Nov to 23 Dec."}</p>
             <div className="info-grid">
               <Info label="Dates" value={dates} icon={<Mark stroke="var(--lilac)"><rect x="3.5" y="5" width="17" height="15" rx="3" /><path d="M3.5 10h17M8 3v4M16 3v4" /></Mark>} />
               <Info label="Every morning" value={SESSION_TIME} icon={<Mark stroke="var(--lilac)"><path d="M3 17h18M6 17a6 6 0 0 1 12 0M12 5v2M5.6 8.6l1.4 1.4M18.4 8.6L17 10M8 21h8" /></Mark>} />
-              <Info label="Duration" value={isCore ? "4 mornings" : "30 days + 90 days"} icon={<Mark stroke="var(--lilac)"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></Mark>} />
+              <Info label="Duration" value={isCore ? "4 mornings" : "30 mornings"} icon={<Mark stroke="var(--lilac)"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></Mark>} />
               <Info label="Venue" value={VENUE_SHORT} icon={<Mark stroke="var(--lilac)"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.3" /></Mark>} />
               <Info label="Language" value={LANGUAGE} icon={<Mark stroke="var(--lilac)"><path d="M4 5h10M4 9h7M9 5c0 6-2.5 10-5 12M6.5 11c1.5 2 3.5 3.5 6 4.5M13 21l3.5-9 3.5 9M14.2 18h4.6" /></Mark>} />
               <Info label="Fee" value={<span className="num">₹{inr(price)}<span className="gst-bit">{feeNote}</span></span>} icon={<Mark stroke="var(--lilac)"><path d="M7 5h10M7 9h10M7 5c4 0 6 1.5 6 4s-2 4-6 4l7 6" /></Mark>} />
             </div>
             <div className="cta-row">
               <a className="btn btn-primary hero-cta" href="#choose">{isCore ? "Book my 4 mornings" : "Join the Comprehensive program"} · <GstNote amount={inr(price)} gst={!isCore} /></a>
-              <p>{isCore ? "Book in about a minute and pay securely. Under 18? A parent books for you." : "30 guided mornings, then 90 days of guided practice with the Shadanga Kriya app until it becomes yours. EMI available on selected banks."}</p>
+              <p>{isCore ? "Book in about a minute and pay securely. Under 18? A parent books for you." : "30 guided mornings at the centre, 24 Nov to 23 Dec. EMI available on selected banks."}</p>
             </div>
           </div>
           <Video playing={playing} setPlaying={setPlaying} />
@@ -269,13 +269,13 @@ export default function Landing() {
           </div>
           <div className="plan-grid">
             <PlanCard title="Core" selected={isCore} onSelect={() => setPlan("core")} badge="Recommended first step" detail={`4 mornings · ${SESSION_TIME}`} price={CORE_FEE} seats={seatLine(seatsReady, coreLeft)} points={CORE_POINTS} />
-            <PlanCard title="Comprehensive" selected={!isCore} onSelect={() => setPlan("comprehensive")} badge="The complete training" dark detail="30 mornings + 90 days of guided practice · 120 days" price={FULL_FEE} gst seats={seatLine(seatsReady, fullLeft)} points={FULL_POINTS} />
+            <PlanCard title="Comprehensive" selected={!isCore} onSelect={() => setPlan("comprehensive")} badge="The complete training" dark detail="30 mornings · 24 Nov – 23 Dec" price={FULL_FEE} gst seats={seatLine(seatsReady, fullLeft)} points={FULL_POINTS} />
           </div>
 
           <form className="form-card" onSubmit={submit}>
             <div>
               <span className="hint">Step 1 of 2 · about a minute</span>
-              <h3>Book: {isCore ? "Core · 4 days" : "Comprehensive · 120 days"} <span className="fee-line"><span className="num">· ₹{inr(price)}<span className="gst-bit">{feeNote}</span></span> per person</span></h3>
+              <h3>Book: {isCore ? "Core · 4 days" : "Comprehensive · 30 days"} <span className="fee-line"><span className="num">· ₹{inr(price)}<span className="gst-bit">{feeNote}</span></span> per person</span></h3>
             </div>
             <span className="tag">{headCount === 1 ? "Booking for 1 person" : `Booking for ${headCount} people`}</span>
             <strong>Person 1 · You</strong>
@@ -405,8 +405,8 @@ export default function Landing() {
       <div className="sticky">
         <div className="wrap">
           <div>
-            <div>{isCore ? "Core · 4 days" : "Comprehensive · 120 days"} · <span className="num">₹{inr(price)}<span className="gst-bit">{feeNote}</span></span></div>
-            <small>{isCore ? "4 mornings" : "30 days + 90 days"} · {SESSION_TIME} · {dates}</small>
+            <div>{isCore ? "Core · 4 days" : "Comprehensive · 30 days"} · <span className="num">₹{inr(price)}<span className="gst-bit">{feeNote}</span></span></div>
+            <small>{isCore ? "4 mornings" : "30 mornings"} · {SESSION_TIME} · {dates}</small>
           </div>
           <a className="btn btn-primary" href="#choose">Book seat</a>
         </div>
