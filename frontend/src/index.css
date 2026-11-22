@@ -589,14 +589,20 @@ h1, h2, h3, p { margin: 0; }
 .cell.na { background: transparent; }
 .cell.focus { box-shadow: 0 0 0 2px #7B3FF6; }
 .legend, .legend-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-size: 12px; color: #4A4458; padding: 0 22px 16px; }
-.legend .cell, .legend-row .cell { width: 14px; height: 14px; }
-.att-table { min-width: 1240px; }
-.att-row { grid-template-columns: 190px repeat(30, 26px); column-gap: 4px; padding: 0 16px; min-height: 52px; }
-.att-row > span:not(.stick) { display: flex; justify-content: center; }
-.att-row .stick { position: sticky; left: 0; background: #fff; z-index: 1; text-align: left; display: block; }
+.legend .cell, .legend-row .cell { width: 14px; height: 14px; flex: none; }
+.legend-row { flex-wrap: nowrap; gap: 22px; padding: 16px 22px; font-size: 13px; line-height: 1; }
+.legend-item { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.legend-note { margin-left: auto; color: #5C5670; white-space: nowrap; }
+.att-table { min-width: 1480px; }
+.att-row { grid-template-columns: 190px repeat(30, 40px); column-gap: 0; padding: 0; min-height: 52px; align-items: stretch; }
+.att-row.head { min-height: 56px; align-items: stretch; }
+.att-row > span:not(.stick) { display: flex; justify-content: center; align-items: center; border-left: 1px solid #E6DDFB; }
+.att-row .stick { position: sticky; left: 0; background: #fff; z-index: 1; text-align: left; display: flex; flex-direction: column; justify-content: center; padding: 8px 14px; box-shadow: 1px 0 0 #E6DDFB; }
 .att-row.head .stick { background: #FBF9FF; }
-.day-h { text-align: center; font-family: Poppins, sans-serif; letter-spacing: 0; text-transform: none; }
-.day-h.on { color: #4A1FB8; }
+.day-h { display: flex; flex-direction: column; align-items: center; gap: 1px; text-align: center; font-family: Poppins, sans-serif; letter-spacing: 0; text-transform: none; line-height: 1.1; }
+.att-row.head .day-h { letter-spacing: 0; text-transform: none; }
+.day-h b { font-weight: 500; font-size: 12px; }
+.day-h small { font-size: 10px; color: #5C5670; font-weight: 400; letter-spacing: 0; text-transform: none; }
 .counter { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; color: #4A4458; }
 .counter .big { font-family: Poppins, sans-serif; font-weight: 500; font-size: 40px; line-height: 1; color: #0A0A0A; }
 .counter .bar { flex-basis: 100%; }
@@ -673,6 +679,8 @@ h1, h2, h3, p { margin: 0; }
   table.data td.actions::before { content: none; }
   .admin .shortcuts .btn, .admin .desk-narrow .btn, .admin .actions .btn { width: 100%; white-space: normal; text-align: center; }
   .admin .daybar .btn { width: auto; flex: none; }
+  .legend-row { flex-wrap: wrap; }
+  .legend-note { margin-left: 0; }
 }
 
 @media (max-width: 380px) {

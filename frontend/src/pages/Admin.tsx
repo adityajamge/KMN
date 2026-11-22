@@ -4,7 +4,7 @@ import { BusyButton } from "../components/BusyButton";
 import { Logo } from "../components/SiteChrome";
 import { Bone, SkeletonRows } from "../components/Skeleton";
 import { occupiesSeat, seatsUsed, useEvent } from "../data/store";
-import { CAPACITY, CORE_DAYS, CORE_DATES, FULL_DAYS, FULL_DATES, SESSION_TIME, UPGRADE_HOLD, VENUE_SHORT } from "../lib/constants";
+import { CAPACITY, CORE_DAYS, CORE_DATES, FULL_DAYS, FULL_DATES, SESSION_TIME, UPGRADE_HOLD } from "../lib/constants";
 import { downloadAttendance } from "../lib/excel";
 import { formatWhen, inr } from "../lib/format";
 import type { Booking, Participant, Plan } from "../lib/types";
@@ -23,7 +23,7 @@ const PAGE: Record<string, { title: string; sub: string }> = {
   "/admin": { title: "Overview", sub: `Nagpur · ${CORE_DATES} · ${SESSION_TIME}` },
   "/admin/check-in": { title: "Check-in", sub: "Slide to the morning. Everyone paid for that day is listed. Check in marks their attendance for that day." },
   "/admin/attendance": { title: "Attendance", sub: "A view of all 30 mornings. Green is present, yellow is late, silver is not yet. Marks are saved from Check-in." },
-  "/admin/participants": { title: "Registrations", sub: "Every person registered for this Nagpur batch, searchable in seconds." },
+  "/admin/participants": { title: "Registrations", sub: "Name, mobile, code, programme, and whether they have paid." },
   "/admin/bookings": { title: "Bookings", sub: "Paid and unpaid bookings for this centre." },
   "/admin/upgrades": { title: "Upgrades", sub: `Core to Comprehensive. A seat stays held until ${UPGRADE_HOLD}.` },
   "/admin/revenue": { title: "Revenue", sub: "Collected for this Nagpur batch. GST is included in the totals." },
@@ -73,8 +73,6 @@ export function AdminLayout() {
               <span className="crumb-sep" aria-hidden="true">›</span>
               <span className="crumb-here">{page.title}</span>
             </nav>
-            <p className="batch-line">Core {CORE_DATES} · Comprehensive {FULL_DATES} · {SESSION_TIME}</p>
-            <p className="site-line"><span className="live-dot" aria-hidden="true" />One centre · {VENUE_SHORT}</p>
           </div>
         </header>
         {menuOpen && <button className="desk-shade" type="button" aria-label="Close menu" onClick={() => setMenuOpen(false)} />}
@@ -124,47 +122,6 @@ function dayLine(index: number) {
   date.setDate(start.getDate() + index);
   const when = date.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
   return `${when} · ${index < CORE_DAYS.length ? "Core morning" : "Comprehensive morning"}`;
-}
-
-function DayBar({ index, onChange }: { index: number; onChange: (next: number) => void }) {
-  const today = todayIndex();
-  return (
-    <div className="day-slider">
-      <div className="daybar">
-        <button type="button" className="btn btn-ghost sm" aria-label="Previous day" disabled={index <= 0} onClick={() => onChange(index - 1)}>‹</button>
-        <div>
-          <strong>Day {index + 1} of {DAYS.length}</strong>
-          <span>{dayLine(index)}</span>
-        </div>
-        <button type="button" className="btn btn-ghost sm" aria-label="Next day" disabled={index >= DAYS.length - 1} onClick={() => onChange(index + 1)}>›</button>
-        <button type="button" className="btn btn-soft sm" onClick={() => onChange(today >= 0 ? today : 0)}>{today >= 0 ? "Today" : "Day 1"}</button>
-      </div>
-      <label className="day-range">
-        <span className="sr">Choose a programme day</span>
-        <input type="range" min={0} max={DAYS.length - 1} step={1} value={index} aria-valuemin={1} aria-valuemax={DAYS.length} aria-valuenow={index + 1} aria-valuetext={`Day ${index + 1}, ${DAYS[index]}`} onChange={(event) => onChange(Number(event.target.value))} />
-      </label>
-      <div className="day-scale"><span>Day 1</span><span>Day {DAYS.length}</span></div>
-    </div>
-  );
-}
-
-function attendanceStats(participant: Participant) {
-  const today = todayIndex();
-  let possible = 0;
-  let present = 0;
-  let streak = 0;
-  let counting = true;
-  for (let index = today - 1; index >= 0; index -= 1) {
-    if (!onProgramme(participant, index)) continue;
-    possible += 1;
-    const mark = markOf(participant.attendance, DAYS[index]);
-    if (mark) present += 1;
-    if (counting) {
-      if (mark) streak += 1;
-      else counting = false;
-    }
-  }
-  return { pct: possible ? Math.round((present / possible) * 100) : 0, streak };
 }
 
 function cellKind(_index: number, mark: "P" | "L" | "", applies: boolean) {
@@ -241,94 +198,42 @@ export function BookingsPage() {
 
 export function ParticipantsPage() {
   const { bookings, adminLoaded } = useEvent();
-  const [query, setQuery] = useState("");
-  const [programme, setProgramme] = useState("all");
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const needle = query.trim().toLowerCase();
-  const rows = peopleOf(bookings).filter(({ participant }) => {
-    if (programme === "core" && (participant.programme !== "core" || participant.upgraded)) return false;
-    if (programme === "comprehensive" && (participant.programme !== "comprehensive" || participant.upgraded)) return false;
-    if (programme === "upgraded" && !participant.upgraded) return false;
-    if (!needle) return true;
-    const haystack = `${participant.name} ${participant.code} ${participant.whatsapp}`.toLowerCase();
-    return haystack.includes(needle) || participant.code.toLowerCase().endsWith(needle);
-  });
-  const selected = rows.find(({ participant }) => participant.id === selectedId) ?? null;
+  const rows = peopleOf(bookings);
   return (
     <div className="stack">
-      <div className="toolbar">
-        <p className="hint">One row per person, with their own code and attendance.</p>
-        <label className="finder">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C5670" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="M16 16l4 4" /></svg>
-          <span className="sr">Search</span>
-          <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Code, last 4, name or WhatsApp" />
-        </label>
-      </div>
-      <label className="sel">Programme
-        <select value={programme} onChange={(event) => setProgramme(event.target.value)}>
-          <option value="all">All programmes</option>
-          <option value="core">Core</option>
-          <option value="comprehensive">Comprehensive</option>
-          <option value="upgraded">Upgraded</option>
-        </select>
-      </label>
-      <div className="desk-split">
-        <section className="block flush">
-          <div className="card-h"><h2>{adminLoaded ? `${rows.length} ${rows.length === 1 ? "person" : "people"}` : "Registrations"}</h2></div>
-          {!adminLoaded ? <SkeletonRows columns={["Name", "Code", "Programme", "WhatsApp", "Attendance", "Flags"]} /> : (
-            <div className="table-wrap">
-              <div className="reg-table" role="table">
-                <div className="reg-row head" role="row"><span>Name</span><span>Code</span><span>Programme</span><span>WhatsApp</span><span>Attendance</span><span>Flags</span></div>
+      <section className="block flush">
+        <div className="card-h"><h2>{adminLoaded ? `${rows.length} ${rows.length === 1 ? "person" : "people"}` : "Registrations"}</h2></div>
+        {!adminLoaded ? <SkeletonRows columns={["Name", "Mobile", "Code", "Programme", "Payment"]} /> : (
+          <div className="table-wrap">
+            <table className="data">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Mobile</th>
+                  <th>Code</th>
+                  <th>Programme</th>
+                  <th>Payment</th>
+                </tr>
+              </thead>
+              <tbody>
                 {rows.map(({ booking, participant }) => {
-                  const stats = attendanceStats(participant);
-                  const label = participant.upgraded ? "Upgraded" : participant.programme === "core" ? "Core" : "Comprehensive";
+                  const programme = participant.upgraded || participant.programme === "comprehensive" ? "Comprehensive" : "Core";
                   return (
-                    <div className={participant.id === selectedId ? "reg-row on" : "reg-row"} role="row" key={participant.id}>
-                      <span><button type="button" className="link" onClick={() => setSelectedId(participant.id)}>{participant.name}</button>{participant.age > 0 && participant.age < 18 && <> <span className="chip info">Under 18</span></>}</span>
-                      <span className="mono">{participant.code || "After payment"}</span>
-                      <span>{label}<br /><Status booking={booking} /></span>
-                      <span className="mono">{participant.whatsapp}</span>
-                      <span>{stats.pct}%</span>
-                      <span className="flags">{participant.healthNote && <span className="chip warn">Health</span>}{participant.checkedIn && <span className="chip ok">Checked in</span>}</span>
-                    </div>
+                    <tr key={participant.id}>
+                      <td data-label="Name">{participant.name}</td>
+                      <td data-label="Mobile" className="mono">{participant.whatsapp}</td>
+                      <td data-label="Code" className="mono">{participant.code || "—"}</td>
+                      <td data-label="Programme">{programme}</td>
+                      <td data-label="Payment">{booking.status === "paid" ? <span className="badge-paid">Paid</span> : <span className="badge-unpaid">Unpaid</span>}</td>
+                    </tr>
                   );
                 })}
-                {rows.length === 0 && <p className="empty">No one matches. Clear a filter, or search by the last 4 characters of the code.</p>}
-              </div>
-            </div>
-          )}
-        </section>
-        {selected && (
-          <aside className="block panel" aria-label="Participant details">
-            <div className="card-h">
-              <div>
-                <h2>{selected.participant.name}</h2>
-                <span className="mono hint">{selected.participant.code}</span>
-              </div>
-              <button type="button" className="btn btn-ghost sm" onClick={() => setSelectedId(null)}>Close</button>
-            </div>
-            <div className="kv">
-              <span>Programme</span><span>{selected.participant.upgraded ? "Upgraded to Comprehensive" : selected.participant.programme === "core" ? "Core" : "Comprehensive"}</span>
-              <span>Age</span><span>{selected.participant.age || "—"} · {selected.participant.role || "—"}</span>
-              <span>WhatsApp</span><span className="mono">{selected.participant.whatsapp}</span>
-              <span>City</span><span>{selected.participant.city}{selected.participant.area ? ` · ${selected.participant.area}` : ""}</span>
-              <span>Checked in</span><span>{selected.participant.checkedIn ? "Yes" : "Not yet"}</span>
-              {selected.participant.guardianName && <><span>Guardian</span><span>{selected.participant.guardianName} · {selected.participant.guardianPhone}</span></>}
-            </div>
-            <div className="sub-card">
-              <span className="lbl">Attendance · {attendanceStats(selected.participant).pct}% · streak {attendanceStats(selected.participant).streak}</span>
-              <div className="strip" aria-label="Attendance by day">
-                {DAYS.map((day, index) => {
-                  const mark = markOf(selected.participant.attendance, day);
-                  const kind = cellKind(index, mark, onProgramme(selected.participant, index));
-                  return <span key={day} className={`cell ${kind}`} title={`${day}${kind === "P" ? " · present" : kind === "L" ? " · late" : kind === "F" ? " · not yet" : ""}`} />;
-                })}
-              </div>
-              <span className="legend"><span className="cell P" />Present <span className="cell L" />Late <span className="cell F" />Not yet</span>
-            </div>
-          </aside>
+                {rows.length === 0 && <tr><td className="empty" colSpan={5}>No one is registered.</td></tr>}
+              </tbody>
+            </table>
+          </div>
         )}
-      </div>
+      </section>
     </div>
   );
 }
@@ -378,7 +283,14 @@ export function CheckInPage() {
   return (
     <div className="stack">
       <section className="block">
-        <DayBar index={dayIndex} onChange={setDayIndex} />
+        <div className="daybar">
+          <button type="button" className="btn btn-ghost sm" aria-label="Previous day" disabled={dayIndex <= 0} onClick={() => setDayIndex(dayIndex - 1)}>‹</button>
+          <div>
+            <strong>Day {dayIndex + 1} of {DAYS.length}</strong>
+            <span>{dayLine(dayIndex)}</span>
+          </div>
+          <button type="button" className="btn btn-ghost sm" aria-label="Next day" disabled={dayIndex >= DAYS.length - 1} onClick={() => setDayIndex(dayIndex + 1)}>›</button>
+        </div>
         <div className="counter">
           <span className="big">{adminLoaded ? checkedCount : "–"}</span>
           <span>of {adminLoaded ? dayPeople.length : "–"} checked in · Day {dayIndex + 1}</span>
@@ -386,7 +298,6 @@ export function CheckInPage() {
             <span className="chip ontime">On time {adminLoaded ? onTime : "–"}</span>
             <span className="chip late">Late {adminLoaded ? late : "–"}</span>
           </span>
-          <div className="bar" aria-hidden="true"><span style={{ width: `${dayPeople.length ? (checkedCount / dayPeople.length) * 100 : 0}%` }} /></div>
         </div>
       </section>
       <div className="toolbar">
@@ -453,7 +364,6 @@ export function CheckInPage() {
 
 export function AttendancePage() {
   const { bookings, adminLoaded } = useEvent();
-  const [dayIndex, setDayIndex] = useState(0);
   const rows = peopleOf(bookings).filter(({ booking }) => booking.status === "paid");
   return (
     <div className="stack">
@@ -461,7 +371,6 @@ export function AttendancePage() {
         <p className="hint">Days 1–4 are Core. Days 5–30 are Comprehensive. This grid shows the marks saved from Check-in.</p>
         <button className="btn btn-primary sm" type="button" disabled={!adminLoaded} onClick={() => downloadAttendance(bookings)}>Download Excel</button>
       </div>
-      <DayBar index={dayIndex} onChange={setDayIndex} />
       <p className="hint">Green is a present mark saved for that morning. Yellow is a late mark. Silver means that morning has no mark yet.</p>
       <section className="block flush">
         {!adminLoaded ? <SkeletonRows columns={["Person"]} /> : (
@@ -469,7 +378,10 @@ export function AttendancePage() {
             <div className="att-table">
               <div className="att-row head">
                 <span className="stick">Person</span>
-                {DAYS.map((day, index) => <span key={day} className={index === dayIndex ? "day-h on" : "day-h"} title={day}>{index + 1}</span>)}
+                {DAYS.map((day) => {
+                  const [date, month] = day.split(" ");
+                  return <span key={day} className="day-h" title={day}><b>{date}</b><small>{month}</small></span>;
+                })}
               </div>
               {rows.map(({ participant }) => {
                 const label = participant.upgraded ? "Upgraded" : participant.programme === "core" ? "Core" : "Comprehensive";
@@ -481,7 +393,7 @@ export function AttendancePage() {
                       const kind = cellKind(index, mark, onProgramme(participant, index));
                       return (
                         <span key={day}>
-                          <span className={`cell ${kind}${index === dayIndex ? " focus" : ""}`} title={`${participant.name} · ${day}${kind === "P" ? " · present" : kind === "L" ? " · late" : kind === "F" ? " · not yet" : ""}`} />
+                          <span className={`cell ${kind}`} title={`${participant.name} · ${day}${kind === "P" ? " · present" : kind === "L" ? " · late" : kind === "F" ? " · not yet" : ""}`} />
                         </span>
                       );
                     })}
@@ -492,10 +404,10 @@ export function AttendancePage() {
           </div>
         )}
         <div className="legend-row">
-          <span><span className="cell P" />Present</span>
-          <span><span className="cell L" />Late</span>
-          <span><span className="cell F" />Not yet</span>
-          <span className="hint">Days 1–4 Core · 5–30 Comprehensive</span>
+          <span className="legend-item"><span className="cell P" />Present</span>
+          <span className="legend-item"><span className="cell L" />Late</span>
+          <span className="legend-item"><span className="cell F" />Not yet</span>
+          <span className="legend-note">Days 1–4 Core · 5–30 Comprehensive</span>
         </div>
       </section>
     </div>

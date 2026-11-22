@@ -1,16 +1,16 @@
 import { CORE_DAYS, FULL_DAYS } from "./constants";
-import type { Booking } from "./types";
+import type { Booking, Participant } from "./types";
 
 type SheetRow = {
   name: string;
-  code: string;
-  whatsapp: string;
-  age: string;
   programme: string;
+  mobile: string;
+  whatsapp: string;
+  continues: boolean;
   attendance: string[];
 };
 
-const LATER_DAYS = FULL_DAYS.slice(CORE_DAYS.length);
+const LEADING = ["Name", "Programme", "Mobile", "WhatsApp"];
 
 export function downloadAttendance(bookings: Booking[]) {
   const xml = buildAttendanceWorkbook(bookings);
@@ -24,54 +24,60 @@ export function downloadAttendance(bookings: Booking[]) {
 }
 
 export function buildAttendanceWorkbook(bookings: Booking[]) {
-  const paid = bookings
+  const rows = bookings
     .filter((booking) => booking.status === "paid")
-    .flatMap((booking) => booking.participants.map((participant) => ({ booking, participant })));
-  const rows = paid
-    .map(({ participant }) => ({
+    .flatMap((booking) => booking.participants)
+    .map((participant) => ({
       name: participant.name,
-      code: participant.code,
+      programme: programmeOf(participant),
+      mobile: participant.whatsapp,
       whatsapp: participant.whatsapp,
-      age: String(participant.age || ""),
-      programme: participant.upgraded ? "Core, then Comprehensive" : participant.programme === "comprehensive" ? "Comprehensive" : "Core",
+      continues: participant.upgraded || participant.programme === "comprehensive",
       attendance: participant.attendance,
     }))
     .sort((a, b) => a.name.localeCompare(b.name, "en"));
-  const continuing = rows.filter((row) => row.programme !== "Core");
-  return workbook([
-    sheet("24-27 Nov", CORE_DAYS, rows),
-    sheet("28 Nov-23 Dec", LATER_DAYS, continuing),
-  ]);
+  return workbook(sheet(rows));
 }
 
-function workbook(sheets: string[]) {
+function programmeOf(participant: Participant) {
+  return participant.upgraded || participant.programme === "comprehensive" ? "Comprehensive" : "Core";
+}
+
+function markOf(attendance: string[], day: string) {
+  const items = attendance.map((item) => item.trim().toLowerCase());
+  const key = day.trim().toLowerCase();
+  if (items.includes(`${key} late`)) return "Late";
+  if (items.includes(key)) return "Present";
+  return "Not yet";
+}
+
+function workbook(body: string) {
   return `<?xml version="1.0"?>
 <?mso-application progid="Excel.Sheet"?>
 <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:x="urn:schemas-microsoft-com:office:excel">
 <Styles>
-<Style ss:ID="header"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#7B3FF6" ss:Pattern="Solid"/><Alignment ss:Vertical="Center"/></Style>
+<Style ss:ID="header"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#7B3FF6" ss:Pattern="Solid"/><Alignment ss:Vertical="Center" ss:Horizontal="Center"/></Style>
+<Style ss:ID="lead"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#7B3FF6" ss:Pattern="Solid"/><Alignment ss:Vertical="Center"/></Style>
 <Style ss:ID="text"><NumberFormat ss:Format="@"/></Style>
 </Styles>
-${sheets.join("\n")}
+${body}
 </Workbook>`;
 }
 
-function sheet(name: string, days: string[], rows: SheetRow[]) {
-  const headers = ["Name", "Code", "WhatsApp", "Age", "Programme", ...days, "Notes"];
-  const widths = [180, 160, 130, 50, 180, ...days.map(() => 72), 160];
+function sheet(rows: SheetRow[]) {
+  const headers = [...LEADING, ...FULL_DAYS];
+  const widths = [180, 140, 120, 120, ...FULL_DAYS.map(() => 72)];
   const body = rows.map((row) => [
     row.name,
-    row.code,
-    row.whatsapp,
-    row.age,
     row.programme,
-    ...days.map((day) => (row.attendance.includes(`${day} late`) ? "L" : row.attendance.includes(day) ? "P" : "")),
-    "",
+    row.mobile,
+    row.whatsapp,
+    ...FULL_DAYS.map((day, index) => (row.continues || index < CORE_DAYS.length ? markOf(row.attendance, day) : "")),
   ]);
-  return `<Worksheet ss:Name="${escapeXml(name)}">
+  return `<Worksheet ss:Name="Attendance">
 <Table>
 ${widths.map((width) => `<Column ss:Width="${width}"/>`).join("")}
-<Row ss:Height="22">${headers.map((header) => cell(header, "header")).join("")}</Row>
+<Row ss:Height="22">${headers.map((header, index) => cell(header, index < LEADING.length ? "lead" : "header")).join("")}</Row>
 ${body.map((line) => `<Row>${line.map((value) => cell(value, "text")).join("")}</Row>`).join("")}
 </Table>
 <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
@@ -79,7 +85,9 @@ ${body.map((line) => `<Row>${line.map((value) => cell(value, "text")).join("")}<
 <FrozenNoSplit/>
 <SplitHorizontal>1</SplitHorizontal>
 <TopRowBottomPane>1</TopRowBottomPane>
-<ActivePane>2</ActivePane>
+<SplitVertical>${LEADING.length}</SplitVertical>
+<LeftColumnRightPane>${LEADING.length}</LeftColumnRightPane>
+<ActivePane>0</ActivePane>
 </WorksheetOptions>
 </Worksheet>`;
 }

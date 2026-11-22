@@ -8,6 +8,8 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "db:setup": "node scripts/setup.js",
+    "db:clear": "node scripts/clear.js",
+    "db:demo": "node scripts/demo.js",
     "db:seed": "node scripts/seed.js"
   },
   "dependencies": {
